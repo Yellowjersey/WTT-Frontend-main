@@ -119,7 +119,7 @@ const User = (props) => {
                 ?  (<div id="profileImage" style={{ background: '#a6a7ac',borderRadius:"50%", color: '#fff', textAlign: 'center', width: '50px', height: '50px', lineHeight: '50px', margin: '20px 0' }}>
                 {firstInitial + lastInitial}
                 </div>)
-                : <img src={`http://localhost:4000/uploads/users/${text}`} width="50px" style={{borderRadius:"50%"}} srcset="" />
+                : <img src={`http://localhost:4000/uploads/users/${text}`} width="50px" style={{borderRadius:"50%"}} />
         );
     }
     },
