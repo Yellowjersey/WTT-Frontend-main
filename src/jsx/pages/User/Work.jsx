@@ -1,39 +1,22 @@
 import React, { useEffect, useMemo, useState } from "react";
 import UserService from "../../../services/user";
 import { useDispatch } from "react-redux";
-import { UploadOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Col,
-  Empty,
-  Form,
-  Input,
-  Modal,
-  Row,
-  Table,
-  Upload,
-} from "antd";
-import { Badge, Dropdown } from "react-bootstrap";
-import moment from "moment";
-import Swal from "sweetalert2";
+import { Button, Col, Form, Input, Modal, Row } from "antd";
 import ToastMe from "../Common/ToastMe";
 import "react-phone-input-2/lib/style.css";
 import PageLoader from "../Common/PageLoader";
-import { phoneFormate } from "../helper";
 import TextArea from "antd/es/input/TextArea";
-import Dragger from "antd/es/upload/Dragger";
-import { DocumentUpload } from "iconsax-react";
 
 const Work = (props) => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(true);
-  const [selectedFilter, setSelectedFilter] = useState(null);
   const [visible, setVisible] = useState(false);
   const [visibleimg, setVisibleimg] = useState(false);
   const [Id, setId] = useState("");
-  var [contractDocument, setContractDocument] = useState([]);
+  const [Name, setName] = useState("");
+  var [images, setimages] = useState();
 
   const gerWork = (value) => {
     dispatch(UserService.getwork(value))
@@ -51,21 +34,30 @@ const Work = (props) => {
   }, []);
 
   const handleSubmit = (values) => {
+    console.log({values});
     if (Id !== "") {
       values.id = Id;
+      if (Name === "deer") {
+        values.deerimage = images;
+      } else {
+        values.humanimage = images;
+      }
     }
     const apicall =
       Id === ""
-        ? UserService.creatework(values)
-        : UserService.updatework(values);
-    dispatch(apicall).then((res) => {
-      gerWork();
-      setId("");
-      ToastMe(res.data.message, "success");
-    });
-    setVisible(false).catch((errors) => {
-      console.log({ errors });
-    });
+        ? UserService.creatework(values) : UserService.updatework(values);
+    dispatch(apicall)
+      .then((res) => {
+        gerWork();
+        setId("");
+        setimages("");
+        setVisibleimg(false);
+        setVisible(false);
+        ToastMe(res.data.message, "success");
+      })
+      .catch((errors) => {
+        console.log({ errors });
+      });
   };
 
   const editModal = (text) => {
@@ -81,30 +73,25 @@ const Work = (props) => {
     }
   };
 
-  const editimageupload = () => {
+  const editimageupload = (e) => {
+    setId(e.id);
+    setName(e.name);
     setVisibleimg(true);
+    // form.resetFields();
   };
+
   let checkImageType = (info) => {
-    const { file } = info;
     const formData = new FormData();
-    formData.append('image', file);
-    console.log(file);
-    console.log(formData);
-    // const apicall =
-    //   Id === ""
-    //     ? UserService.creatework(values)
-    //     : UserService.updatework(values);
-    dispatch(UserService.updateimage(formData)).then((res) => {
-      // gerWork();
-      // setId("");
-      ToastMe(res.data.message, "success");
-    });
-    setVisibleimg(false).catch((errors) => {
-      console.log({ errors });
-    });
+    formData.append("image", info.target.files[0]);
+    dispatch(UserService.updateimage(formData))
+      .then((res) => {
+        setimages(res?.data?.file_name);
+        ToastMe(res.data.message, "success");
+      })
+      .catch((errors) => {
+        console.log({ errors });
+      });
   };
-
-
 
   return (
     <>
@@ -125,13 +112,15 @@ const Work = (props) => {
                   style={{ objectFit: "cover" }}
                   src={`http://localhost:4000/uploads/admin/${data[0]?.humanimage}`}
                   width="100%"
+                  height="250px"
                   alt=""
-                  srcset=""
                 />
                 <Button
                   style={{ position: "absolute", right: "0" }}
                   type="dashed"
-                  onClick={() => editimageupload()}
+                  onClick={() =>
+                    editimageupload({ id: data[0]._id, name: "human" })
+                  }
                 >
                   {" "}
                   <i class="fa fa-edit" aria-hidden="true"></i>
@@ -149,12 +138,16 @@ const Work = (props) => {
                 <img
                   src={`http://localhost:4000/uploads/admin/${data[0]?.deerimage}`}
                   width="100%"
+                  height="250px"
+                  style={{ objectFit: "cover" }}
                   alt=""
-                  srcset=""
                 />
                 <Button
                   style={{ position: "absolute", right: "0" }}
                   type="dashed"
+                  onClick={() =>
+                    editimageupload({ id: data[0]._id, name: "deer" })
+                  }
                 >
                   {" "}
                   <i class="fa fa-edit" aria-hidden="true"></i>
@@ -273,7 +266,7 @@ const Work = (props) => {
         okText="Submit"
         cancelText="Cancel"
         onCancel={() => {
-          setVisible(false);
+          setVisibleimg(false);
         }}
         footer={
           [
@@ -299,31 +292,19 @@ const Work = (props) => {
           form={form}
           layout="vertical"
           autoComplete="off"
-          // onFinish={handleSubmitimg}
+          onFinish={handleSubmit}
         >
-          {/* <Form.Item
-            name="image"
-            rules={[{ required: true, message: "Please Enter Human image" }]}
-          > */}
-            <Form.Item
-              label={"Human image"}
-              name="contract"
-            >
-              <Dragger
-                // fileList={contractDocument}
-                multiple={false}
-                maxCount={1}
-                onChange={(info) => checkImageType(info)}
-                accept="image/*"
-                // onRemove={handleRemoveImage}
-              >
-                <p className="ant-upload-drag-icon">
-                  <DocumentUpload size="40" color="#707070" />
-                </p>
-              </Dragger>
-            </Form.Item>
-          {/* </Form.Item> */}
-          {/* <div style={{ textAlign: "right" }}>
+          <Form.Item label={`${Name} image`} name="contract">
+            <Input
+              type="file"
+              name="image"
+              className="file-input-control"
+              id="file-input-control"
+              onChange={checkImageType}
+              accept="image/*"
+            />
+          </Form.Item>
+          <div style={{ textAlign: "right" }}>
             <Button key="cancel" onClick={() => setVisibleimg(false)}>
               {" "}
               Cancel{" "}
@@ -336,7 +317,7 @@ const Work = (props) => {
             >
               Save
             </Button>
-          </div> */}
+          </div>
         </Form>
       </Modal>
     </>

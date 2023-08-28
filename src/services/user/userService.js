@@ -528,10 +528,11 @@ export function creatework(data) {
 
 export function updatework(data) {
     data.env = 'test'
+    console.log(data,"data");
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('patch', BaseUrl + '/admin/updatework', data)
-                .then(function (res) {
+            .then(function (res) {
                     return resolve(res);
                 })
                 .catch(function (error) {
@@ -551,7 +552,7 @@ export function updateimage(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
             console.log(1)
-            Http.callApi('post', BaseUrl + 'uploadImage/admin', data)
+            Http.callApi('post', BaseUrl + '/uploadImage/admin', data)
                 .then(function (res) {
                     console.log(res,"res");
                     return resolve(res);
@@ -567,6 +568,28 @@ export function updateimage(data) {
         })
     )
 }
+// export function imageupdate(data) {
+//     data.env = 'test'
+//     console.log(data,"data1234");
+//     return dispatch => (
+//         new Promise((resolve, reject) => {
+//             console.log(1)
+//             Http.callApi('post', BaseUrl + '/uploadImage/admin', data)
+//                 .then(function (res) {
+//                     console.log(res,"res");
+//                     return resolve(res);
+//                 })
+//                 .catch(function (error) {
+//                     console.log(error);
+//                     const data = {
+//                         errorData: error,
+//                         // statusCode: error.response.status,
+//                     };
+//                     return reject(data);
+//                 })
+//         })
+//     )
+// }
 
 export function sendUserNotification(data) {
     data.type = 2
