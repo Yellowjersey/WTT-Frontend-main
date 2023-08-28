@@ -113,7 +113,7 @@ const Work = (props) => {
                   src={`http://localhost:4000/uploads/admin/${data[0]?.humanimage}`}
                   width="100%"
                   height="350px"
-                  alt=""
+                  loading="lazy"
                 />
                 <Button
                   style={{ position: "absolute", right: "0" }}
@@ -123,7 +123,7 @@ const Work = (props) => {
                   }
                 >
                   {" "}
-                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  <i className="fa fa-edit" aria-hidden="true"></i>
                 </Button>
               </div>
               {/* <div>
@@ -140,7 +140,7 @@ const Work = (props) => {
                   width="100%"
                   height="350px"
                   style={{ objectFit: "cover" }}
-                  alt=""
+                  loading="lazy"
                 />
                 <Button
                   style={{ position: "absolute", right: "0" }}
@@ -150,7 +150,7 @@ const Work = (props) => {
                   }
                 >
                   {" "}
-                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  <i className="fa fa-edit" aria-hidden="true"></i>
                 </Button>
               </div>
               {/* <div>
@@ -160,9 +160,9 @@ const Work = (props) => {
               </div> */}
             </Col>
           </Row>
-          {data?.map((text) => {
+          {data?.map((text, key) => {
             return (
-              <Row style={{ margin: "10px 0" }} span={24}>
+              <Row style={{ margin: "10px 0" }} span={24} key={key}>
                 <Col style={{ margin: "0 15px" }} xs={24} lg={11}>
                   {text?.humandescription}
                 </Col>
@@ -175,7 +175,7 @@ const Work = (props) => {
                   onClick={() => editModal(text)}
                 >
                   {" "}
-                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  <i className="fa fa-edit" aria-hidden="true"></i>
                 </Button>
               </Row>
             );
