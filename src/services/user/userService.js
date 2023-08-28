@@ -63,14 +63,14 @@ export function getRequest(value) {
     )
 }
 
-export function getBroker(value) {
+export function getwork(value) {
     let search = value || '';
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('get', BaseUrl + '/admin/brokerList?search=')
+            Http.callApi('get', BaseUrl + '/admin/workList  ')
                 .then(function (res) {
                     // dispatch(action.setNotificationData(res));
-                    return resolve(res);
+                    return resolve(res?.data);
                 })
                 .catch(function (error) {
                     const data = {
@@ -506,18 +506,60 @@ export function deleteCms(data) {
     )
 }
 
-export function sendNotification(data) {
-    // data.env = 'test'
-    data.type = 1
+export function creatework(data) {
+    console.log(data,123);
+    data.env = 'test'
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('post', BaseUrl + '/admin/sendAllUserNotification', data)
+            Http.callApi('post', BaseUrl + '/admin/creatework', data)
                 .then(function (res) {
                     return resolve(res);
                 })
                 .catch(function (error) {
                     const data = {
                         errorData: error.response.data.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function updatework(data) {
+    data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('patch', BaseUrl + '/admin/updatework', data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function updateimage(data) {
+    data.env = 'test'
+    console.log(data,"data1234");
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            console.log(1)
+            Http.callApi('post', BaseUrl + 'uploadImage/admin', data)
+                .then(function (res) {
+                    console.log(res,"res");
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    const data = {
+                        errorData: error,
                         // statusCode: error.response.status,
                     };
                     return reject(data);
