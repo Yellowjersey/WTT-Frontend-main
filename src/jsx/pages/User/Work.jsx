@@ -112,7 +112,7 @@ const Work = (props) => {
                   style={{ objectFit: "cover" }}
                   src={`http://localhost:4000/uploads/admin/${data[0]?.humanimage}`}
                   width="100%"
-                  height="250px"
+                  height="350px"
                   alt=""
                 />
                 <Button
@@ -138,7 +138,7 @@ const Work = (props) => {
                 <img
                   src={`http://localhost:4000/uploads/admin/${data[0]?.deerimage}`}
                   width="100%"
-                  height="250px"
+                  height="350px"
                   style={{ objectFit: "cover" }}
                   alt=""
                 />
