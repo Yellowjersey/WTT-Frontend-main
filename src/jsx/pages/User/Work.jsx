@@ -63,7 +63,7 @@ const Work = (props) => {
   const editModal = (text) => {
     setVisible(true);
     if (text) {
-      setId(text._id);
+      setId(text?._id);
       form.setFieldsValue({
         humandescription: text.humandescription,
         deerdescription: text.deerdescription,
@@ -77,6 +77,9 @@ const Work = (props) => {
     setId(e.id);
     setName(e.name);
     setVisibleimg(true);
+      form.setFieldsValue({
+        contract: '',
+            })
     // form.resetFields();
   };
 
@@ -119,7 +122,7 @@ const Work = (props) => {
                   style={{ position: "absolute", right: "0" }}
                   type="dashed"
                   onClick={() =>
-                    editimageupload({ id: data[0]._id, name: "human" })
+                    editimageupload({ id: data[0]?._id, name: "human" })
                   }
                 >
                   {" "}
@@ -146,7 +149,7 @@ const Work = (props) => {
                   style={{ position: "absolute", right: "0" }}
                   type="dashed"
                   onClick={() =>
-                    editimageupload({ id: data[0]._id, name: "deer" })
+                    editimageupload({ id: data[0]?._id, name: "deer" })
                   }
                 >
                   {" "}
