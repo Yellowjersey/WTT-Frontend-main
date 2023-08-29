@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserService from "../../../services/user";
 import { useDispatch } from "react-redux";
 import { Button, Col, Form, Input, Modal, Row } from "antd";
@@ -6,8 +6,9 @@ import ToastMe from "../Common/ToastMe";
 import "react-phone-input-2/lib/style.css";
 import PageLoader from "../Common/PageLoader";
 import TextArea from "antd/es/input/TextArea";
+import Swal from "sweetalert2";
 
-const Work = (props) => {
+const Work = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [form] = Form.useForm();
@@ -34,7 +35,6 @@ const Work = (props) => {
   }, []);
 
   const handleSubmit = (values) => {
-    console.log({values});
     if (Id !== "") {
       values.id = Id;
       if (Name === "deer") {
@@ -61,6 +61,7 @@ const Work = (props) => {
   };
 
   const editModal = (text) => {
+    setId("")
     setVisible(true);
     if (text) {
       setId(text?._id);
@@ -96,6 +97,30 @@ const Work = (props) => {
       });
   };
 
+  const approvePendingUser = (text) => {
+    let data = text?._id;
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Are you sure you want to delete this?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            dispatch(UserService.deletework(data))
+                .then((res) => {
+                  gerWork();
+                    ToastMe("Work Deleted successfully", 'success')
+                })
+                .catch((errors) => {
+                    console.log({ errors })
+                })
+        }
+    })
+};
+
   return (
     <>
       <PageLoader loading={loading} />
@@ -108,7 +133,7 @@ const Work = (props) => {
         </div>
         <div className="card-body">
           <Row span={24}>
-            <Col style={{ margin: "0 15px" }} xs={24} lg={11}>
+            <Col style={{ margin: "0 10px" }} xs={24} lg={11}>
               <h1 style={{ textAlign: "center" }}>Human Vision</h1>
               <div style={{ position: "relative" }}>
                 <img
@@ -126,7 +151,7 @@ const Work = (props) => {
                   }
                 >
                   {" "}
-                  <i className="fa fa-edit" aria-hidden="true"></i>
+                  <i className="fa fa-edit" style={{fontSize:"16px" , color:"#1677ff"}} aria-hidden="true"></i>
                 </Button>
               </div>
               {/* <div>
@@ -135,7 +160,7 @@ const Work = (props) => {
                 })}
               </div> */}
             </Col>
-            <Col style={{ margin: "0 15px" }} xs={24} lg={11}>
+            <Col style={{ margin: "0 10px" }} xs={24} lg={11}>
               <h1 style={{ textAlign: "center" }}>Deer Vision</h1>
               <div style={{ position: "relative" }}>
                 <img
@@ -153,33 +178,41 @@ const Work = (props) => {
                   }
                 >
                   {" "}
-                  <i className="fa fa-edit" aria-hidden="true"></i>
+                  <i className="fa fa-edit" style={{fontSize:"16px" , color:"#1677ff"}} aria-hidden="true"></i>
                 </Button>
               </div>
-              {/* <div>
-                {data?.map((text) => {
-                  return <p>{text?.deerdescription}</p>;
-                })}
-              </div> */}
             </Col>
           </Row>
           {data?.map((text, key) => {
             return (
               <Row style={{ margin: "10px 0" }} span={24} key={key}>
-                <Col style={{ margin: "0 15px" }} xs={24} lg={11}>
+                <Col style={{ margin: "0 10px" }} xs={24} lg={11}>
                   {text?.humandescription}
                 </Col>
-                <Col style={{ margin: "0 15px" }} xs={24} lg={11}>
+                <Col style={{ margin: "0 10px" }} xs={24} lg={11}>
                   {text?.deerdescription}
                 </Col>
-                <Button
-                  style={{ position: "absolute", right: "0" }}
+                {
+                  (text?.humandescription ||  text?.deerdescription) ? 
+                  <>
+                  <Button
+                  style={{ position: "absolute", right: "50px" }}
                   type="dashed"
                   onClick={() => editModal(text)}
+                  >
+                  {" "}
+                  <i className="fa fa-edit" style={{fontSize:"16px" , color:"#1677ff"}} aria-hidden="true"></i>
+                </Button>
+                <Button
+                style={{ position: "absolute", right: "0" }}
+                type="dashed"
+                onClick={() => approvePendingUser(text)}
                 >
                   {" "}
-                  <i className="fa fa-edit" aria-hidden="true"></i>
+                  <i className="fa fa-trash" style={{fontSize:"16px" , color:"#f92b2b"}} aria-hidden="true"></i>
                 </Button>
+                </> : ""
+                }
               </Row>
             );
           })}
@@ -195,21 +228,6 @@ const Work = (props) => {
         }}
         footer={
           [
-            // <Button
-            //     key="submit"
-            //     type="primary"
-            //     onClick={() => {
-            //         // form.validateFields()
-            //         //     .then((values) => {
-            //         //         onSubmit(values);
-            //         //     })
-            //         //     .catch((info) => {
-            //         //         console.log("Validate Failed:", info);
-            //         //     });
-            //     }}
-            // >
-            //     Submit
-            // </Button>
           ]
         }
       >
@@ -262,7 +280,6 @@ const Work = (props) => {
           </div>
         </Form>
       </Modal>
-
       <Modal
         open={visibleimg}
         title={"Update image"}
@@ -273,21 +290,6 @@ const Work = (props) => {
         }}
         footer={
           [
-            // <Button
-            //     key="submit"
-            //     type="primary"
-            //     onClick={() => {
-            //         // form.validateFields()
-            //         //     .then((values) => {
-            //         //         onSubmit(values);
-            //         //     })
-            //         //     .catch((info) => {
-            //         //         console.log("Validate Failed:", info);
-            //         //     });
-            //     }}
-            // >
-            //     Submit
-            // </Button>
           ]
         }
       >
@@ -323,6 +325,7 @@ const Work = (props) => {
           </div>
         </Form>
       </Modal>
+
     </>
   );
 };

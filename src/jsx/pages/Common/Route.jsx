@@ -3,6 +3,7 @@ const route = [
     'dashboard-dark',
     'user-list',
     'how-it-work',
+    'contact-us',
     'request-list',
     'sub-user-list',
     'link-list',

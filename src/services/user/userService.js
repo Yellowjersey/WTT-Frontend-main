@@ -121,11 +121,10 @@ export function getCarrierSubUserList(data) {
     )
 }
 
-export function getCarrierSubUserLinkList(data) {
+export function getContactus(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
-            const id = data.state.id
-            Http.callApi('get',  `${BaseUrl}/admin/carrierfmcsasList?id=${id}`, [])
+            Http.callApi('get',  `${BaseUrl}/admin/getContactUs`, [])
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -198,19 +197,37 @@ export function getfmcsas(value) {
     )
 }
 
-export function changeUserStatus(data) {
-    data.env = 'test'
+export function deletework(data) {
+    // data.env = 'test'
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('post', BaseUrl + '/admin/changeUserStatus', data)
+            Http.callApi('delete', BaseUrl + `/admin/deletework?id=${data}`)
                 .then(function (res) {
                     return resolve(res);
                 })
                 .catch(function (error) {
-                    // const data = {
-                    //     // errorData: error.response.data.message,
-                    //     // statusCode: error.response.status,
-                    // };
+                    const data = {
+                        errorData: error.response.data.message,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+export function deletecontact(data) {
+    // data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('delete', BaseUrl + `/admin/deletecontactus?id=${data}`)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data.message,
+                        statusCode: error.response.status,
+                    };
                     return reject(data);
                 })
         })
@@ -506,8 +523,47 @@ export function deleteCms(data) {
     )
 }
 
+export function createcontact(data) {
+    // console.log(data,"data");
+    // data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + '/admin/addContactUs', data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function updatecontant(data) {
+    const id = data?.id
+    // data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('patch', BaseUrl + `/admin/updateContactUs?id=${id}`, data)
+            .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
 export function creatework(data) {
-    console.log(data,123);
     data.env = 'test'
     return dispatch => (
         new Promise((resolve, reject) => {
@@ -528,7 +584,6 @@ export function creatework(data) {
 
 export function updatework(data) {
     data.env = 'test'
-    console.log(data,"data");
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('patch', BaseUrl + '/admin/updatework', data)
@@ -548,17 +603,13 @@ export function updatework(data) {
 
 export function updateimage(data) {
     data.env = 'test'
-    console.log(data,"data1234");
     return dispatch => (
         new Promise((resolve, reject) => {
-            console.log(1)
             Http.callApi('post', BaseUrl + '/uploadImage/admin', data)
                 .then(function (res) {
-                    console.log(res,"res");
                     return resolve(res);
                 })
                 .catch(function (error) {
-                    console.log(error);
                     const data = {
                         errorData: error,
                         // statusCode: error.response.status,
