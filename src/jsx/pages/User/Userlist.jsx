@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import UserService from "../../../services/user";
 import { useDispatch } from "react-redux";
-import { Badge, Empty, Input, Table } from "antd";
-import { Dropdown } from "react-bootstrap";
+import {Empty, Input, Table } from "antd";
+import { Badge, Dropdown } from "react-bootstrap";
 import moment from "moment";
 import "react-phone-input-2/lib/style.css";
 import PageLoader from "../Common/PageLoader";
@@ -141,15 +141,11 @@ const User = (props) => {
         dataIndex: 'status',
         key: 'status',
         render: (text, data) => (
-          // <div>
-          //     {data.isApprove === 1 ? <Badge onClick={() => approvePendingUser(data)} bg=" badge-lg " className='badge-primary light badge-lg' style={{ cursor: 'pointer' }}>Active</Badge>
-          //         : <Badge onClick={() => approvePendingUser(data)} bg=" badge-lg " className='badge-danger light badge-lg' style={{ cursor: 'pointer' }}>Deactive</Badge>}
-          // </div>
-          <div style={{ cursor : 'pointer' }}>
-                 {data.status === 1 ? <Badge bg=" badge-lg " className='badge-primary light badge-lg'onClick={() => approvePendingUser(data)} >Active</Badge>
-                    : <Badge bg=" badge-lg " className='badge-danger light badge-lg'  onClick={() => approvePendingUser(data)}>Deactive</Badge>}
-             </div>
-        ),
+          <div>
+              {data.status === 1 ? <Badge bg=" badge-lg " className='badge-primary light badge-xs' style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)} >Active</Badge>
+                  : <Badge bg=" badge-lg " className='badge-danger light badge-xs' style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)} >Deactive</Badge>}
+          </div>
+      ),
     },
     {
       title: "Created At",

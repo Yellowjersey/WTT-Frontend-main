@@ -256,7 +256,7 @@ const SideBar = (props) => {
             <ul >
             <li><Link className={`${path === "how-it-work" ? "mm-active" : ""}`} to="/how-it-work">How it Work</Link></li>
             <li><Link className={`${path === "contact-us" ? "mm-active" : ""}`} to="/contact-us">Contact us</Link></li>
-            {/* <li><Link className={`${path === "user-notification" ? "mm-active" : ""}`} to="/user-notification">Individual Notification</Link></li> */}
+            <li><Link className={`${path === "about-us" ? "mm-active" : ""}`} to="/about-us">About Us</Link></li>
             </ul>
           </li>
 

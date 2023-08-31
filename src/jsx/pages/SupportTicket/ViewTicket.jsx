@@ -53,28 +53,28 @@ const ViewTicket = () => {
           values.message = res.data.file_name;
 
           dispatch(supportService.ticketReply(values))
-          .then((res) => {
-            form.setFieldsValue({
-              message: '',
+            .then((res) => {
+              form.setFieldsValue({
+                message: '',
+              })
+              getMessageList();
+              getTicket();
+              scrollToBottom();
+              setUserImg('')
             })
-            getMessageList();
-            getTicket();
-            scrollToBottom();
-            setUserImg('')
-          })
 
-          .catch((errors) => {
-            console.log({ errors })
-          })
+            .catch((errors) => {
+              console.log({ errors })
+            })
         })
-        
+
         .catch((errors, statusCode) => {
           setUserImg('')
           ToastMe(errors.errorData, "error");
         });
 
-    } 
-    
+    }
+
     else {
       values.type = 1; //msg type 1=text 2=media
     }
@@ -131,49 +131,6 @@ const ViewTicket = () => {
     scrollToBottom();
   });
 
-  //Close Ticket
-
-  //   const closeTicket = (text) => {    
-  //     // let options = `?id=${data.id}`;
-  //     Swal.fire({
-  //         title: 'Are you sure?',
-  //         text: "To close ticket!",
-  //         icon: 'warning',
-  //         showCancelButton: true,
-  //         confirmButtonColor: '#3085d6',
-  //         cancelButtonColor: '#d33',
-  //         confirmButtonText: 'Yes, Change it!'
-  //     }).then((result) => {
-  //         // setLoading(true);
-  //         if (result.isConfirmed) {
-  //             dispatch(supportService.ticketClose(options))
-  //                 .then((res) => {
-  //                   setTicketClose(res.data)
-  //                   getTicket();
-  //                     // setLoading(false);
-  //                     // getFAQListData();
-  //                     // ToastMe("Hair type status change successfully", 'success')
-  //                 })
-  //                 .catch((errors) => {
-  //                     // setLoading(false);
-  //                     console.log({ errors })
-  //                 })
-  //         }
-  //     })
-  //   };
-
-  //Enter click on message store
-  //   const sendMessage = () => {
-  //     form.validateFields()
-  //       .then((values) => {
-  //         onSubmit(values); 
-  //         form.resetFields();
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   };
-
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -187,19 +144,6 @@ const ViewTicket = () => {
     setUserImg(userImgSrc);
     setimageData(filesPath)
   }
-
-  const uploadImage = () => {
-    const image = new FormData();
-    image.append('image', imageData);
-    dispatch(supportService.uploadCommonImage(image))
-      .then((res) => {
-        setUploadedImage(res.data.file_name)
-      })
-      .catch((errors, statusCode) => {
-        setUserImg('')
-        ToastMe(errors.errorData, "error");
-      });
-  };
 
   const Back = async () => {
     history.push('/support-list');
@@ -246,8 +190,8 @@ const ViewTicket = () => {
               <div className="col-6">
                 <Card.Text>
                   <div>
-                    <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>Subject :&nbsp;</label>
-                    {data?.subject ? data?.subject : '-'}
+                    <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>User Name :&nbsp;</label>
+                    <span style={{ fontWeight: 'initial', fontSize: 'large' }}>{data?.user_name ? data?.user_name : '-'}</span>
                   </div>
                 </Card.Text>
               </div>
@@ -255,7 +199,7 @@ const ViewTicket = () => {
                 <Card.Text>
                   <div>
                     <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>Requested On :&nbsp;</label>
-                    {data?.createdAt ? moment(data?.createdAt).format('hh:mm A') : '-'}
+                    <span style={{ fontWeight: 'initial', fontSize: 'large' }}>{data?.createdAt ? moment(data?.createdAt).format('hh:mm A') : '-'}</span>
                   </div>
                 </Card.Text>
               </div>
@@ -265,8 +209,8 @@ const ViewTicket = () => {
                 <div className="col-6">
                   <Card.Text>
                     <div>
-                      <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>Message :&nbsp;</label>
-                      {data?.description ? data?.description : '-'}
+                      <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>Subject :&nbsp;</label>
+                      <span style={{ fontWeight: 'initial', fontSize: 'large' }}>{data?.subject ? data?.subject : '-'}</span>
                     </div>
                   </Card.Text>
                 </div>
@@ -276,6 +220,17 @@ const ViewTicket = () => {
                       <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>Status :&nbsp;</label>
                       {data?.status == 1 ? <span className="badge badge-warning" >Open</span>
                         : <span className="badge badge-success" >Close</span>}
+                    </div>
+                  </Card.Text>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <Card.Text>
+                    <div>
+                      <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>Message :&nbsp;</label>
+                      <span style={{ fontWeight: 'initial', fontSize: 'large' }}>  {data?.description ? data?.description : '-'}
+                      </span>
                     </div>
                   </Card.Text>
                 </div>
@@ -314,7 +269,7 @@ const ViewTicket = () => {
               initialValues={{
                 modifier: "public"
               }}
-              >
+            >
               <div className="form_warpper">
                 <Form.Item name="message"
                 >
