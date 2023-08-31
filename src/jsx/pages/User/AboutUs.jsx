@@ -101,6 +101,7 @@ const AboutUs = (props) => {
     ];
 
     const handleSubmit = (values) => {
+        values.question = values.question.trim();
         const apicall =
             Id === ""
                 ? supportService.createabout(values) : supportService.updateabout(Id, values);
@@ -200,7 +201,8 @@ const AboutUs = (props) => {
                             name="question"
                             rules={[
                                 { required: true, message: "Please Question" },
-                                { max: 20, message: "Miximum 20 character allow!" },
+                                { pattern: new RegExp(".*\\S.*[a-zA-z0-9 ]"), message: 'Only space is not allowed' }
+
                             ]}
                         >
                             <Input
