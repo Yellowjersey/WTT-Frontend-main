@@ -265,12 +265,12 @@ const SideBar = (props) => {
               <span className="nav-text">FMCSAS List</span>
             </Link>
           </li> */}
-          {/* <li className={`${path === "request-list" || path == "request-detail" ? "mm-active" : ""}`}>
-            <Link to="/request-list" >
-              <i className="fa fa-question-circle"></i>
-              <span className="nav-text">Request List</span>
+          <li className={`${path === "support-list" || path == "support-tickets" ? "mm-active" : ""}`}>
+            <Link to="/support-list" >
+              <i className="fa fa-envelope"></i>
+              <span className="nav-text">Support Tickets</span>
             </Link>
-          </li> */}
+          </li>
           <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
               <i class="fa fa-bell" aria-hidden="true"></i>

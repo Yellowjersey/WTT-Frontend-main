@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 /// React router dom
-import {  Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 /// Css
 import "./index.css";
@@ -42,8 +42,8 @@ import CarrierSubUserList from "./pages/User/CarrierSubUserList";
 import SubUserFmcsasList from "./pages/User/SubUserFmcsasList";
 import CarrierSubUserLinkList from "./pages/User/CarrierSubUserLinkList";
 import AppProfile from "./components/AppsMenu/AppProfile/AppProfile";
-
-
+import SupportTicket from "./pages/SupportTicket/SupportTicket";
+import ViewTicket from "./pages/SupportTicket/ViewTicket";
 
 
 const Markup = () => {
@@ -52,8 +52,8 @@ const Markup = () => {
     { url: "", component: Home },
     { url: "dashboard", component: Home },
     { url: "dashboard-dark", component: DashboardDark },
- 
-    
+
+
     // User
     { url: "user-list", component: User },
     { url: "how-it-work", component: Work },
@@ -68,7 +68,7 @@ const Markup = () => {
     { url: "FMCSAS-list", component: FmcsasList },
     { url: "FMCSAS-view", component: FmcsasView },
 
-    
+
     //Notification
     { url: "general-notification", component: Notification },
     { url: "user-notification", component: UserNotification },
@@ -76,13 +76,15 @@ const Markup = () => {
 
     { url: "user-detail", component: ViewUser },
 
-	
-	/// Apps
+
+    /// Apps
     { url: "app-profile", component: AppProfile },
     { url: "change-password", component: ChangePassword },
     { url: "google2fa", component: Google2fa },
 
-
+    //support-ticket
+    { url: "support-list", component: SupportTicket },
+    { url: "view-ticket", component: ViewTicket },
 
     /// pages
     { url: "page-register", component: Registration },
@@ -99,9 +101,8 @@ const Markup = () => {
     <>
       <div
         id={`${!pagePath ? "main-wrapper" : ""}`}
-        className={`${!pagePath ? "show" : "mh100vh"}  ${
-          menuToggle ? "menu-toggle" : ""
-        }`}
+        className={`${!pagePath ? "show" : "mh100vh"}  ${menuToggle ? "menu-toggle" : ""
+          }`}
       >
         {!pagePath && <Nav />}
 
@@ -123,8 +124,8 @@ const Markup = () => {
           </div>
         </div>
         {!pagePath && <Footer />}
-      </div>      
-	  <ScrollToTop />
+      </div>
+      <ScrollToTop />
     </>
   );
 };

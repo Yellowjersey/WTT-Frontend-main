@@ -70,7 +70,7 @@ export function loginAction(email, password, history) {
     return (dispatch) => {
         login(email, password)
             .then((response) => {
-                console.log(response,"response");
+                // console.log(response,"response");
                 const resObject = {
                     kind: "identitytoolkit#VerifyPasswordResponse",
                     localId: "qmt6dRyipIad8UCc0QpMV2MENSy1",
