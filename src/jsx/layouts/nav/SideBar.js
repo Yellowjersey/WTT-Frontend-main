@@ -250,11 +250,12 @@ const SideBar = (props) => {
 
           <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
-              <i class="fa fa-cog" aria-hidden="true"></i>
+              <i className="fa fa-cog" aria-hidden="true"></i>
               <span className="nav-text">Settings</span>
             </Link>
             <ul >
             <li><Link className={`${path === "how-it-work" ? "mm-active" : ""}`} to="/how-it-work">How it Work</Link></li>
+            <li><Link className={`${path === "contact-us" ? "mm-active" : ""}`} to="/contact-us">Contact us</Link></li>
             {/* <li><Link className={`${path === "user-notification" ? "mm-active" : ""}`} to="/user-notification">Individual Notification</Link></li> */}
             </ul>
           </li>
@@ -273,7 +274,7 @@ const SideBar = (props) => {
           </li>
           <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
-              <i class="fa fa-bell" aria-hidden="true"></i>
+              <i className="fa fa-bell" aria-hidden="true"></i>
 
               <span className="nav-text">Notifications</span>
             </Link>

@@ -40,10 +40,14 @@ import LinkList from "./pages/User/LinkList";
 import SubUserLinkList from "./pages/User/SubUserLinkList";
 import CarrierSubUserList from "./pages/User/CarrierSubUserList";
 import SubUserFmcsasList from "./pages/User/SubUserFmcsasList";
-import CarrierSubUserLinkList from "./pages/User/CarrierSubUserLinkList";
+import CarrierSubUserLinkList from "./pages/User/Contactus";
 import AppProfile from "./components/AppsMenu/AppProfile/AppProfile";
 import SupportTicket from "./pages/SupportTicket/SupportTicket";
 import ViewTicket from "./pages/SupportTicket/ViewTicket";
+import Contactus from "./pages/User/Contactus";
+
+
+
 
 
 const Markup = () => {
@@ -57,6 +61,7 @@ const Markup = () => {
     // User
     { url: "user-list", component: User },
     { url: "how-it-work", component: Work },
+    { url: "contact-us", component: Contactus },
     { url: "sub-user-list", component: SubUserList },
     { url: "link-list", component: LinkList },
     { url: "sub-user-link-list", component: SubUserLinkList },

@@ -44,7 +44,7 @@ const FmcsasView = (props) => {
               <div className="container">
                 <div className="request_detail_card">
                   {img ?
-                      <img src={`${img}`} alt="" srcset="" width="100%" height="400px"  style={{paddingBottom:"10px",objectFit:"contain"}}/>
+                      <img src={`${img}`} alt="" width="100%" height="400px"  style={{paddingBottom:"10px",objectFit:"contain"}}/>
                     :""}
                   <div className="card_header d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center gap-3">
