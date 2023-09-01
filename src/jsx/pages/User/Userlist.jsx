@@ -64,10 +64,7 @@ const User = (props) => {
           })
           .catch((errors) => {
             console.log({ errors })
-<<<<<<< HEAD
-=======
             setLoading(false);
->>>>>>> 8864c5e97d7e5f6932d514a180517f0f2f655159
           })
       }
     })
