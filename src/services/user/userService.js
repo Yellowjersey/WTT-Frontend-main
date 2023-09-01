@@ -15,7 +15,7 @@ export function getUser(value) {
                 })
                 .catch(function (error) {
                     const data = {
-                        errorData: error.response.data,
+                        errorData: error.message,
                         // statusCode: error.response.status,
                     };
                     return reject(data);
