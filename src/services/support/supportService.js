@@ -10,8 +10,8 @@ export function getTicketList() {
                 })
                 .catch(function (error) {
                     const data = {
-                        errorData: error.response.data,
-                        statusCode: error.response.status,
+                        errorData: error.message,
+                        // statusCode: error.response.status,
                     };
                     return reject(data);
                 })
@@ -122,7 +122,7 @@ export function uploadCommonImage(data) {
         })
     )
 }
-export function getContactus() {
+export function getAboutUs() {
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('get', BaseUrl + '/admin/getAboutUs')
@@ -131,8 +131,9 @@ export function getContactus() {
                 })
                 .catch(function (error) {
                     const data = {
-                        errorData: error.response.data,
-                        statusCode: error.response.status,
+                        // errorData: error.response.data,
+                        errorData: error.message,
+                        // statusCode: error.response.status,
                     };
                     return reject(data);
                 })

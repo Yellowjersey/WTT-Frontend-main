@@ -27,6 +27,7 @@ const Work = () => {
       })
       .catch((errors) => {
         console.log({ errors });
+        setLoading(false)
       });
   };
 

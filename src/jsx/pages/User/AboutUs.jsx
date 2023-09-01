@@ -25,7 +25,7 @@ const AboutUs = (props) => {
     const [Id, setId] = useState("");
 
     const getaboutus = () => {
-        dispatch(supportService.getContactus())
+        dispatch(supportService.getAboutUs())
             .then((res) => {
                 var newArr = [];
                 for (var i = 0; i < res.data.length; i++) {
@@ -44,6 +44,7 @@ const AboutUs = (props) => {
             })
             .catch((errors) => {
                 console.log({ errors })
+                setLoading(false)
             })
     }
     useEffect(() => {

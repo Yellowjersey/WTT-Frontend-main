@@ -15,7 +15,8 @@ export function getUser(value) {
                 })
                 .catch(function (error) {
                     const data = {
-                        errorData: error.response.data,
+                        // errorData: error.response.data,
+                        error : error.message,
                         // statusCode: error.response.status,
                     };
                     return reject(data);
@@ -35,7 +36,7 @@ export function getAllUser(value) {
                 })
                 .catch(function (error) {
                     const data = {
-                        errorData: error.response.data,
+                        errorData: error.message,
                         // statusCode: error.response.status,
                     };
                     return reject(data);
@@ -74,7 +75,8 @@ export function getwork(value) {
                 })
                 .catch(function (error) {
                     const data = {
-                        errorData: error.response.data,
+                        // errorData: error.response.data,
+                        errorData: error.message,
                         // statusCode: error.response.status,
                     };
                     return reject(data);
@@ -130,7 +132,8 @@ export function getContactus(data) {
                 })
                 .catch(function (error) {
                     const data = {
-                        errorData: error.response.data.message,
+                        // errorData: error.response.data.message,
+                        errorData: error.message,
                         // statusCode: error.response.status,
                     };
                     return reject(data);
@@ -670,7 +673,7 @@ export function getNotificationlist(type) {
                 })
                 .catch(function (error) {
                     const data = {
-                        errorData: error.response.data.message,
+                        error : error.message,
                         // statusCode: error.response.status,
                     };
                     return reject(data);

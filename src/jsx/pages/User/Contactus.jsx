@@ -45,6 +45,7 @@ const Contactus = (props) => {
             })
             .catch((errors) => {
                 console.log({ errors })
+                setLoading(false)
             })
     }
     useEffect(() => {

@@ -10,8 +10,8 @@ export function dashboard(key) {
                 })
                 .catch(function (error) {
                     const data = {
-                        errorData: error.response.data,
-                        statusCode: error.response.status,
+                        errorData: error.message,
+                        // statusCode: error.response.status,
                     };
                     return reject(data);
                 })
