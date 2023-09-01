@@ -68,6 +68,7 @@ const Home = () => {
 			})
 			.catch((errors) => {
 				console.log({ errors })
+				setLoading(false);
 			})
 	};
 	const items = [
