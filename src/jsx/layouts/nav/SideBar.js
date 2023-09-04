@@ -252,8 +252,9 @@ const SideBar = (props) => {
               <span className="nav-text">Settings</span>
             </Link>
             <ul >
-              <li><Link className={`${path === "how-it-work" ? "mm-active" : ""}`} to="/how-it-work">How it Work</Link></li>
-              <li><Link className={`${path === "contact-us" ? "mm-active" : ""}`} to="/contact-us">Contact us</Link></li>
+            <li><Link className={`${path === "how-it-work" ? "mm-active" : ""}`} to="/how-it-work">How it Work</Link></li>
+            <li><Link className={`${path === "contact-us" ? "mm-active" : ""}`} to="/contact-us">Contact us</Link></li>
+            <li><Link className={`${path === "about-us" ? "mm-active" : ""}`} to="/about-us">About Us</Link></li>
             </ul>
           </li>
           <li className={`${path === "hunter-tip" || path == "hunter-tip" ? "mm-active" : ""}`}>

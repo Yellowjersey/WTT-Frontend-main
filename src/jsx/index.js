@@ -45,10 +45,7 @@ import AppProfile from "./components/AppsMenu/AppProfile/AppProfile";
 import SupportTicket from "./pages/SupportTicket/SupportTicket";
 import ViewTicket from "./pages/SupportTicket/ViewTicket";
 import Contactus from "./pages/User/Contactus";
-
-
-
-
+import AboutUs from "./pages/User/AboutUs";
 
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
@@ -90,6 +87,9 @@ const Markup = () => {
     //support-ticket
     { url: "support-list", component: SupportTicket },
     { url: "view-ticket", component: ViewTicket },
+
+    //About us
+    { url: "about-us", component: AboutUs },
 
     /// pages
     { url: "page-register", component: Registration },

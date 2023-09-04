@@ -77,6 +77,7 @@ const UserNotification = (props) => {
             })
             .catch((errors) => {
                 console.log({ errors })
+                setLoading(false)
             })
     }
 
@@ -95,6 +96,7 @@ const UserNotification = (props) => {
             })
             .catch((errors) => {
                 console.log({ errors })
+                setLoading(false)
             })
     }
 

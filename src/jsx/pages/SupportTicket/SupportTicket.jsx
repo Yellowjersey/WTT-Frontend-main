@@ -23,21 +23,21 @@ const SupportTicket = (props) => {
         props.history.push("/view-ticket", { state: text.id })
     }
 
-    const onSubmit = (values) => {
-        dispatch(UserService.sendNotification(values))
-            .then((res) => {
-                getTicketList();
-                form.setFieldsValue({
-                    title: '',
-                    message: '',
-                })
-                ToastMe(res.data.message, 'success')
-            })
-        setVisible(false)
-            .catch((errors) => {
-                console.log({ errors })
-            })
-    }
+    // const onSubmit = (values) => {
+    //     dispatch(UserService.sendNotification(values))
+    //         .then((res) => {
+    //             getTicketList();
+    //             form.setFieldsValue({
+    //                 title: '',
+    //                 message: '',
+    //             })
+    //             ToastMe(res.data.message, 'success')
+    //         })
+    //     setVisible(false)
+    //         .catch((errors) => {
+    //             console.log({ errors })
+    //         })
+    // }
 
     const getTicketList = () => {
         dispatch(supportService.getTicketList())
