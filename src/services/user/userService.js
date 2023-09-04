@@ -178,11 +178,11 @@ export function getLinkList(data) {
     )
 }
 
-export function getfmcsas(value) {
+export function gethuntertip(value) {
     let search = value || '';
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('get', BaseUrl + '/admin/fmcsasList')
+            Http.callApi('get', BaseUrl + '/admin/huntertipList')
                 .then(function (res) {
                     // dispatch(action.setNotificationData(res));
                     return resolve(res);
@@ -619,6 +619,27 @@ export function updateimage(data) {
         })
     )
 }
+
+
+export function createhntertip(data) {
+    data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + '/admin/createhuntertip', data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
 // export function imageupdate(data) {
 //     data.env = 'test'
 //     console.log(data,"data1234");

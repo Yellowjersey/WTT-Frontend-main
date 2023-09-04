@@ -22,6 +22,7 @@ const Contactus = (props) => {
     const [visible, setVisible] = useState(false);
     const [visiblemail, setVisiblemail] = useState(false);
     const [Id, setId] = useState("");
+    const [mailAddress, setMailAddress] = useState("");
     const subUserdata = location.state;
 
     const getcontactus = () => {
@@ -29,16 +30,20 @@ const Contactus = (props) => {
             .then((res) => {
                 var newArr = [];
                 for (var i = 0; i < res.data.length; i++) {
-                    newArr.push(
-                        {
-                            key: i,
-                            id: res.data[i]._id,
-                            name: res.data[i].name,
-                            email: res.data[i].email,
-                            phone: res.data[i].phone,
-                            mailAddress: res.data[i].mailAddress
-                        }
-                    )
+                    setMailAddress({mailAddress: res.data[0].mailAddress,id:res.data[0]._id})
+                    if (res?.data[i]?.name) {
+
+                        newArr.push(
+                            {
+                                key: i-1,
+                                id: res.data[i]._id,
+                                name: res.data[i].name,
+                                email: res.data[i].email,
+                                phone: res.data[i].phone,
+                                mailAddress: res.data[i].mailAddress
+                            }
+                        )
+                    }
                 }
                 setData(newArr);
                 setLoading(false)
@@ -169,7 +174,6 @@ const Contactus = (props) => {
         });
     }
 
-
     return (
         <>
             <PageLoader loading={loading} />
@@ -183,15 +187,15 @@ const Contactus = (props) => {
 
                 <div className="card-body">
                     <div style={{ textAlign: "center" }}>
-                        {data.map((mail) => {
-                            return mail?.mailAddress ? <p ><span style={{ fontSize: "18px", fontWeight: 700 }}> MailAddress </span>  :- <span style={{ fontSize: "15px" }}> {mail?.mailAddress}</span>
+                        {/* {data.map((mail) => { */}
+                            { mailAddress?.mailAddress ? <p ><span style={{ fontSize: "18px", fontWeight: 700 }}> MailAddress </span>  :- <span style={{ fontSize: "15px" }}> {mailAddress?.mailAddress}</span>
                                 <span
                                     style={{ margin: "0 10px", fontSize: "16px", color: "#1677ff", cursor: "pointer" }}
-                                    onClick={() => editModalmail(mail)}>
+                                    onClick={() => editModalmail(mailAddress)}>
                                     <i className="fa fa-edit" aria-hidden="true"></i>
                                 </span>
-                            </p> : ""
-                        })}
+                            </p> : ""}
+                        {/* })} */}
                     </div>
                     <Table columns={columnss} className='table_custom' dataSource={data} />
                 </div>

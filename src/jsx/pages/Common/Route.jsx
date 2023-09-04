@@ -4,6 +4,7 @@ const route = [
     'user-list',
     'how-it-work',
     'contact-us',
+    'hunter-tip',
     'request-list',
     'sub-user-list',
     'link-list',
