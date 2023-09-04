@@ -30,6 +30,7 @@ const User = (props) => {
           id: res.data[i]._id,
           mobile: res.data[i].mobile,
           status: res.data[i].status,
+          is_subscription: res.data[i].is_subscription,
           createdAt: res.data[i].createdAt,
         });
       }
@@ -73,6 +74,17 @@ const User = (props) => {
   useEffect(() => {
     getUserList();
   }, [serach]);
+
+  const svg1 = (
+    <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
+      <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+        <rect x="0" y="0" width="24" height="24"></rect>
+        <circle fill="#000000" cx="5" cy="12" r="2"></circle>
+        <circle fill="#000000" cx="12" cy="12" r="2"></circle>
+        <circle fill="#000000" cx="19" cy="12" r="2"></circle>
+      </g>
+    </svg>
+  );
 
   let firstInitial;
   let lastInitial;
@@ -144,9 +156,37 @@ const User = (props) => {
       dataIndex: "createdAt",
       key: "createdAt",
       render: (text) => <div>{moment(text).format("DD MMM YYYY h:mm A")}</div>,
-    }
+    },
+    {
+      title: 'Actions',
+      key: 'actions',
+      render: (text) => (
+        <>
+          <Dropdown>
+            <Dropdown.Toggle
+              variant="danger"
+              className="light sharp i-false badge_label"
+            >
+              {svg1}
+              {
+                text.readStatusCount > 0 ?
+                  <span className="badge light text-white bg-danger rounded-circle">{text.readStatusCount}</span> : ''
+              }
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => viewUser(text)}>View</Dropdown.Item>
+              {/* <Dropdown.Item onClick={() => viewChat(text)}>Chat</Dropdown.Item> */}
+              {/* <Dropdown.Item onClick={() => editModal(text)}>Edit</Dropdown.Item> */}
+            </Dropdown.Menu>
+          </Dropdown>
+        </>
+      )
+    },
   ];
 
+  const viewUser = (text) => {
+    props.history.push("/user-detail", { userDetail: text })
+  }
 
   const handleSearch = (e) => {
     setSerach(e.target.value)

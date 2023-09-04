@@ -88,7 +88,7 @@ export function getSubUserList(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
             const id = data.state.id
-            Http.callApi('get',  `${BaseUrl}/admin/subUserList?id=${id}`, [])
+            Http.callApi('get', `${BaseUrl}/admin/subUserList?id=${id}`, [])
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -107,7 +107,7 @@ export function getCarrierSubUserList(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
             const id = data.state.id
-            Http.callApi('get',  `${BaseUrl}/admin/carriersubUserList?id=${id}`, [])
+            Http.callApi('get', `${BaseUrl}/admin/carriersubUserList?id=${id}`, [])
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -125,7 +125,7 @@ export function getCarrierSubUserList(data) {
 export function getContactus(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('get',  `${BaseUrl}/admin/getContactUs`, [])
+            Http.callApi('get', `${BaseUrl}/admin/getContactUs`, [])
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -145,19 +145,19 @@ export function getSubUserFmcsasList(data) {
     data.env = 'test'
     const queryParam = `?dotNumber=${data?.state?.dotNumber}&env=${data?.env}`;
     return dispatch => (
-     new Promise((resolve, reject) => {
-        Http.callApi('get', BaseUrl + '/admin/carrierfmcsasList' + queryParam,[])
-            .then(function (res) {
-                return  resolve(res);
-            })
-            .catch(function (error) {
-                const data = {
-                    errorData: error.response.data.message,
-                    // statusCode: error.response.status,
-                };
-                return reject(data);
-            });
-    })
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/carrierfmcsasList' + queryParam, [])
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                });
+        })
     )
 }
 
@@ -165,7 +165,7 @@ export function getLinkList(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
             const id = data.state.id
-            Http.callApi('get',  `${BaseUrl}/admin/linkList?id=${id}`, [])
+            Http.callApi('get', `${BaseUrl}/admin/linkList?id=${id}`, [])
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -241,7 +241,7 @@ export function getProfile() {
         new Promise((resolve, reject) => {
             Http.callApi('get', BaseUrl + '/admin/profile')
                 .then(function (res) {
-                    console.log(res,"ressss");
+                    console.log(res, "ressss");
                     // dispatch(action.setNotificationData(res));
                     return resolve(res);
                 })
@@ -285,7 +285,7 @@ export function carrierDetails(data) {
     data.env = 'test'
     const queryParam = `?userId=${data?.id}&env=${data.env}`;
     return new Promise((resolve, reject) => {
-        Http.callApi('get', BaseUrl + '/admin/carrierDetails' + queryParam,[])
+        Http.callApi('get', BaseUrl + '/admin/carrierDetails' + queryParam, [])
             .then(function (res) {
                 resolve(res);
             })
@@ -303,7 +303,7 @@ export function googleimage(data) {
     data.env = 'test'
     const queryParam = `?id=${data.id}&env=${data.env}`;
     return new Promise((resolve, reject) => {
-        Http.callApi('get', BaseUrl + '/admin/physicalAddressPhotos' + queryParam,[])
+        Http.callApi('get', BaseUrl + '/admin/physicalAddressPhotos' + queryParam, [])
             .then(function (res) {
                 resolve(res);
             })
@@ -341,13 +341,13 @@ export function changepassword(data, adminData) {
 export function enableGoogle2FA(email) {
     return Http.callApi('post', BaseUrl + '/admin/generateGoogle2fa', { email });
 }
-  
+
 export function disableGoogle2FA() {
     return Http.callApi('post', BaseUrl + '/admin/disableGoogle2fa');
 }
-  
+
 export function verifyGoogle2FA(values) {
-    return Http.callApi('post', BaseUrl + '/admin/google2faCheck', values );
+    return Http.callApi('post', BaseUrl + '/admin/google2faCheck', values);
 }
 
 export function uploadProfile(data) {
@@ -551,7 +551,7 @@ export function updatecontant(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('patch', BaseUrl + `/admin/updateContactUs?id=${id}`, data)
-            .then(function (res) {
+                .then(function (res) {
                     return resolve(res);
                 })
                 .catch(function (error) {
@@ -589,7 +589,7 @@ export function updatework(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('patch', BaseUrl + '/admin/updatework', data)
-            .then(function (res) {
+                .then(function (res) {
                     return resolve(res);
                 })
                 .catch(function (error) {
@@ -672,7 +672,7 @@ export function getNotificationlist(type) {
                 })
                 .catch(function (error) {
                     const data = {
-                        error : error.message,
+                        error: error.message,
                         // statusCode: error.response.status,
                     };
                     return reject(data);
@@ -952,7 +952,7 @@ export function listSubscribeUser(data) {
     let search = data || '';
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('get', BaseUrl + '/admin/listSubscribeUser?search='+search)
+            Http.callApi('get', BaseUrl + '/admin/listSubscribeUser?search=' + search)
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -1035,6 +1035,44 @@ export function getPaymentHistory() {
                 .catch(function (error) {
                     const data = {
                         errorData: error.response.data.errors,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function getSharedPostList(id) {
+    // data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/getSharedPostList/' + id)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function getSavedPostList(id) {
+    // data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/getSavedPostList/' + id)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
                         // statusCode: error.response.status,
                     };
                     return reject(data);
