@@ -77,15 +77,15 @@ const SideBar = (props) => {
     "transaction-details",
     "task",
   ],
-  user = [
-    "user-list",
-    "broker-list",
-    'user-detail'
-  ],
-  notification = [
-    "general-notification",
-    "user-notification",
-  ],
+    user = [
+      "user-list",
+      "broker-list",
+      'user-detail'
+    ],
+    notification = [
+      "general-notification",
+      "user-notification",
+    ],
     app = [
       "app-profile",
       "post-details",
@@ -239,13 +239,11 @@ const SideBar = (props) => {
           </li>
           <li className={`${user.includes(path) ? "mm-active" : ""}`}>
             <Link className={`${path === "user-list" ? "mm-active" : ""}`} to="/user-list">
-            {/* <Link className="has-arrow ai-icon" to="#" > */}
+              {/* <Link className="has-arrow ai-icon" to="#" > */}
               <i className="fa fa-user"></i>
               <span className="nav-text">Users List</span>
             </Link>
-            {/* <ul > */}
-              {/* <li><Link className={`${path === "broker-list" ? "mm-active" : ""}`} to="/broker-list">Broker List</Link></li> */}
-            {/* </ul> */}
+
           </li>
 
           <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
@@ -260,13 +258,12 @@ const SideBar = (props) => {
             <li><Link className={`${path === "cms" ? "mm-active" : ""}`} to="/cms">CMS</Link></li>
             </ul>
           </li>
-
-          {/* <li className={`${path === "FMCSAS-list" || path === "FMCSAS-view" ? "mm-active" : ""}`}>
-            <Link to="/FMCSAS-list" >
-              <i className="fa fa-question-circle"></i>
-              <span className="nav-text">FMCSAS List</span>
+          <li className={`${path === "hunter-tip" || path == "hunter-tip" ? "mm-active" : ""}`}>
+            <Link to="/hunter-tip" >
+              <i className="fa fa-lightbulb"></i>
+              <span className="nav-text">Hunter Tip</span>
             </Link>
-          </li> */}
+          </li>
           <li className={`${path === "support-list" || path == "support-tickets" ? "mm-active" : ""}`}>
             <Link to="/support-list" >
               <i className="fa fa-envelope"></i>
@@ -280,8 +277,8 @@ const SideBar = (props) => {
               <span className="nav-text">Notifications</span>
             </Link>
             <ul >
-            <li><Link className={`${path === "general-notification" ? "mm-active" : ""}`} to="/general-notification">General Notifications</Link></li>
-            <li><Link className={`${path === "user-notification" ? "mm-active" : ""}`} to="/user-notification">Individual Notification</Link></li>
+              <li><Link className={`${path === "general-notification" ? "mm-active" : ""}`} to="/general-notification">General Notifications</Link></li>
+              <li><Link className={`${path === "user-notification" ? "mm-active" : ""}`} to="/user-notification">Individual Notification</Link></li>
             </ul>
           </li>
         </MM>

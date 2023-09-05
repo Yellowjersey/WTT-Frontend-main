@@ -34,7 +34,7 @@ import ChangePassword from "./components/AppsMenu/AppProfile/ChangePassword";
 import Google2fa from "./components/AppsMenu/AppProfile/Google2fa";
 // import Google2fa from "./components/AppsMenu/AppProfile/";
 import FmcsasView from "./pages/User/FmcsasView";
-import FmcsasList from "./pages/User/FmcsasList";
+import HunterTip from "./pages/User/HunterTip";
 import SubUserList from "./pages/User/SubUserList";
 import LinkList from "./pages/User/LinkList";
 import SubUserLinkList from "./pages/User/SubUserLinkList";
@@ -68,9 +68,9 @@ const Markup = () => {
     { url: "sub-user-FMCSAS-list", component: SubUserFmcsasList },
     { url: "request-list", component: RequestList },
     { url: "request-detail", component: viewRequest },
-    { url: "FMCSAS-list", component: FmcsasList },
     { url: "FMCSAS-view", component: FmcsasView },
-
+    { url: "hunter-tip", component: HunterTip },
+    
 
     //Notification
     { url: "general-notification", component: Notification },
