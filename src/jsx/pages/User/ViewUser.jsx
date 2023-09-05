@@ -52,12 +52,12 @@ const ViewUser = () => {
                   <img src={userDetail?.img ? process.env.REACT_APP_PROFILE_URL + 'users/' + userDetail?.img : dummy} class="imaga_fluid" alt="" />
                 </div>
               </div>
-              <div class="col-md-12 col-lg-4">
+              <div class="col-md-12 col-lg-8">
                 <div class="text_content">
                   <p className="fs16 fw-400 lh-lg mb-2"> <i className="fa fa-user" aria-hidden="true"></i> &nbsp; {userDetail?.firstName ? userDetail?.firstName + ' ' + userDetail?.lastName : '-'}</p>
                   <p className="fs16 fw-400 lh-lg mb-2"> <i className="fa fa-envelope" aria-hidden="true"></i> &nbsp; {userDetail?.email ? userDetail?.email : '-'}</p>
                   <p className="fs16 fw-400 lh-lg mb-2"> <i className="fa fa-phone-square" aria-hidden="true"></i> &nbsp; {userDetail?.mobile ? userDetail?.mobile : '-'}</p>
-                  <p className="fs16 fw-400 lh-lg mb-2"> <i className="fa fa-id-card" aria-hidden="true"></i>{userDetail?.is_subscription ? (userDetail?.is_subscription === 0 ? <Badge bg=" badge-lg " className='badge bg-dark' style={{ cursor: 'pointer' }} >Is not subscribe</Badge> : <Badge bg=" badge-lg " className='badge bg-dark' style={{ cursor: 'pointer' }} >Is subscribe</Badge>) : <Badge bg=" badge-lg " className='badge bg-dark' style={{ cursor: 'pointer' }} >Is not subscribe</Badge>}</p>
+                  <p className="fs16 fw-400 lh-lg mb-2"> <i className="fa fa-id-card" aria-hidden="true"></i>{userDetail?.is_subscription ? (userDetail?.is_subscription === 0 ? <Badge bg=" badge-lg " className='badge bg-dark' >Is not subscribe</Badge> : <Badge bg=" badge-lg " className='badge bg-dark' >Is subscribe</Badge>) : <Badge bg=" badge-lg " className='badge' >Is not subscribe</Badge>}</p>
                 </div>
               </div>
             </div>
@@ -65,41 +65,46 @@ const ViewUser = () => {
         </Col>
       </Row>
       <Row>
-        <Col xl="6">
+        <Col xl="12">
           <Card>
             <Card.Header className=" border-0 pb-0">
               <Card.Title>Shared Post</Card.Title>
             </Card.Header>
             <Card.Body>
+              <div className="d-flex gap-2 flex-wrap">
               {
                 sharedPost.length !== 0 ? sharedPost.map((post, key) => {
                   return (
-                    <div key={key}>
+                    <div key={key} className="image_wrapper">
                       <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" />
                     </div>
                   )
                 }) : 'No Post'
               }
+              </div>
+              
             </Card.Body>
           </Card>
         </Col>
       </Row>
       <Row>
-        <Col xl="6">
+        <Col xl="12">
           <Card>
             <Card.Header className=" border-0 pb-0">
               <Card.Title>Saved Post</Card.Title>
             </Card.Header>
             <Card.Body>
+            <div className="d-flex gap-2 flex-wrap">
               {
                 savedPost.length !== 0 ? savedPost.map((post, key) => {
                   return (
-                    <div key={key}>
+                    <div key={key} className="image_wrapper">
                       <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" />
                     </div>
                   )
                 }) : 'No Post'
               }
+               </div>
             </Card.Body>
           </Card>
         </Col>
