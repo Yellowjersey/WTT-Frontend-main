@@ -1,6 +1,4 @@
 import Http from '../../Http'
-import * as action from '../../store/actions'
-import { loginConfirmedAction } from '../../store/actions/AuthActions';
 // import ToastMe from '../../view/common/ToastMe';
 const BaseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -45,7 +43,6 @@ export function getAllUser(value) {
 }
 
 export function getRequest(value) {
-    let search = value || '';
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('get', BaseUrl + '/admin/requestList')
@@ -64,7 +61,6 @@ export function getRequest(value) {
 }
 
 export function getwork(value) {
-    let search = value || '';
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('get', BaseUrl + '/admin/workList  ')
@@ -200,7 +196,6 @@ export function getLinkList(data) {
 }
 
 export function gethuntertip(value) {
-    let search = value || '';
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('get', BaseUrl + '/admin/huntertipList')

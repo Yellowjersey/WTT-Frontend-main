@@ -2,10 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import UserService from '../../../services/user';
 import { useDispatch } from 'react-redux';
 import { Button,Form, Empty, Table, Modal, Input, Badge } from 'antd';
-import { Dropdown } from "react-bootstrap";
 import 'react-phone-input-2/lib/style.css';
 import PageLoader from '../Common/PageLoader';
-import moment from 'moment';
 import TextArea from 'antd/es/input/TextArea';
 import ToastMe from "../Common/ToastMe";
 import Swal from 'sweetalert2';
@@ -19,7 +17,6 @@ const HunterTip = (props) => {
     const [Id, setId] = useState("");
 
   const [visible, setVisible] = useState(false);
-    const [selectedFilter, setSelectedFilter] = useState(null)
 
     const gethuntertip = (value) => {
         dispatch(UserService.gethuntertip(value))
@@ -47,17 +44,6 @@ const HunterTip = (props) => {
         gethuntertip();
     }, [])
 
-
-    const svg1 = (
-        <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
-            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                <rect x="0" y="0" width="24" height="24"></rect>
-                <circle fill="#000000" cx="5" cy="12" r="2"></circle>
-                <circle fill="#000000" cx="12" cy="12" r="2"></circle>
-                <circle fill="#000000" cx="19" cy="12" r="2"></circle>
-            </g>
-        </svg>
-    );
 
     const  changestatus = (e) => {
       Swal.fire({
@@ -111,8 +97,8 @@ const HunterTip = (props) => {
             key: 'status',
             render: (element, data) => (
               <div style={{ width: "100px" , cursor: 'pointer' }} onClick={()=>changestatus(data)}>
-                  {element === 0 ? <Badge bg=" badge-lg " className='badge-danger light badge-lg'>Deactive</Badge>
-                      : <Badge bg=" badge-lg " className='badge-success light badge-lg' >Active</Badge>}
+                  {element === 0 ? <Badge bg=" badge-lg " className='badge-danger light badge-xs badge bg- badge-lg'>Deactive</Badge>
+                      : <Badge bg=" badge-lg " className='badge-primary light badge-xs badge bg- badge-lg' >Active</Badge>}
               </div>
           ),
         },

@@ -6,7 +6,6 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 /// Link
 import { Link } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
-import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import { ThemeContext } from "../../../context/ThemeContext";
 import LogoutPage from './Logout';
 import dummy from "../../../images/dummy.png";
@@ -85,100 +84,6 @@ const SideBar = (props) => {
     notification = [
       "general-notification",
       "user-notification",
-    ],
-    app = [
-      "app-profile",
-      "post-details",
-      "change-password",
-      "app-calender",
-      "email-compose",
-      "email-inbox",
-      "email-read",
-      "ecom-product-grid",
-      "ecom-product-list",
-      "ecom-product-order",
-      "ecom-checkout",
-      "ecom-invoice",
-      "ecom-customers",
-      "post-details",
-      "ecom-product-detail",
-    ],
-    email = ["email-compose", "email-inbox", "email-read"],
-    shop = [
-      "ecom-product-grid",
-      "ecom-product-list",
-      "ecom-product-list",
-      "ecom-product-order",
-      "ecom-checkout",
-      "ecom-invoice",
-      "ecom-customers",
-      "ecom-product-detail",
-    ],
-    charts = [
-      "chart-rechart",
-      "chart-flot",
-      "chart-chartjs",
-      "chart-chartist",
-      "chart-sparkline",
-      "chart-apexchart",
-    ],
-    bootstrap = [
-      "ui-accordion",
-      "ui-badge",
-      "ui-alert",
-      "ui-button",
-      "ui-modal",
-      "ui-button-group",
-      "ui-list-group",
-      "ui-card",
-      "ui-carousel",
-      "ui-dropdown",
-      "ui-popover",
-      "ui-progressbar",
-      "ui-tab",
-      "ui-typography",
-      "ui-pagination",
-      "ui-grid",
-    ],
-    plugins = [
-      "uc-select2",
-
-      "uc-sweetalert",
-      "uc-toastr",
-      "uc-noui-slider",
-      "map-jqvmap",
-      "uc-lightgallery",
-    ],
-    redux = [
-      "redux-form",
-      "redux-wizard",
-      "todo",
-    ],
-    widget = ["widget-basic"],
-    forms = [
-      "form-element",
-      "form-wizard",
-      "form-editor-summernote",
-      "form-pickers",
-      "form-validation-jquery",
-    ],
-    table = ["table-bootstrap-basic", "table-datatable-basic"],
-    pages = [
-      "page-register",
-      "page-login",
-      "page-lock-screen",
-      "page-error-400",
-      "page-error-403",
-      "page-error-404",
-      "page-error-500",
-      "page-error-503",
-    ],
-    error = [
-      "page-error-400",
-      "page-error-403",
-      "page-error-404",
-      "page-error-500",
-      "page-error-503",
     ];
   return (
     <div
@@ -231,7 +136,7 @@ const SideBar = (props) => {
           </Dropdown.Menu>
         </Dropdown>
         <MM className="metismenu" id="menu">
-          <li className={`${deshBoard.includes(path) || path == 'dashboard' ? "mm-active" : ""}`}>
+          <li className={`${deshBoard.includes(path) || path === 'dashboard' ? "mm-active" : ""}`}>
             <Link to="/" >
               <i className="fas fa-home"></i>
               <span className="nav-text">Dashboard</span>
@@ -258,13 +163,13 @@ const SideBar = (props) => {
             <li><Link className={`${path === "cms" ? "mm-active" : ""}`} to="/cms">CMS</Link></li>
             </ul>
           </li>
-          <li className={`${path === "hunter-tip" || path == "hunter-tip" ? "mm-active" : ""}`}>
+          <li className={`${path === "hunter-tip" || path === "hunter-tip" ? "mm-active" : ""}`}>
             <Link to="/hunter-tip" >
               <i className="fa fa-lightbulb"></i>
               <span className="nav-text">Hunter Tip</span>
             </Link>
           </li>
-          <li className={`${path === "support-list" || path == "support-tickets" ? "mm-active" : ""}`}>
+          <li className={`${path === "support-list" || path === "support-tickets" ? "mm-active" : ""}`}>
             <Link to="/support-list" >
               <i className="fa fa-envelope"></i>
               <span className="nav-text">Support Tickets</span>
