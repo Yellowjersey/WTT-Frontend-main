@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import UserService from '../../../services/user';
 import { useDispatch } from 'react-redux';
-import { Button,Form, Empty, Table, Modal, Input } from 'antd';
+import { Button,Form, Empty, Table, Modal, Input, Badge } from 'antd';
 import { Dropdown } from "react-bootstrap";
 import 'react-phone-input-2/lib/style.css';
 import PageLoader from '../Common/PageLoader';
 import moment from 'moment';
 import TextArea from 'antd/es/input/TextArea';
 import ToastMe from "../Common/ToastMe";
+import Swal from 'sweetalert2';
 
 
 const HunterTip = (props) => {
@@ -15,6 +16,7 @@ const HunterTip = (props) => {
     const [data, setData] = useState([]);
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
+    const [Id, setId] = useState("");
 
   const [visible, setVisible] = useState(false);
     const [selectedFilter, setSelectedFilter] = useState(null)
@@ -57,6 +59,29 @@ const HunterTip = (props) => {
         </svg>
     );
 
+    const  changestatus = (e) => {
+      Swal.fire({
+          title: 'Are you sure?',
+          text: "To change this HunterTip status!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Change it!'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              dispatch(UserService.changehunterTipStatus(e))
+                  .then((res) => {
+                    gethuntertip(); 
+                      ToastMe("Hunter Tip status change successfully", 'success')
+                  })
+                  .catch((errors) => {
+                      console.log({ errors })
+                  })
+          }
+      })
+    }
+
     const columnss = [
         {
             title: 'ID',
@@ -84,40 +109,55 @@ const HunterTip = (props) => {
             title: 'status',
             dataIndex: 'status',
             key: 'status',
-            render: (data) => (
-                <p style={{ width: "100px" }}>  {data === '' || data === null ? "-" : data === 1 ? "Active" : "Deactive"}</p>
-            )
+            render: (element, data) => (
+              <div style={{ width: "100px" , cursor: 'pointer' }} onClick={()=>changestatus(data)}>
+                  {element === 0 ? <Badge bg=" badge-lg " className='badge-danger light badge-lg'>Deactive</Badge>
+                      : <Badge bg=" badge-lg " className='badge-success light badge-lg' >Active</Badge>}
+              </div>
+          ),
         },
+        {
+          title: 'Action',
+          dataIndex: 'action',
+          key: 'action',
+          render: (text, data) => (
+              <>
+                  <div>
+                      <span
+                          style={{ margin: "0 10px", fontSize: "16px", color: "#1677ff", cursor: "pointer" }}
+                          onClick={() => editModal(data)}>
+                          <i className="fa fa-edit" aria-hidden="true"></i>
+                      </span>
+                  </div>
+              </>
+          ),
+      },
     ];
     const editModal = (text) => {
-        // setId("")
-        setVisible(true);
-        if (text) {
-        //   setId(text?._id);
-        //   form.setFieldsValue({
-        //     humandescription: text.humandescription,
-        //     deerdescription: text.deerdescription,
-        //   });
+      setVisible(true);
+      setId("")
+      if (text) {
+          setId(text?._id);
+          form.setFieldsValue({
+            title: text.title,
+            description: text.description,
+          });
         } else {
           form.resetFields();
         }
       };
+
       const handleSubmit = (values) => {
-        // if (Id !== "") {
-        //   values.id = Id;
-        //   if (Name === "deer") {
-        //     values.deerimage = images;
-        //   } else {
-        //     values.humanimage = images;
-        //   }
-        // }
+        if(Id){
+          values.id = Id
+        }
         
-        
+      const apicall =  Id ? UserService.Edithntertip(values) : UserService.createhntertip(values);
          
-        dispatch(UserService.createhntertip(values))
+        dispatch(apicall)
           .then((res) => {
             gethuntertip();
-            // setId("");
+            setId("");
             setVisible(false);
             ToastMe(res.data.message, "success");
           })
@@ -148,7 +188,7 @@ const HunterTip = (props) => {
             </div>
             <Modal
         open={visible}
-        title={"Add Hunter Tip"}
+        title={Id ? "Edit Hunter Tip" :"Add Hunter Tip"}
         okText="Submit"
         cancelText="Cancel"
         onCancel={() => {
