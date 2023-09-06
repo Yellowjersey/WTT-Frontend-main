@@ -3,7 +3,6 @@
 /src/uploads/
 /.vscode
 /.idea
-build
 **/.DS_Store
 .DS_Store
 .env
