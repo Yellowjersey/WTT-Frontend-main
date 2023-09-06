@@ -79,9 +79,9 @@ const Work = () => {
     setId(e.id);
     setName(e.name);
     setVisibleimg(true);
-      form.setFieldsValue({
-        contract: '',
-            })
+    form.setFieldsValue({
+      contract: '',
+    })
     // form.resetFields();
   };
 
@@ -101,26 +101,26 @@ const Work = () => {
   const approvePendingUser = (text) => {
     let data = text?._id;
     Swal.fire({
-        title: 'Are you sure?',
-        text: "Are you sure you want to delete this?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Delete it!'
+      title: 'Are you sure?',
+      text: "Are you sure you want to delete this?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete it!'
     }).then((result) => {
-        if (result.isConfirmed) {
-            dispatch(UserService.deletework(data))
-                .then((res) => {
-                  gerWork();
-                    ToastMe("Work Deleted successfully", 'success')
-                })
-                .catch((errors) => {
-                    console.log({ errors })
-                })
-        }
+      if (result.isConfirmed) {
+        dispatch(UserService.deletework(data))
+          .then((res) => {
+            gerWork();
+            ToastMe("Work Deleted successfully", 'success')
+          })
+          .catch((errors) => {
+            console.log({ errors })
+          })
+      }
     })
-};
+  };
 
   return (
     <>
@@ -139,7 +139,7 @@ const Work = () => {
               <div style={{ position: "relative" }}>
                 <img
                   style={{ objectFit: "cover" }}
-                  src={`http://localhost:4000/uploads/admin/${data[0]?.humanimage}`}
+                  src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data[0]?.humanimage}
                   width="100%"
                   height="350px"
                   loading="lazy"
@@ -152,7 +152,7 @@ const Work = () => {
                   }
                 >
                   {" "}
-                  <i className="fa fa-edit" style={{fontSize:"16px" , color:"#1677ff"}} aria-hidden="true"></i>
+                  <i className="fa fa-edit" style={{ fontSize: "16px", color: "#1677ff" }} aria-hidden="true"></i>
                 </Button>
               </div>
               {/* <div>
@@ -165,7 +165,7 @@ const Work = () => {
               <h1 style={{ textAlign: "center" }}>Deer Vision</h1>
               <div style={{ position: "relative" }}>
                 <img
-                  src={`http://localhost:4000/uploads/admin/${data[0]?.deerimage}`}
+                  src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data[0]?.deerimage}
                   width="100%"
                   height="350px"
                   style={{ objectFit: "cover" }}
@@ -179,7 +179,7 @@ const Work = () => {
                   }
                 >
                   {" "}
-                  <i className="fa fa-edit" style={{fontSize:"16px" , color:"#1677ff"}} aria-hidden="true"></i>
+                  <i className="fa fa-edit" style={{ fontSize: "16px", color: "#1677ff" }} aria-hidden="true"></i>
                 </Button>
               </div>
             </Col>
@@ -194,25 +194,25 @@ const Work = () => {
                   {text?.deerdescription}
                 </Col>
                 {
-                  (text?.humandescription ||  text?.deerdescription) ? 
-                  <>
-                  <Button
-                  style={{ position: "absolute", right: "50px" }}
-                  type="dashed"
-                  onClick={() => editModal(text)}
-                  >
-                  {" "}
-                  <i className="fa fa-edit" style={{fontSize:"16px" , color:"#1677ff"}} aria-hidden="true"></i>
-                </Button>
-                <Button
-                style={{ position: "absolute", right: "0" }}
-                type="dashed"
-                onClick={() => approvePendingUser(text)}
-                >
-                  {" "}
-                  <i className="fa fa-trash" style={{fontSize:"16px" , color:"#f92b2b"}} aria-hidden="true"></i>
-                </Button>
-                </> : ""
+                  (text?.humandescription || text?.deerdescription) ?
+                    <>
+                      <Button
+                        style={{ position: "absolute", right: "50px" }}
+                        type="dashed"
+                        onClick={() => editModal(text)}
+                      >
+                        {" "}
+                        <i className="fa fa-edit" style={{ fontSize: "16px", color: "#1677ff" }} aria-hidden="true"></i>
+                      </Button>
+                      <Button
+                        style={{ position: "absolute", right: "0" }}
+                        type="dashed"
+                        onClick={() => approvePendingUser(text)}
+                      >
+                        {" "}
+                        <i className="fa fa-trash" style={{ fontSize: "16px", color: "#f92b2b" }} aria-hidden="true"></i>
+                      </Button>
+                    </> : ""
                 }
               </Row>
             );
