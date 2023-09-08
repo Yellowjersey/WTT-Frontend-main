@@ -87,6 +87,23 @@ export function changeaboutStatus(id) {
         })
     )
 }
+export function changetutorialStatus(id) {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('put', BaseUrl + '/admin/changetutorialStatus/' + id)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
 export function ticketReply(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
@@ -159,7 +176,7 @@ export function createabout(data) {
         })
     )
 }
-export function updateabout(id,data) {
+export function updateabout(id, data) {
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('put', BaseUrl + '/admin/updateAboutUs/' + id, data)
@@ -167,6 +184,62 @@ export function updateabout(id,data) {
                     return resolve(res);
                 })
                 .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+export function getTutorial(id, data) {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/getTutorial')
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function createTutorial(data) {
+    data.env = 'test';
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + '/admin/createTutorial', data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+export function updateTutorial(id, data) {
+    data.env ='test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('put', BaseUrl + '/admin/updateTutorial/' + id, data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    console.log(error)
                     const data = {
                         errorData: error.response.data,
                         statusCode: error.response.status,

@@ -47,6 +47,7 @@ import ViewTicket from "./pages/SupportTicket/ViewTicket";
 import Contactus from "./pages/User/Contactus";
 import AboutUs from "./pages/User/AboutUs";
 import Cms from "./pages/Setting/Cms";
+import Tutorial from "./pages/Setting/Tutorial";
 
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
@@ -92,6 +93,7 @@ const Markup = () => {
     //About us
     { url: "about-us", component: AboutUs },
     { url: "cms", component: Cms },
+    { url: "tutorials", component: Tutorial },
 
     /// pages
     { url: "page-register", component: Registration },
