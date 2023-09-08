@@ -74,11 +74,16 @@ const Tutorial = (props) => {
             dataIndex: 'description',
             key: 'description',
         },
-        // {
-        //     title: 'Link',
-        //     dataIndex: 'link',
-        //     key: 'link',
-        // },
+        {
+            title: 'Link',
+            dataIndex: 'link',
+            key: 'link',
+            render: (text, data) => (
+                <div >
+                <a style={{color:"blue"}} href={text} target="_blank" rel="noopener noreferrer">{text}</a>
+                </div>
+            ),
+        },
         {
             title: 'Status',
             dataIndex: 'status',
