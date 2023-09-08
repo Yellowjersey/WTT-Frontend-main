@@ -150,19 +150,6 @@ const SideBar = (props) => {
             </Link>
 
           </li>
-
-          <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
-            <Link className="has-arrow ai-icon" to="#" >
-              <i className="fa fa-cog" aria-hidden="true"></i>
-              <span className="nav-text">Settings</span>
-            </Link>
-            <ul >
-            <li><Link className={`${path === "how-it-work" ? "mm-active" : ""}`} to="/how-it-work">How it Work</Link></li>
-            <li><Link className={`${path === "contact-us" ? "mm-active" : ""}`} to="/contact-us">Contact us</Link></li>
-            <li><Link className={`${path === "about-us" ? "mm-active" : ""}`} to="/about-us">About Us</Link></li>
-            <li><Link className={`${path === "cms" ? "mm-active" : ""}`} to="/cms">CMS</Link></li>
-            </ul>
-          </li>
           <li className={`${path === "tutorials" || path === "tutorials" ? "mm-active" : ""}`}>
             <Link to="/tutorials" >
               <i className="fa fa-list"></i>
@@ -190,6 +177,18 @@ const SideBar = (props) => {
             <ul >
               <li><Link className={`${path === "general-notification" ? "mm-active" : ""}`} to="/general-notification">General Notifications</Link></li>
               <li><Link className={`${path === "user-notification" ? "mm-active" : ""}`} to="/user-notification">Individual Notification</Link></li>
+            </ul>
+          </li>
+          <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
+            <Link className="has-arrow ai-icon" to="#" >
+              <i className="fa fa-cog" aria-hidden="true"></i>
+              <span className="nav-text">Settings</span>
+            </Link>
+            <ul >
+            <li><Link className={`${path === "how-it-work" ? "mm-active" : ""}`} to="/how-it-work">How it Work</Link></li>
+            <li><Link className={`${path === "contact-us" ? "mm-active" : ""}`} to="/contact-us">Contact us</Link></li>
+            <li><Link className={`${path === "about-us" ? "mm-active" : ""}`} to="/about-us">About Us</Link></li>
+            <li><Link className={`${path === "cms" ? "mm-active" : ""}`} to="/cms">CMS</Link></li>
             </ul>
           </li>
         </MM>
