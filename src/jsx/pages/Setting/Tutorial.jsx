@@ -80,7 +80,7 @@ const Tutorial = (props) => {
             key: 'link',
             render: (text, data) => (
                 <div >
-                <a style={{color:"blue"}} href={text} target="_blank" rel="noopener noreferrer">{text}</a>
+                <a style={{color:"blue"}} href={text} target="_blank" rel="noopener noreferrer">Click here.</a>
                 </div>
             ),
         },
