@@ -82,7 +82,6 @@ const Work = () => {
     form.setFieldsValue({
       contract: '',
     })
-    // form.resetFields();
   };
 
   let checkImageType = (info) => {
