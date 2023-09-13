@@ -1,34 +1,11 @@
-import React, { Fragment, useState, useReducer, useEffect } from "react";
-// import { Button, Dropdown, Modal, Tab, Nav, Form } from "react-bootstrap";
+import React, { Fragment, useState, useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Button, Form, Input } from "antd";
 import { Edit2 } from "iconsax-react";
-import { Link } from "react-router-dom";
-import { SRLWrapper } from "simple-react-lightbox";
-// import profile from "../../../../images/profile/profile.png";
 import UserService from "../../../../services/user";
-import PageTitle from "../../../layouts/PageTitle";
 import ToastMe from "../../../pages/Common/ToastMe";
-import dummy from "../../../../images/dummy.png";
 import {loginConfirmedAction} from '../../../../store/actions/AuthActions';
 
-const initialState = false;
-const reducer = (state, action)   => {
-  switch (action.type) {
-    case "sendMessage":
-      return { ...state, sendMessage: !state.sendMessage };
-    case "postModal":
-      return { ...state, post: !state.post };
-    case "linkModal":
-      return { ...state, link: !state.link };
-    case "cameraModal":
-      return { ...state, camera: !state.camera };
-    case "replyModal":
-      return { ...state, reply: !state.reply };
-    default:
-      return state;
-  }
-};
 
 const   AppProfile = (props) => {
   const dispatch = useDispatch();
@@ -50,7 +27,6 @@ const   AppProfile = (props) => {
     
     const previewUserImageOnChange = (ev) => {
       let userImgSrc = URL.createObjectURL(ev.target.files[0]);
-      let filesPath = ev.target.files[0];
       setUserImg(userImgSrc);
       setUserImgpath(ev.target.files[0])
       
@@ -90,10 +66,6 @@ const   AppProfile = (props) => {
       dispatch(UserService.updateUserProfile(data, props?.adminData))
       .then((res) => {
         ToastMe("Profile Updated Successfully", "success");
-        // loginurldata();
-        // setTimeout(() => {
-          // 	window.location.reload();
-          // }, 500)
           props.history.push("/dashboard");
         })
         .catch((errors) => {
@@ -101,18 +73,12 @@ const   AppProfile = (props) => {
         });
       };
 
-  const options = {
-    settings: {
-      overlayColor: "#000000",
-    },
-  };
 
   useEffect(() => {
     getProfile();
   }, []);
 
   useEffect(()=>{
-    // getProfile();
     loginurldata();
   },[onFinish])
   
