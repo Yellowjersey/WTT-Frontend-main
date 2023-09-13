@@ -175,7 +175,7 @@ const dispatch = useDispatch();
               <span className="nav-text">Support Tickets</span>
             </Link>
           </li>
-          <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
+          {/* <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
               <i className="fa fa-bell" aria-hidden="true"></i>
 
@@ -185,7 +185,7 @@ const dispatch = useDispatch();
               <li><Link className={`${path === "general-notification" ? "mm-active" : ""}`} to="/general-notification">General Notifications</Link></li>
               <li><Link className={`${path === "user-notification" ? "mm-active" : ""}`} to="/user-notification">Individual Notification</Link></li>
             </ul>
-          </li>
+          </li> */}
           <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
               <i className="fa fa-cog" aria-hidden="true"></i>
