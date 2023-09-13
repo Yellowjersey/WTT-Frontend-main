@@ -91,7 +91,9 @@ const   AppProfile = (props) => {
       admin_id: user?._id,
     });
   }, [user]);
-  let imageurl = `${process.env.REACT_APP_PROFILE}${user?.image}` 
+  
+  let imageurl = `${process.env.REACT_APP_PROFILE_URL + 'admin/'}${user?.image}`
+
   return (
     <Fragment>
       <div className="row">
