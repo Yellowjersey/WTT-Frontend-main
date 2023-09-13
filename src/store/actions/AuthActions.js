@@ -70,14 +70,13 @@ export function loginAction(email, password, history) {
     return (dispatch) => {
         login(email, password)
             .then((response) => {
-                // console.log(response,"response");
                 const resObject = {
                     kind: "identitytoolkit#VerifyPasswordResponse",
                     localId: "qmt6dRyipIad8UCc0QpMV2MENSy1",
                     email: 'admin@admin.com',
                     id: response.data.user._id,
                     displayName: response.data.user.name,
-                    profileImage: response.data.user.photoURL,
+                    profileImage: response.data.user.image,
                     registered: true,
                     refreshToken: response.data.refreshToken,
                     accessToken: response.data.accessToken,
@@ -95,7 +94,6 @@ export function loginAction(email, password, history) {
                 dispatch(loginConfirmedAction(resObject));
             })
             .catch((error) => {
-                console.log('error',error);
                 ToastMe(error?.response?.data?.message, 'error')
                 const errorMessage = formatError(error?.response?.data?.message);
                 dispatch(loginFailedAction(errorMessage));

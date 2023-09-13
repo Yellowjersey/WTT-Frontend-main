@@ -1,6 +1,6 @@
 /// Menu
 import Metismenu from "metismenujs";
-import React, { Component, useContext, useEffect } from "react";
+import React, { Component, useContext, useEffect, useState } from "react";
 /// Scroll
 import PerfectScrollbar from "react-perfect-scrollbar";
 /// Link
@@ -9,11 +9,14 @@ import { Dropdown } from "react-bootstrap";
 import { ThemeContext } from "../../../context/ThemeContext";
 import LogoutPage from './Logout';
 import dummy from "../../../images/dummy.png";
+import UserService from "../../../services/user";
+// const Userservice from "../"
 
 
 /// Image
 //import user from "../../../images/user.jpg";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+
 
 
 class MM extends Component {
@@ -36,6 +39,8 @@ class MM extends Component {
 
 const SideBar = (props) => {
   const adminData = props?.adminData;
+const dispatch = useDispatch();
+  const [users, setUser] = useState();
 
   const {
     iconHover,
@@ -85,6 +90,8 @@ const SideBar = (props) => {
       "general-notification",
       "user-notification",
     ];
+
+   let profileImage = `${process.env.REACT_APP_PROFILE}${adminData?.profileImage}`
   return (
     <div
       className={`dlabnav ${iconHover} ${sidebarposition.value === "fixed" &&
@@ -100,7 +107,7 @@ const SideBar = (props) => {
         <Dropdown className="dropdown header-profile2">
           <Dropdown.Toggle variant="" as="a" className="nav-link i-false c-pointer">
             <div className="header-info2 d-flex align-items-center border">
-              <img src={adminData?.profileImage != null ? adminData?.profileImage : dummy} width={20} alt="" />
+              <img src={adminData?.profileImage != null ? profileImage : dummy} width={20} alt="" />
               {/* <img src={profile} width={20} alt="" /> */}
               <div className="d-flex align-items-center sidebar-info">
                 <div>

@@ -273,6 +273,7 @@ export function getProfile() {
 }
 
 export function updateUserProfile(data, adminData) {
+    console.log(data);
     data.env = 'test'
     return dispatch => (
         new Promise((resolve, reject) => {
@@ -408,6 +409,7 @@ export function uploadProfile(data) {
 }
 
 export function uploadUserProfile(data) {
+    console.log(data);
     data.env = 'test';
     return dispatch => (
         new Promise((resolve, reject) => {
