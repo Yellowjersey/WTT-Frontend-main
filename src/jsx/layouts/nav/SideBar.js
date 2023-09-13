@@ -91,7 +91,7 @@ const dispatch = useDispatch();
       "user-notification",
     ];
 
-   let profileImage = `${process.env.REACT_APP_PROFILE}${adminData?.profileImage}`
+   let profileImage = `${process.env.REACT_APP_PROFILE_URL + 'admin/'}${adminData?.profileImage}`
   return (
     <div
       className={`dlabnav ${iconHover} ${sidebarposition.value === "fixed" &&
