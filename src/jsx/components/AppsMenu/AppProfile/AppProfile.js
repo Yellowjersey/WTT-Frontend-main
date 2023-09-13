@@ -58,7 +58,9 @@ const   AppProfile = (props) => {
 
     const loginurldata =  () =>{
       let data = props?.adminData
-      data.profileImage = imageName
+      if(imageName){
+        data.profileImage = imageName
+      }
       dispatch(loginConfirmedAction(data));
     }
     
@@ -76,7 +78,7 @@ const   AppProfile = (props) => {
 			})
 			.catch((errors, statusCode) => {
         setUserImg('')
-				ToastMe(errors.errorData, "error");
+				// ToastMe(errors.errorData, "error");
 			});
       return data;
     }
