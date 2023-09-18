@@ -98,7 +98,7 @@ function Login(props) {
                           </label>
                           <input type="email" className="form-control"
                             value={email}
-                            validationSchema={loginSchema}
+                            validationschema={loginSchema}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Type Your Email Address"
                           />
@@ -109,7 +109,7 @@ function Login(props) {
                           <input
                             type="password"
                             className="form-control"
-                            validationSchema={loginSchema}
+                            validationschema={loginSchema}
                             value={password}
                             placeholder="Type Your Password"
                             onChange={(e) =>
