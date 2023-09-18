@@ -33,7 +33,7 @@ const Work = () => {
 
   useEffect(() => {
     gerWork();
-  }, []);
+  },[]);
 
   const handleSubmit = (values) => {
     if (Id !== "") {
@@ -137,7 +137,7 @@ const Work = () => {
               <h1 style={{ textAlign: "center" }}>Human Vision</h1>
               <div style={{ position: "relative" }}>
                 <img
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "cover"  ,borderRadius:"6px" }}
                   src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data[0]?.humanimage}
                   width="100%"
                   height="350px"
@@ -167,7 +167,7 @@ const Work = () => {
                   src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data[0]?.deerimage}
                   width="100%"
                   height="350px"
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "cover" ,borderRadius:"6px" }}
                   loading="lazy"
                 />
                 <Button

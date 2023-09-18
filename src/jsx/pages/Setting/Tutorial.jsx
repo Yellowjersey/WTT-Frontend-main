@@ -27,7 +27,6 @@ const Tutorial = (props) => {
     const getTutorial = () => {
         dispatch(supportService.getTutorial())
             .then((res) => {
-                console.log(res.data)
                 var newArr = [];
                 for (var i = 0; i < res.data.length; i++) {
                     newArr.push(

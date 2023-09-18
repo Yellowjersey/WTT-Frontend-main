@@ -80,6 +80,42 @@ export function getwork(value) {
     )
 }
 
+export function getusersubscription(value) {
+    let search = value || '';
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + `/admin/usersubscription?serach=${search}`)
+                .then(function (res) {
+                    return resolve(res?.data);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function gettransaction(value) {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/usersubscriptionlist')
+                .then(function (res) {
+                    return resolve(res?.data);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+
 export function getSubUserList(data) {
     return dispatch => (
         new Promise((resolve, reject) => {

@@ -23,24 +23,13 @@ import ForgotPassword from "./pages/ForgotPassword";
 
 import { ThemeContext } from "../context/ThemeContext";
 import User from "./pages/User/Userlist";
-import RequestList from "./pages/User/Request";
-import viewRequest from "./pages/User/ViewRequest";
 import ViewUser from "./pages/User/ViewUser";
 import Notification from "./pages/Setting/Notification";
 import Work from "./pages/User/Work";
 import UserNotification from "./pages/Setting/UserNotification";
 import NotificationDetail from "./pages/Setting/NotificationDetail";
 import ChangePassword from "./components/AppsMenu/AppProfile/ChangePassword";
-import Google2fa from "./components/AppsMenu/AppProfile/Google2fa";
-// import Google2fa from "./components/AppsMenu/AppProfile/";
-import FmcsasView from "./pages/User/FmcsasView";
 import HunterTip from "./pages/User/HunterTip";
-import SubUserList from "./pages/User/SubUserList";
-import LinkList from "./pages/User/LinkList";
-import SubUserLinkList from "./pages/User/SubUserLinkList";
-import CarrierSubUserList from "./pages/User/CarrierSubUserList";
-import SubUserFmcsasList from "./pages/User/SubUserFmcsasList";
-import CarrierSubUserLinkList from "./pages/User/Contactus";
 import AppProfile from "./components/AppsMenu/AppProfile/AppProfile";
 import SupportTicket from "./pages/SupportTicket/SupportTicket";
 import ViewTicket from "./pages/SupportTicket/ViewTicket";
@@ -48,6 +37,8 @@ import Contactus from "./pages/User/Contactus";
 import AboutUs from "./pages/User/AboutUs";
 import Cms from "./pages/Setting/Cms";
 import Tutorial from "./pages/Setting/Tutorial";
+import UserSubscriptions from "./pages/User/UserSubscriptions";
+import Transaction from "./pages/User/Transaction";
 
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
@@ -61,16 +52,9 @@ const Markup = () => {
     { url: "user-list", component: User },
     { url: "how-it-work", component: Work },
     { url: "contact-us", component: Contactus },
-    { url: "sub-user-list", component: SubUserList },
-    { url: "link-list", component: LinkList },
-    { url: "sub-user-link-list", component: SubUserLinkList },
-    { url: "carrier-sub-user-list", component: CarrierSubUserList },
-    { url: "carrier-sub-user-Link-list", component: CarrierSubUserLinkList },
-    { url: "sub-user-FMCSAS-list", component: SubUserFmcsasList },
-    { url: "request-list", component: RequestList },
-    { url: "request-detail", component: viewRequest },
-    { url: "FMCSAS-view", component: FmcsasView },
     { url: "hunter-tip", component: HunterTip },
+    { url: "user-subscriptions", component: UserSubscriptions },
+    { url: "transaction", component: Transaction },
     
 
     //Notification
@@ -84,7 +68,6 @@ const Markup = () => {
     /// Apps
     { url: "app-profile", component: AppProfile },
     { url: "change-password", component: ChangePassword },
-    { url: "google2fa", component: Google2fa },
 
     //support-ticket
     { url: "support-list", component: SupportTicket },
