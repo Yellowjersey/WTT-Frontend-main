@@ -13,6 +13,7 @@ const Transaction = () => {
   const [loading, setLoading] = useState(true);
   const [serach, setSerach] = useState('');
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [statusFilterName, setStatusFilterName] = useState('Status');
 
   const UserSubscription = () => {
     dispatch(UserService.getusersubscription(serach))
@@ -136,6 +137,21 @@ const Transaction = () => {
   ];
 
   const handleFilterChange = (filterOption) => {
+    if(filterOption === 0){
+      setStatusFilterName('Pending') 
+    }else if(filterOption === 0){
+      setStatusFilterName('Pending') 
+    } else if(filterOption === 1){
+      setStatusFilterName('Running') 
+    }else if(filterOption === 2){
+      setStatusFilterName('Update') 
+    }else if(filterOption === 3){
+      setStatusFilterName('Fail') 
+    }else if(filterOption === 4){
+      setStatusFilterName('Cancel') 
+    }else {
+      setStatusFilterName('All') 
+    }
     setSelectedFilter(filterOption);
   };
 
@@ -225,7 +241,7 @@ const Transaction = () => {
             </div>
             <Dropdown menu={{ items }} placement="bottom" arrow={{ pointAtCenter: true }} >
               {/* <span style={{backgroundColor:"#44814f", color:"#ffffff" , padding:"5px 8px" , borderRadius:"6px" , fontSize:"14px"}}> Filter by Status </span> */}
-              <Button className="btn-primary">Status</Button>
+              <Button className="btn-primary">{statusFilterName}</Button>
             </Dropdown>
           </div>
         </div>
