@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import UserService from "../../../services/user";
 import { useDispatch } from "react-redux";
-import { Badge, Button,  Empty, Input, Table } from "antd";
+import { Badge, Button, Empty, Input, Table } from "antd";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import "react-phone-input-2/lib/style.css";
 import PageLoader from "../Common/PageLoader";
@@ -188,12 +188,10 @@ const Transaction = () => {
         <div className="card-header">
           <h4 className="card-title">Transaction</h4>
           <div className="d-flex gap-2">
-            <div>
+            <div className="search_feild">
               <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
             </div>
-            <DropdownButton
-              title={statusFilterName}
-            >
+            <DropdownButton title={statusFilterName} className="custom_dd">
               <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
               <Dropdown.Item onClick={() => handleFilterChange(0)} >Pending</Dropdown.Item>
               <Dropdown.Item onClick={() => handleFilterChange(1)} >Running</Dropdown.Item>

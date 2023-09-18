@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import '../../components/table/FilteringTable/filtering.css';
 import { useDispatch } from 'react-redux';
-import {  Table , Empty} from 'antd';
+import { Table, Empty } from 'antd';
 import { Badge, Dropdown, DropdownButton } from "react-bootstrap";
 import PageLoader from '../Common/PageLoader';
 import supportService from '../../../services/support';
@@ -146,12 +146,10 @@ const SupportTicket = (props) => {
             <div className="card">
                 <div className="card-header">
                     <h4 className="card-title">Support List</h4>
-                    <DropdownButton
-                        title={statusFilterName}
-                    >
+                    <DropdownButton title={statusFilterName} className="custom_dd" >
                         <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
                         <Dropdown.Item onClick={() => handleFilterChange(1)} >Open</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleFilterChange(2)} >Close</Dropdown.Item> 
+                        <Dropdown.Item onClick={() => handleFilterChange(2)} >Close</Dropdown.Item>
                     </DropdownButton>
                 </div>
                 <div className="card-body">
