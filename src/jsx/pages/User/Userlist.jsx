@@ -17,6 +17,7 @@ const User = (props) => {
   const [loading, setLoading] = useState(true);
   const [serach, setSerach] = useState('');
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [statusFilterName, setStatusFilterName] = useState('Status');
 
   const getUserList = (value) => {
     dispatch(UserService.getUser(serach)).then((res) => {
@@ -195,6 +196,13 @@ const User = (props) => {
   }
 
   const handleFilterChange = (filterOption) => {
+    if (filterOption === 0) {
+      setStatusFilterName('Deactive')
+    } else if (filterOption === 1) {
+      setStatusFilterName('Active')
+    } else {
+      setStatusFilterName('All')
+    }
     setSelectedFilter(filterOption);
   };
 
@@ -249,7 +257,7 @@ const User = (props) => {
               <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
             </div>
             <AntdDropDown menu={{ items }} placement="bottom" arrow={{ pointAtCenter: true }} >
-              <Button className="btn-primary">Status</Button>
+              <Button className="btn-primary">{statusFilterName}</Button>
             </AntdDropDown>
           </div>
         </div>
