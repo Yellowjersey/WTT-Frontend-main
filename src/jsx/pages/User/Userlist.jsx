@@ -64,6 +64,7 @@ const User = (props) => {
           .then((res) => {
             getUserList();
             setSelectedFilter(null);
+            setStatusFilterName('All')
             ToastMe("User status change successfully", 'success')
           })
           .catch((errors) => {
