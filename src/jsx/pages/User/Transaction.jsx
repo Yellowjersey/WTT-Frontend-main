@@ -1,12 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import UserService from "../../../services/user";
 import { useDispatch } from "react-redux";
-import { Badge, Button, Col, Dropdown, Empty, Form, Input, Modal, Row, Table } from "antd";
-import ToastMe from "../Common/ToastMe";
+import { Badge, Button, Dropdown, Empty, Input, Table } from "antd";
 import "react-phone-input-2/lib/style.css";
 import PageLoader from "../Common/PageLoader";
-import TextArea from "antd/es/input/TextArea";
-import Swal from "sweetalert2";
 import moment from "moment";
 import { SearchOutlined } from "@ant-design/icons";
 
@@ -16,7 +13,6 @@ const Transaction = () => {
   const [loading, setLoading] = useState(true);
   const [serach, setSerach] = useState('');
   const [selectedFilter, setSelectedFilter] = useState(null);
-
 
   const UserSubscription = () => {
     dispatch(UserService.getusersubscription(serach))
@@ -86,7 +82,7 @@ const Transaction = () => {
       title: "Subscription Price",
       dataIndex: "SubscriptionPrice",
       key: "SubscriptionPrice",
-      render: (text, data) => {
+      render: (text) => {
         return <span>{`$` + text ?? "-"}</span>;
       },
     },
@@ -95,7 +91,7 @@ const Transaction = () => {
       dataIndex: "discount",
       key: "discount",
       render: (text) => {
-        return <span>{text + "%" ?? "-"}</span>;
+        return <span>{text ? text + "%" : '-'}</span>;
       },
     },
     {
@@ -164,7 +160,6 @@ const Transaction = () => {
       return true;
     });
   }, [data, selectedFilter]);
-
 
   const items = [
     {
