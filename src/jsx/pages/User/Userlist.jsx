@@ -231,7 +231,7 @@ const User = (props) => {
             <div className="search_feild">
               <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
             </div>
-            <DropdownButton title={statusFilterName} className="custom_dd">
+            <DropdownButton title={statusFilterName === "All" ? "Filter By Status" : statusFilterName} className="custom_dd">
               <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
               <Dropdown.Item onClick={() => handleFilterChange(1)} >Active</Dropdown.Item>
               <Dropdown.Item onClick={() => handleFilterChange(0)} >Deactive</Dropdown.Item>

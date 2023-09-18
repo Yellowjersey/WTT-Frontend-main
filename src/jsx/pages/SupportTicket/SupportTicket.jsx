@@ -146,7 +146,7 @@ const SupportTicket = (props) => {
             <div className="card">
                 <div className="card-header">
                     <h4 className="card-title">Support List</h4>
-                    <DropdownButton title={statusFilterName} className="custom_dd" >
+                    <DropdownButton title={statusFilterName === "All" ? "Filter By Status" : statusFilterName} className="custom_dd" >
                         <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
                         <Dropdown.Item onClick={() => handleFilterChange(1)} >Open</Dropdown.Item>
                         <Dropdown.Item onClick={() => handleFilterChange(2)} >Close</Dropdown.Item>

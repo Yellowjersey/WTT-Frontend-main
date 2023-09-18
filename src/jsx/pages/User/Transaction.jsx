@@ -180,7 +180,6 @@ const Transaction = () => {
 
 
 
-
   return (
     <>
       <PageLoader loading={loading} />
@@ -191,7 +190,7 @@ const Transaction = () => {
             <div className="search_feild">
               <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
             </div>
-            <DropdownButton title={statusFilterName} className="custom_dd">
+            <DropdownButton title={statusFilterName === "All" ? "Filter By Status" : statusFilterName} className="custom_dd">
               <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
               <Dropdown.Item onClick={() => handleFilterChange(0)} >Pending</Dropdown.Item>
               <Dropdown.Item onClick={() => handleFilterChange(1)} >Running</Dropdown.Item>
