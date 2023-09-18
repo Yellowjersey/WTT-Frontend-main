@@ -62,6 +62,7 @@ const User = (props) => {
         dispatch(UserService.changeUserStatus(data))
           .then((res) => {
             getUserList();
+            setSelectedFilter(null);
             ToastMe("User status change successfully", 'success')
           })
           .catch((errors) => {
