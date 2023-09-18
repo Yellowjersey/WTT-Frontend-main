@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import UserService from "../../../services/user";
 import { useDispatch } from "react-redux";
-import { Badge, Button, Dropdown, Empty, Input, Table } from "antd";
+import { Badge, Button,  Empty, Input, Table } from "antd";
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 import "react-phone-input-2/lib/style.css";
 import PageLoader from "../Common/PageLoader";
 import moment from "moment";
@@ -13,7 +14,7 @@ const Transaction = () => {
   const [loading, setLoading] = useState(true);
   const [serach, setSerach] = useState('');
   const [selectedFilter, setSelectedFilter] = useState(null);
-  const [statusFilterName, setStatusFilterName] = useState('Status');
+  const [statusFilterName, setStatusFilterName] = useState('Filter By Status');
 
   const UserSubscription = () => {
     dispatch(UserService.getusersubscription(serach))
@@ -137,20 +138,20 @@ const Transaction = () => {
   ];
 
   const handleFilterChange = (filterOption) => {
-    if(filterOption === 0){
-      setStatusFilterName('Pending') 
-    }else if(filterOption === 0){
-      setStatusFilterName('Pending') 
-    } else if(filterOption === 1){
-      setStatusFilterName('Running') 
-    }else if(filterOption === 2){
-      setStatusFilterName('Update') 
-    }else if(filterOption === 3){
-      setStatusFilterName('Fail') 
-    }else if(filterOption === 4){
-      setStatusFilterName('Cancel') 
-    }else {
-      setStatusFilterName('All') 
+    if (filterOption === 0) {
+      setStatusFilterName('Pending')
+    } else if (filterOption === 0) {
+      setStatusFilterName('Pending')
+    } else if (filterOption === 1) {
+      setStatusFilterName('Running')
+    } else if (filterOption === 2) {
+      setStatusFilterName('Update')
+    } else if (filterOption === 3) {
+      setStatusFilterName('Fail')
+    } else if (filterOption === 4) {
+      setStatusFilterName('Cancel')
+    } else {
+      setStatusFilterName('All')
     }
     setSelectedFilter(filterOption);
   };
@@ -177,56 +178,7 @@ const Transaction = () => {
     });
   }, [data, selectedFilter]);
 
-  const items = [
-    {
-      key: 8,
-      label: (
-        <a onClick={() => handleFilterChange()} >
-          All
-        </a>
-      ),
-    },
-    {
-      key: '0',
-      label: (
-        <a onClick={() => handleFilterChange(0)} >
-          Pending
-        </a>
-      ),
-    },
-    {
-      key: '1',
-      label: (
-        <a onClick={() => handleFilterChange(1)} >
-          Running
-        </a>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <a onClick={() => handleFilterChange(2)} >
-          Update
-        </a>
-      ),
-    },
-    {
-      key: '3',
-      label: (
-        <a onClick={() => handleFilterChange(3)} >
-          Fail
-        </a>
-      ),
-    },
-    {
-      key: '4',
-      label: (
-        <a onClick={() => handleFilterChange(4)} >
-          Cancel
-        </a>
-      ),
-    },
-  ];
+
 
 
   return (
@@ -239,10 +191,16 @@ const Transaction = () => {
             <div>
               <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
             </div>
-            <Dropdown menu={{ items }} placement="bottom" arrow={{ pointAtCenter: true }} >
-              {/* <span style={{backgroundColor:"#44814f", color:"#ffffff" , padding:"5px 8px" , borderRadius:"6px" , fontSize:"14px"}}> Filter by Status </span> */}
-              <Button className="btn-primary">{statusFilterName}</Button>
-            </Dropdown>
+            <DropdownButton
+              title={statusFilterName}
+            >
+              <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange(0)} >Pending</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange(1)} >Running</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange(2)} >Update</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange(3)} >Fail</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange(4)} >Cancel</Dropdown.Item>
+            </DropdownButton>
           </div>
         </div>
         <div className="card-body">

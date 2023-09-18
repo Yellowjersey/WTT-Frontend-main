@@ -9,7 +9,7 @@ import { phoneFormate } from "../helper";
 import Swal from "sweetalert2";
 import ToastMe from "../Common/ToastMe";
 import { SearchOutlined } from "@ant-design/icons";
-import { Badge, Dropdown } from "react-bootstrap";
+import { Badge, Dropdown, DropdownButton } from "react-bootstrap";
 
 const User = (props) => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const User = (props) => {
   const [loading, setLoading] = useState(true);
   const [serach, setSerach] = useState('');
   const [selectedFilter, setSelectedFilter] = useState(null);
-  const [statusFilterName, setStatusFilterName] = useState('Status');
+  const [statusFilterName, setStatusFilterName] = useState('Filter By Status');
 
   const getUserList = (value) => {
     dispatch(UserService.getUser(serach)).then((res) => {
@@ -220,32 +220,6 @@ const User = (props) => {
   }, [data, selectedFilter]);
 
 
-  const items = [
-    {
-      key: 8,
-      label: (
-        <a onClick={() => handleFilterChange()} >
-          All
-        </a>
-      ),
-    },
-    {
-      key: '0',
-      label: (
-        <a onClick={() => handleFilterChange(0)} >
-          Deactive
-        </a>
-      ),
-    },
-    {
-      key: '1',
-      label: (
-        <a onClick={() => handleFilterChange(1)} >
-          Active
-        </a>
-      ),
-    }
-  ];
 
   return (
     <>
@@ -257,9 +231,13 @@ const User = (props) => {
             <div>
               <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
             </div>
-            <AntdDropDown menu={{ items }} placement="bottom" arrow={{ pointAtCenter: true }} >
-              <Button className="btn-primary">{statusFilterName}</Button>
-            </AntdDropDown>
+            <DropdownButton
+              title={statusFilterName}
+            >
+              <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange(1)} >Active</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange(0)} >Deactive</Dropdown.Item>
+            </DropdownButton>
           </div>
         </div>
         <div className="card-body">

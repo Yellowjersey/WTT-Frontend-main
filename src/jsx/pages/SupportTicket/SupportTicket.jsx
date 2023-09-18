@@ -1,12 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import '../../components/table/FilteringTable/filtering.css';
-import UserService from '../../../services/user';
 import { useDispatch } from 'react-redux';
-import { Modal, Table, Button, Input, Form, Empty ,  Dropdown as AntdDropDown} from 'antd';
-import { Badge, Dropdown } from "react-bootstrap";
-import ToastMe from '../Common/ToastMe';
-import Swal from 'sweetalert2';
-import moment from "moment";
+import {  Table , Empty} from 'antd';
+import { Badge, Dropdown, DropdownButton } from "react-bootstrap";
 import PageLoader from '../Common/PageLoader';
 import supportService from '../../../services/support';
 
@@ -14,12 +10,9 @@ import supportService from '../../../services/support';
 const SupportTicket = (props) => {
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
-    const [visible, setVisible] = useState(false);
-    const [id, setId] = useState('');
-    const [form] = Form.useForm();
     const [loading, setLoading] = useState(true);
     const [selectedFilter, setSelectedFilter] = useState(null);
-    const [statusFilterName, setStatusFilterName] = useState('Status');
+    const [statusFilterName, setStatusFilterName] = useState('Filter By Status');
 
     const viewTicket = (text) => {
         props.history.push("/view-ticket", { state: text.id })
@@ -124,55 +117,28 @@ const SupportTicket = (props) => {
     ];
 
     const handleFilterChange = (filterOption) => {
-        if (filterOption === 0) {
-          setStatusFilterName('Close')
+        if (filterOption === 2) {
+            setStatusFilterName('Close')
         } else if (filterOption === 1) {
-          setStatusFilterName('Open')
+            setStatusFilterName('Open')
         } else {
-          setStatusFilterName('All')
+            setStatusFilterName('All')
         }
         setSelectedFilter(filterOption);
-      };
+    };
 
-      const filteredData = useMemo(() => {
+    const filteredData = useMemo(() => {
         if (selectedFilter === null) return data;
         return data.filter((item) => {
-          if (selectedFilter === 2) {
-            return item.status === 2;
-          } else if (selectedFilter === 1) {
-            return item.status === 1;
-          }
-          return true;
+            if (selectedFilter === 2) {
+                return item.status === 2;
+            } else if (selectedFilter === 1) {
+                return item.status === 1;
+            }
+            return true;
         });
-      }, [data, selectedFilter]);
-    
+    }, [data, selectedFilter]);
 
-    const items = [
-        {
-          key: 8,
-          label: (
-            <a onClick={() => handleFilterChange()} >
-              All
-            </a>
-          ),
-        },
-        {
-          key: '0',
-          label: (
-            <a onClick={() => handleFilterChange(2)} >
-              Close
-            </a>
-          ),
-        },
-        {
-          key: '1',
-          label: (
-            <a onClick={() => handleFilterChange(1)} >
-              Open
-            </a>
-          ),
-        }
-      ];
 
     return (
         <>
@@ -180,9 +146,13 @@ const SupportTicket = (props) => {
             <div className="card">
                 <div className="card-header">
                     <h4 className="card-title">Support List</h4>
-                        <AntdDropDown menu={{ items }} placement="bottom" arrow={{ pointAtCenter: true }} >
-                            <Button className="btn-primary">{statusFilterName}</Button>
-                        </AntdDropDown>
+                    <DropdownButton
+                        title={statusFilterName}
+                    >
+                        <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleFilterChange(1)} >Open</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleFilterChange(2)} >Close</Dropdown.Item> 
+                    </DropdownButton>
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">
@@ -192,7 +162,7 @@ const SupportTicket = (props) => {
                         }
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
