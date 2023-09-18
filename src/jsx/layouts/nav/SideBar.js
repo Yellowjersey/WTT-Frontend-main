@@ -177,7 +177,7 @@ const dispatch = useDispatch();
           </li>
           <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
-              <i className="fa fa-cog" aria-hidden="true"></i>
+            <i className="fa fa-user-plus" aria-hidden="true"></i>
               <span className="nav-text">Subscriptions</span>
             </Link>
             <ul >
