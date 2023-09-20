@@ -746,7 +746,7 @@ export function sendUserNotification(data) {
 export function getNotificationlist(type) {
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('get', BaseUrl + '/admin/getNotification?type=' + type)
+            Http.callApi('get', BaseUrl + '/admin/getNotification')
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -1147,6 +1147,25 @@ export function getSavedPostList(id) {
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('get', BaseUrl + '/admin/getSavedPostList/' + id)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+export function sendNotification(data) {
+    console.log(data)
+    data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + '/admin/sendAlluserNotification/' , data)
                 .then(function (res) {
                     return resolve(res);
                 })

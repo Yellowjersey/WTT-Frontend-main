@@ -43,7 +43,7 @@ const Notification = () => {
                     title: '',
                     message: '',
                 })
-                ToastMe(res.data.message, 'success')
+                ToastMe("Notification Send Succesfully", 'success')
             })
         setVisible(false)
             .catch((errors) => {
@@ -52,16 +52,16 @@ const Notification = () => {
     }
 
     const getNotificationlist = () => {
-        let notification_type = 1;
-        dispatch(UserService.getNotificationlist(notification_type))
+        dispatch(UserService.getNotificationlist())
             .then((res) => {
+                console.log(res.data)
                 let newArr = [];
                 for (var i = 0; i < res.data.length; i++) {
                     newArr.push(
                         {
                             key: i,
-                            title: res.data[i].notification.title || '-',
-                            message: res.data[i].notification.body || '-',
+                            title: res.data[i].title || '-',
+                            message: res.data[i].message || '-',
                             status: res.data[i].status || '-',
                             id: res.data[i]._id || '-',
                         }
@@ -112,26 +112,6 @@ const Notification = () => {
             dataIndex: 'message',
             key: 'message',
         },
-        {
-            title: 'Actions',
-            key: 'actions',
-            render: (text) => (
-                <>
-                    <Dropdown>
-                        <Dropdown.Toggle
-                            variant="danger"
-                            className="light sharp i-false"
-                        >
-                            {svg1}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick={() => editModal(text)}>Resend</Dropdown.Item>
-                            {/* <Dropdown.Item onClick={() => deleteCms(text)}>Delete</Dropdown.Item> */}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </>
-            )
-        },
     ];
 
     return (
@@ -141,7 +121,7 @@ const Notification = () => {
                 <div className="card-header">
                     <h4 className="card-title">Notification</h4>
                     <Button type="primary" onClick={() => editModal()}>
-                        Add Notification
+                        Send Notification
                     </Button>
                 </div>
                 <div className="card-body">
@@ -153,7 +133,7 @@ const Notification = () => {
                     </div>
                 </div>
             </div>
-            <Modal open={visible} title={id ? "Resend Notification" : "Add Notification"} okText="Submit" cancelText="Cancel"
+            <Modal open={visible} title="Send Notification" okText="Submit" cancelText="Cancel"
                 onCancel={() => {
                     setVisible(false);
                 }}
