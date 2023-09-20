@@ -39,7 +39,7 @@ class MM extends Component {
 
 const SideBar = (props) => {
   const adminData = props?.adminData;
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [users, setUser] = useState();
 
   const {
@@ -88,10 +88,9 @@ const dispatch = useDispatch();
     ],
     notification = [
       "general-notification",
-      "user-notification",
     ];
 
-   let profileImage = `${process.env.REACT_APP_PROFILE_URL + 'admin/'}${adminData?.profileImage}`
+  let profileImage = `${process.env.REACT_APP_PROFILE_URL + 'admin/'}${adminData?.profileImage}`
   return (
     <div
       className={`dlabnav ${iconHover} ${sidebarposition.value === "fixed" &&
@@ -175,27 +174,36 @@ const dispatch = useDispatch();
               <span className="nav-text">Support Tickets</span>
             </Link>
           </li>
-          <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
+          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
-            <i className="fa fa-user-plus" aria-hidden="true"></i>
+              <i className="fa fa-user-plus" aria-hidden="true"></i>
               <span className="nav-text">Subscriptions</span>
             </Link>
             <ul >
-            <li><Link className={`${path === "user-subscriptions" ? "mm-active" : ""}`} to="/user-subscriptions">Subscribed Users</Link></li>
-            <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/transaction">Transaction</Link></li>
-           
+              <li><Link className={`${path === "user-subscriptions" ? "mm-active" : ""}`} to="/user-subscriptions">Subscribed Users</Link></li>
+              <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/transaction">Transaction</Link></li>
+
             </ul>
           </li>
           <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
+            <Link className="has-arrow ai-icon" to="#" >
+              <i className="fa fa-bell" aria-hidden="true"></i>
+              <span className="nav-text">Notifications</span>
+            </Link>
+            <ul >
+              <li><Link className={`${path === "general-notification" ? "mm-active" : ""}`} to="/general-notification">General Notifications</Link></li>
+            </ul>
+          </li>
+          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
               <i className="fa fa-cog" aria-hidden="true"></i>
               <span className="nav-text">Settings</span>
             </Link>
             <ul >
-            <li><Link className={`${path === "how-it-work" ? "mm-active" : ""}`} to="/how-it-work">How it Work</Link></li>
-            <li><Link className={`${path === "contact-us" ? "mm-active" : ""}`} to="/contact-us">Contact us</Link></li>
-            <li><Link className={`${path === "about-us" ? "mm-active" : ""}`} to="/about-us">About Us</Link></li>
-            <li><Link className={`${path === "cms" ? "mm-active" : ""}`} to="/cms">CMS</Link></li>
+              <li><Link className={`${path === "how-it-work" ? "mm-active" : ""}`} to="/how-it-work">How it Work</Link></li>
+              <li><Link className={`${path === "contact-us" ? "mm-active" : ""}`} to="/contact-us">Contact us</Link></li>
+              <li><Link className={`${path === "about-us" ? "mm-active" : ""}`} to="/about-us">About Us</Link></li>
+              <li><Link className={`${path === "cms" ? "mm-active" : ""}`} to="/cms">CMS</Link></li>
             </ul>
           </li>
         </MM>
