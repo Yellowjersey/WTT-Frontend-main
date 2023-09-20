@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import '../../components/table/FilteringTable/filtering.css';
-import UserService from '../../../services/user';
 import { useDispatch } from 'react-redux';
-import { Modal, Table, Button, Input, Form, Empty } from 'antd';
-import { Badge, Dropdown } from "react-bootstrap";
-import ToastMe from '../Common/ToastMe';
-import Swal from 'sweetalert2';
-import moment from "moment";
+import { Table, Empty } from 'antd';
+import { Badge, Dropdown, DropdownButton } from "react-bootstrap";
 import PageLoader from '../Common/PageLoader';
 import supportService from '../../../services/support';
 
@@ -14,30 +10,13 @@ import supportService from '../../../services/support';
 const SupportTicket = (props) => {
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
-    const [visible, setVisible] = useState(false);
-    const [id, setId] = useState('');
-    const [form] = Form.useForm();
     const [loading, setLoading] = useState(true);
+    const [selectedFilter, setSelectedFilter] = useState(null);
+    const [statusFilterName, setStatusFilterName] = useState('Filter By Status');
 
     const viewTicket = (text) => {
         props.history.push("/view-ticket", { state: text.id })
     }
-
-    // const onSubmit = (values) => {
-    //     dispatch(UserService.sendNotification(values))
-    //         .then((res) => {
-    //             getTicketList();
-    //             form.setFieldsValue({
-    //                 title: '',
-    //                 message: '',
-    //             })
-    //             ToastMe(res.data.message, 'success')
-    //         })
-    //     setVisible(false)
-    //         .catch((errors) => {
-    //             console.log({ errors })
-    //         })
-    // }
 
     const getTicketList = () => {
         dispatch(supportService.getTicketList())
@@ -137,19 +116,51 @@ const SupportTicket = (props) => {
         },
     ];
 
+    const handleFilterChange = (filterOption) => {
+        if (filterOption === 2) {
+            setStatusFilterName('Close')
+        } else if (filterOption === 1) {
+            setStatusFilterName('Open')
+        } else {
+            setStatusFilterName('All')
+        }
+        setSelectedFilter(filterOption);
+    };
+
+    const filteredData = useMemo(() => {
+        if (selectedFilter === null) return data;
+        return data.filter((item) => {
+            if (selectedFilter === 2) {
+                return item.status === 2;
+            } else if (selectedFilter === 1) {
+                return item.status === 1;
+            }
+            return true;
+        });
+    }, [data, selectedFilter]);
+
+
     return (
         <>
             <PageLoader loading={loading} />
             <div className="card">
+                <div className="card-header">
+                    <h4 className="card-title">Support List</h4>
+                    <DropdownButton title={statusFilterName === "All" ? "Filter By Status" : statusFilterName} className="custom_dd" >
+                        <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleFilterChange(1)} >Open</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleFilterChange(2)} >Close</Dropdown.Item>
+                    </DropdownButton>
+                </div>
                 <div className="card-body">
                     <div className="table-responsive">
                         {
-                            data && data.length > 0 ?
-                                <Table dataSource={data} columns={columnss} className='table_custom' /> : <Empty />
+                            filteredData && filteredData.length > 0 ?
+                                <Table dataSource={filteredData} columns={columnss} className='table_custom' /> : <Empty />
                         }
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }

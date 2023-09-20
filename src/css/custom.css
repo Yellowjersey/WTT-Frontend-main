@@ -180,4 +180,13 @@ body[data-theme-version="dark"] .table-responsive .table_custom .ant-table .ant-
     object-fit: cover;
     object-position: center;
   } 
+
+  .search_feild .ant-input-affix-wrapper{
+    height: 100%;
+  }
+  
+  .custom_dd .dropdown-toggle{
+    padding: 8px;
+    border-radius: 8px;
+  }
   

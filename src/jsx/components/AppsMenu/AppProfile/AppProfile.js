@@ -1,75 +1,87 @@
-import React, { Fragment, useState, useReducer, useEffect } from "react";
-// import { Button, Dropdown, Modal, Tab, Nav, Form } from "react-bootstrap";
+import React, { Fragment, useState, useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Button, Form, Input } from "antd";
 import { Edit2 } from "iconsax-react";
-import { Link } from "react-router-dom";
-import { SRLWrapper } from "simple-react-lightbox";
-// import profile from "../../../../images/profile/profile.png";
 import UserService from "../../../../services/user";
-import PageTitle from "../../../layouts/PageTitle";
 import ToastMe from "../../../pages/Common/ToastMe";
-import dummy from "../../../../images/dummy.png";
+import {loginConfirmedAction} from '../../../../store/actions/AuthActions';
 
-const initialState = false;
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "sendMessage":
-      return { ...state, sendMessage: !state.sendMessage };
-    case "postModal":
-      return { ...state, post: !state.post };
-    case "linkModal":
-      return { ...state, link: !state.link };
-    case "cameraModal":
-      return { ...state, camera: !state.camera };
-    case "replyModal":
-      return { ...state, reply: !state.reply };
-    default:
-      return state;
-  }
-};
 
-const AppProfile = (props) => {
+const   AppProfile = (props) => {
   const dispatch = useDispatch();
   const [user, setUser] = useState();
   const [form] = Form.useForm();
   const [userImg, setUserImg] = useState("");
+  const [userImgpath, setUserImgpath] = useState("");
   const [imageName, setImageName] = useState();
 
   const getProfile = () => {
-    console.log(1);
     dispatch(UserService.getProfile())
-    .then((res) => {
+      .then((res) => {
         setUser(res.data);
       })
       .catch((errors) => {
         console.log({ errors });
       });
-  };
+    };
+    
+    const previewUserImageOnChange = (ev) => {
+      let userImgSrc = URL.createObjectURL(ev.target.files[0]);
+      setUserImg(userImgSrc);
+      setUserImgpath(ev.target.files[0])
+      
+    }
 
-  const onFinish = (data) => {
-    dispatch(UserService.updateUserProfile(data, props?.adminData))
+    const loginurldata =  () =>{
+      let data = props?.adminData
+      if(imageName){
+        data.profileImage = imageName
+      }
+      dispatch(loginConfirmedAction(data));
+    }
+    
+   
+    const uploadimage = async () => {
+      const image = new FormData();
+      image.append('image', userImgpath);
+      
+      let data = await dispatch(UserService.uploadUserProfile(image))
+			.then((res) => {
+        if (res.data) {
+          setImageName(res.data.file_name)
+          return res.data.file_name
+				}
+			})
+			.catch((errors, statusCode) => {
+        setUserImg('')
+				// ToastMe(errors.errorData, "error");
+			});
+      return data;
+    }
+    
+    const onFinish = async (data) => {
+      const dataimage =  await uploadimage()
+      data.image = dataimage
+      
+      dispatch(UserService.updateUserProfile(data, props?.adminData))
       .then((res) => {
         ToastMe("Profile Updated Successfully", "success");
-        // setTimeout(() => {
-        // 	window.location.reload();
-        // }, 500)
-        props.history.push("/dashboard");
-      })
-      .catch((errors) => {
-        console.log({ errors });
-      });
-  };
+          props.history.push("/dashboard");
+        })
+        .catch((errors) => {
+          console.log({ errors });
+        });
+      };
 
-  const options = {
-    settings: {
-      overlayColor: "#000000",
-    },
-  };
 
   useEffect(() => {
     getProfile();
   }, []);
+
+  useEffect(()=>{
+    loginurldata();
+  },[onFinish])
+  
 
   useEffect(() => {
     form.setFieldsValue({
@@ -79,6 +91,9 @@ const AppProfile = (props) => {
       admin_id: user?._id,
     });
   }, [user]);
+  
+  let imageurl = `${process.env.REACT_APP_PROFILE_URL + 'admin/'}${user?.image}`
+
   return (
     <Fragment>
       <div className="row">
@@ -92,6 +107,36 @@ const AppProfile = (props) => {
                 ></div>
               </div>
               <div className="profile-info">
+                <div className="profile-photo"
+                // style={{ position: 'relative', width: '400px', height: '200px' ,margin: '0 auto' }}
+                >
+                  <div className="img_wrapper">
+                    
+                    <img
+                      src={userImg ? userImg : imageurl}
+                      className="img-fluid rounded-circle custome_imag"
+                      // style={{ width: '200%',height: '40%',objectFit: 'cover',borderRadius: '50%'}}
+                      alt="profile"
+                    />
+                  </div>
+                  <label htmlFor='file-input-control' className="edit_btn"
+                    style={{
+                      position: 'absolute', marginTop: '-20px', right: '0', display: 'flex',
+                      justifyContent: 'center', alignItems: 'center', width: '40px', height: '40px', backgroundColor: '#fff',
+                      borderRadius: '50%', boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)', cursor: 'pointer'
+                    }}>
+                    <a role={"button"} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
+                      <Edit2 size="20" color="#333230" />
+                      <div className="col d-none" style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', opacity: '0' }}>
+                        <Input type="file" name="image" className="file-input-control"
+                          style={{
+                            position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', cursor: 'pointer', opacity: '0', 
+                          }}
+                          id='file-input-control' onChange={(event)=>previewUserImageOnChange(event)} accept="image/*" />
+                      </div>
+                    </a>
+                  </label>
+                </div>
                 <Form
                   name="basic"
                   form={form}
@@ -186,11 +231,11 @@ const AppProfile = (props) => {
                               max: 15,
                               message: "maximum length is 15",
                             },
-							{
-								pattern: /^[0-9]+$/,
-								message:
-								  "Only numbers allowed!",
-							  },
+                            {
+                              pattern: /^[0-9]+$/,
+                              message:
+                                "Only numbers allowed!",
+                            },
                           ]}
                         >
                           <Input

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import UserService from "../../../services/user";
 import { useDispatch } from "react-redux";
-import { Empty, Input, Table } from "antd";
-import { Badge, Dropdown } from "react-bootstrap";
+import { Button, Empty, Input, Table, Dropdown as AntdDropDown } from "antd";
 import moment from "moment";
 import "react-phone-input-2/lib/style.css";
 import PageLoader from "../Common/PageLoader";
@@ -10,12 +9,15 @@ import { phoneFormate } from "../helper";
 import Swal from "sweetalert2";
 import ToastMe from "../Common/ToastMe";
 import { SearchOutlined } from "@ant-design/icons";
+import { Badge, Dropdown, DropdownButton } from "react-bootstrap";
 
 const User = (props) => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [serach, setSerach] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [statusFilterName, setStatusFilterName] = useState('Filter By Status');
 
   const getUserList = (value) => {
     dispatch(UserService.getUser(serach)).then((res) => {
@@ -61,6 +63,8 @@ const User = (props) => {
         dispatch(UserService.changeUserStatus(data))
           .then((res) => {
             getUserList();
+            setSelectedFilter(null);
+            setStatusFilterName('All')
             ToastMe("User status change successfully", 'success')
           })
           .catch((errors) => {
@@ -123,7 +127,7 @@ const User = (props) => {
             ? (<div id="profileImage" style={{ background: '#a6a7ac', borderRadius: "50%", color: '#fff', textAlign: 'center', width: '50px', height: '50px', lineHeight: '50px', margin: '20px 0' }}>
               {firstInitial + lastInitial}
             </div>)
-            : <img src={process.env.REACT_APP_PROFILE_URL + 'users/' + text} width="50px" style={{ borderRadius: "50%" }} />
+            : <img src={process.env.REACT_APP_PROFILE_URL + 'users/' + text} width="50px" height="50px" style={{ borderRadius: "50%" }} />
         );
       }
     },
@@ -192,21 +196,53 @@ const User = (props) => {
     setSerach(e.target.value)
   }
 
+  const handleFilterChange = (filterOption) => {
+    if (filterOption === 0) {
+      setStatusFilterName('Deactive')
+    } else if (filterOption === 1) {
+      setStatusFilterName('Active')
+    } else {
+      setStatusFilterName('All')
+    }
+    setSelectedFilter(filterOption);
+  };
+
+  const filteredData = useMemo(() => {
+    if (selectedFilter === null) return data;
+    return data.filter((item) => {
+      if (selectedFilter === 0) {
+        return item.status === 0;
+      } else if (selectedFilter === 1) {
+        return item.status === 1;
+      }
+      return true;
+    });
+  }, [data, selectedFilter]);
+
+
+
   return (
     <>
       <PageLoader loading={loading} />
       <div className="card">
         <div className="card-header">
           <h4 className="card-title">User List</h4>
-          <div>
-            <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
+          <div className="d-flex gap-2">
+            <div className="search_feild">
+              <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
+            </div>
+            <DropdownButton title={statusFilterName === "All" ? "Filter By Status" : statusFilterName} className="custom_dd">
+              <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange(1)} >Active</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleFilterChange(0)} >Deactive</Dropdown.Item>
+            </DropdownButton>
           </div>
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            {data && data.length > 0 ? (
+            {filteredData && filteredData.length > 0 ? (
               <Table
-                dataSource={data}
+                dataSource={filteredData}
                 columns={columnss}
                 className="table_custom"
               />

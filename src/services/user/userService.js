@@ -80,6 +80,42 @@ export function getwork(value) {
     )
 }
 
+export function getusersubscription(value) {
+    let search = value || '';
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + `/admin/usersubscription?serach=${search}`)
+                .then(function (res) {
+                    return resolve(res?.data);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function gettransaction(value) {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/usersubscriptionlist')
+                .then(function (res) {
+                    return resolve(res?.data);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+
 export function getSubUserList(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
@@ -257,7 +293,6 @@ export function getProfile() {
         new Promise((resolve, reject) => {
             Http.callApi('get', BaseUrl + '/admin/profile')
                 .then(function (res) {
-                    console.log(res, "ressss");
                     // dispatch(action.setNotificationData(res));
                     return resolve(res);
                 })
@@ -564,7 +599,6 @@ export function deleteCms(data) {
 }
 
 export function createcontact(data) {
-    // console.log(data,"data");
     // data.env = 'test'
     return dispatch => (
         new Promise((resolve, reject) => {
@@ -703,13 +737,10 @@ export function Edithntertip(data) {
 
 // export function imageupdate(data) {
 //     data.env = 'test'
-//     console.log(data,"data1234");
 //     return dispatch => (
 //         new Promise((resolve, reject) => {
-//             console.log(1)
 //             Http.callApi('post', BaseUrl + '/uploadImage/admin', data)
 //                 .then(function (res) {
-//                     console.log(res,"res");
 //                     return resolve(res);
 //                 })
 //                 .catch(function (error) {
