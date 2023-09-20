@@ -54,7 +54,7 @@ const Home = () => {
 				<h4><b>Users</b></h4>
 				<div className="col-xl-12">
 					<div className="row">
-						<div className="col-xl-3 col-sm-6" onClick={subscriberRedirect}>
+						<div className="col-xl-3 col-sm-6" onClick={subscriberRedirect} style={{cursor:"pointer"}}>
 							<div className="card overflow-hidden">
 								<div className="card-header border-0">
 									<div className="d-flex">
@@ -77,7 +77,7 @@ const Home = () => {
 								</div>
 							</div>
 						</div>
-						<div className="col-xl-3 col-sm-6" onClick={UserRedirect}>
+						<div className="col-xl-3 col-sm-6" onClick={UserRedirect} style={{cursor:"pointer"}}>
 							<div className="card overflow-hidden">
 								<div className="card-header border-0">
 									<div className="d-flex">
