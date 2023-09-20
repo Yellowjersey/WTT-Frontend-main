@@ -54,7 +54,6 @@ const Notification = () => {
     const getNotificationlist = () => {
         dispatch(UserService.getNotificationlist())
             .then((res) => {
-                console.log(res.data)
                 let newArr = [];
                 for (var i = 0; i < res.data.length; i++) {
                     newArr.push(
