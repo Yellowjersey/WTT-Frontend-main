@@ -187,7 +187,7 @@ const SideBar = (props) => {
           </li>
           <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
-              <i className="fa fa-user-plus" aria-hidden="true"></i>
+              <i className="fa fa-bell" aria-hidden="true"></i>
               <span className="nav-text">Notifications</span>
             </Link>
             <ul >
