@@ -93,25 +93,29 @@ function Login(props) {
                       )}
                       <form onSubmit={onLogin}>
                         <div className="form-group">
-                          <label className="mb-2 ">
+                          <label  htmlFor="email" className="mb-2 ">
                             <strong>Email</strong>
                           </label>
                           <input type="email" className="form-control"
                             value={email}
-                            validationSchema={loginSchema}
+                            id="email"
+                            data-validation-schema={loginSchema}
                             onChange={(e) => setEmail(e.target.value)}
+                            autoComplete="email" 
                             placeholder="Type Your Email Address"
                           />
                           {errors.email && <div className="text-danger fs-12">{errors.email}</div>}
                         </div>
                         <div className="form-group">
-                          <label className="mb-2 "><strong>Password</strong></label>
+                          <label htmlFor="password" className="mb-2 "><strong>Password</strong></label>
                           <input
                             type="password"
                             className="form-control"
-                            validationSchema={loginSchema}
+                            id="password"
+                            data-validation-schema={loginSchema}
                             value={password}
                             placeholder="Type Your Password"
+                            autoComplete="current-password"
                             onChange={(e) =>
                               setPassword(e.target.value)
                             }

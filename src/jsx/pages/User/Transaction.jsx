@@ -201,7 +201,6 @@ const Transaction = () => {
           </div>
         </div>
         <div className="card-body">
-          {/* <Row> */}
           {filteredData && filteredData?.length > 0 ? (
             <Table
               dataSource={filteredData}
@@ -211,7 +210,6 @@ const Transaction = () => {
           ) : (
             <Empty />
           )}
-          {/* </Row> */}
         </div>
       </div>
 
