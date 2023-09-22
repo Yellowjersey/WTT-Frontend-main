@@ -4,7 +4,7 @@ import React, { Component, useContext, useEffect, useState } from "react";
 /// Scroll
 import PerfectScrollbar from "react-perfect-scrollbar";
 /// Link
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { ThemeContext } from "../../../context/ThemeContext";
 import LogoutPage from './Logout';
@@ -24,9 +24,8 @@ class MM extends Component {
     this.$el = this.el;
     this.mm = new Metismenu(this.$el);
   }
-  componentWillUnmount() {
-  }
   render() {
+
     return (
       <div className="mm-wrapper">
         <ul className="metismenu" ref={(el) => (this.el = el)}>
@@ -41,6 +40,9 @@ const SideBar = (props) => {
   const adminData = props?.adminData;
   const dispatch = useDispatch();
   const [users, setUser] = useState();
+  // const data = useParams();
+  const path = useLocation();
+  // console.log(path.pathname);
 
   const {
     iconHover,
@@ -48,6 +50,7 @@ const SideBar = (props) => {
     headerposition,
     sidebarLayout,
   } = useContext(ThemeContext);
+
   useEffect(() => {
     var btn = document.querySelector(".nav-control");
     var aaa = document.querySelector("#main-wrapper");
@@ -66,11 +69,10 @@ const SideBar = (props) => {
   }, []);
   // let scrollPosition = useScrollPosition();
   /// Path
-  let path = window.location.pathname;
-  path = path.split("/");
-  path = path[path.length - 1];
-  /// Active menu
-  let deshBoard = [
+  // let path = window.location.pathname;
+  // path = path.split("/");
+  // path = path[path.length - 1];
+  let deshBoard = [ 
     "",
     "dashboard",
     "dashboard-dark",
@@ -142,33 +144,33 @@ const SideBar = (props) => {
           </Dropdown.Menu>
         </Dropdown>
         <MM className="metismenu" id="menu">
-          <li className={`${deshBoard.includes(path) || path === 'dashboard' ? "mm-active" : ""}`}>
+          <li className={`${deshBoard.includes(path) || path.pathname === '/' ? "mm-active" : ""}`}>
             <Link to="/" >
               <i className="fas fa-home"></i>
               <span className="nav-text">Dashboard</span>
             </Link>
           </li>
-          <li className={`${user.includes(path) ? "mm-active" : ""}`}>
-            <Link className={`${path === "user-list" ? "mm-active" : ""}`} to="/user-list">
+          <li className={`${user.includes(path) || path.pathname === '/user-list' ? "mm-active" : ""}`}>
+            <Link to="/user-list">
               {/* <Link className="has-arrow ai-icon" to="#" > */}
               <i className="fa fa-user"></i>
               <span className="nav-text">Users List</span>
             </Link>
 
           </li>
-          <li className={`${path === "tutorials" || path === "tutorials" ? "mm-active" : ""}`}>
+          <li className={`${path.pathname === "/tutorials" || path.pathname === "/tutorials" ? "mm-active" : ""}`}>
             <Link to="/tutorials" >
               <i className="fa fa-list"></i>
               <span className="nav-text">Tutorials</span>
             </Link>
           </li>
-          <li className={`${path === "hunter-tip" || path === "hunter-tip" ? "mm-active" : ""}`}>
+          <li className={`${path === "hunter-tip" || path.pathname === "/hunter-tip" ? "mm-active" : ""}`}>
             <Link to="/hunter-tip" >
               <i className="fa fa-lightbulb"></i>
               <span className="nav-text">Hunter Tip</span>
             </Link>
           </li>
-          <li className={`${path === "support-list" || path === "support-tickets" ? "mm-active" : ""}`}>
+          <li className={`${path.pathname === "/support-list" || path.pathname === "/support-tickets" ? "mm-active" : ""}`}>
             <Link to="/support-list" >
               <i className="fa fa-envelope"></i>
               <span className="nav-text">Support Tickets</span>
@@ -185,7 +187,7 @@ const SideBar = (props) => {
 
             </ul>
           </li>
-          <li className={`${notification.includes(path) ? "mm-active" : ""}`}>
+          <li>
             <Link className="has-arrow ai-icon" to="#" >
               <i className="fa fa-bell" aria-hidden="true"></i>
               <span className="nav-text">Notifications</span>

@@ -79,7 +79,7 @@ const Tutorial = (props) => {
             key: 'link',
             render: (text, data) => (
                 <div >
-                <a style={{color:"blue"}} href={text} target="_blank" rel="noopener noreferrer">Click here.</a>
+                    <a style={{ color: "blue" }} href={text} target="_blank" rel="noopener noreferrer">Click here.</a>
                 </div>
             ),
         },
@@ -224,8 +224,10 @@ const Tutorial = (props) => {
                             name="link"
                             rules={[
                                 { required: true, message: "Please Link" },
-                                { pattern: /^(https?:\/\/)?([\w.-]+)(\.\w{2,})(\/\S*)?$/, message: 'Enter a valid URL' },
-
+                                {
+                                    pattern: /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?$/,
+                                    message: 'Enter a valid YouTube URL'
+                                },
                             ]}
                         >
                             <Input

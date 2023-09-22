@@ -78,11 +78,13 @@ const SupportTicket = (props) => {
             title: 'subject',
             dataIndex: 'subject',
             key: 'subject',
+            className: 'custom_width'
         },
         {
             title: 'Description',
             dataIndex: 'description',
             key: 'description',
+            className: 'custom_width'
         },
         {
             title: 'status',

@@ -1,28 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {  useEffect, useState } from 'react';
+import { useHistory  } from 'react-router-dom';
 import loadable from "@loadable/component";
 import pMinDelay from "p-min-delay";
-// import { Tabs } from 'antd';
 import CommonService from '../../../services/common';
-import { Card, Dropdown, Nav, Tab, Tabs } from 'react-bootstrap';
 import PageLoader from '../../pages/Common/PageLoader';
 
-///Images
-// import avt1 from "./../../../images/avatar/1.jpg";
-// import avt2 from "./../../../images/avatar/2.jpg";
-// import avt3 from "./../../../images/avatar/3.jpg";
-// import avt4 from "./../../../images/avatar/4.jpg";
-// import avt5 from "./../../../images/avatar/5.jpg";
-// import avt6 from "./../../../images/avatar/6.jpg";
-
-
-//Import Components
-import { ThemeContext } from "../../../context/ThemeContext";
-
-import DonutChart from './Dashboard/DonutChart';
-import WidgetChart3 from './Dashboard/WidgetChart3';
-import PreviousTransactions from './Dashboard/PreviousTransactions';
-import NouiRangeSlider from './Dashboard/NouiRangeSlider';
 import { useDispatch } from 'react-redux';
 
 const TotalInvoices = loadable(() =>
@@ -38,8 +20,7 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const [countData, setCountData] = useState();
 	const [loading, setLoading] = useState(true);
-	const { changeBackground } = useContext(ThemeContext);
-	const [key, setKey] = useState('home');
+	const history = useHistory();
 
 	const dashboardCountData = (key) => {
 		key = "All"
@@ -59,6 +40,13 @@ const Home = () => {
 		dashboardCountData();
 	}, []);
 
+	const UserRedirect = () => {
+		history.push('/user-list');
+	}
+	const subscriberRedirect = () => {
+		history.push('/user-subscriptions');
+	}
+
 	return (
 		<>
 			<PageLoader loading={loading} />
@@ -66,7 +54,7 @@ const Home = () => {
 				<h4><b>Users</b></h4>
 				<div className="col-xl-12">
 					<div className="row">
-						<div className="col-xl-3 col-sm-6">
+						<div className="col-xl-3 col-sm-6" onClick={subscriberRedirect} style={{cursor:"pointer"}}>
 							<div className="card overflow-hidden">
 								<div className="card-header border-0">
 									<div className="d-flex">
@@ -89,7 +77,7 @@ const Home = () => {
 								</div>
 							</div>
 						</div>
-						<div className="col-xl-3 col-sm-6">
+						<div className="col-xl-3 col-sm-6" onClick={UserRedirect} style={{cursor:"pointer"}}>
 							<div className="card overflow-hidden">
 								<div className="card-header border-0">
 									<div className="d-flex">
