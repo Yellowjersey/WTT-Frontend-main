@@ -41,6 +41,7 @@ const ViewTicket = () => {
     values.support_ticket_id = state.state
     values.user_id = data.user_id
 
+    console.log(values)
     if (values.message == undefined) {
       const image = new FormData();
       image.append('image', imageData);
@@ -54,9 +55,7 @@ const ViewTicket = () => {
 
           dispatch(supportService.ticketReply(values))
             .then((res) => {
-              form.setFieldsValue({
-                message: '',
-              })
+              form.resetFields();
               getMessageList();
               getTicket();
               scrollToBottom();
@@ -80,9 +79,7 @@ const ViewTicket = () => {
     }
     dispatch(supportService.ticketReply(values))
       .then((res) => {
-        form.setFieldsValue({
-          message: '',
-        })
+        form.resetFields();
         getMessageList();
         getTicket();
         scrollToBottom();
@@ -303,7 +300,7 @@ const ViewTicket = () => {
                 </div>
                 <Button
                   key="submit"
-                  type="primary"
+                  type="primary" htmlType="submit"
                   onClick={() => {
                     form.validateFields()
                       .then((values) => {
