@@ -28,14 +28,18 @@ const Contactus = (props) => {
     const getcontactus = () => {
         dispatch(UserService.getContactus(subUserdata))
             .then((res) => {
+                console.log(res.data);
                 var newArr = [];
                 for (var i = 0; i < res.data.length; i++) {
-                    setMailAddress({mailAddress: res.data[0].mailAddress,id:res.data[0]._id})
+                    setMailAddress({
+                        mailAddress: res.data[res?.data?.length - 1]?.mailAddress || '',
+                        id: res.data[res?.data?.length - 1]?._id || '',
+                      });
                     if (res?.data[i]?.name) {
 
                         newArr.push(
                             {
-                                key: i-1,
+                                key: i,
                                 id: res.data[i]._id,
                                 name: res.data[i].name,
                                 email: res.data[i].email,
