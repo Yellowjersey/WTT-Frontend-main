@@ -189,4 +189,9 @@ body[data-theme-version="dark"] .table-responsive .table_custom .ant-table .ant-
     padding: 8px;
     border-radius: 8px;
   }
+
+  .custom_width{
+    min-width: 200px;
+    max-width: 200px;
+  }
   
