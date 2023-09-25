@@ -16,12 +16,12 @@ const PromoCode = () => {
     const [loading, setLoading] = useState(true);
     const [promo, setPromo] = useState()
 
-    const getPromocode = () => {
+    const getPromocode =async () => {
         dispatch(SettingService.getPromoCode())
             .then((res) => {
                 setLoading(false);
-                if (res.data != null) {
-                    setPromo(res?.data)
+                 if (res.data != null) {
+                  setPromo(res?.data)
                 }
             })
             .catch((errors) => {
@@ -61,10 +61,10 @@ const PromoCode = () => {
                         <span style={{ display: "flex", alignItems: "center" }}>
                             <h1>PromoCode : </h1>
                             <h3 style={{ marginRight: "10px" }}>{promo?.promo_code} </h3>
+                            {console.log(promo?.status)}
+                            {console.log(promo?.status === true ? true : false,"1234")}
                             <Switch
-                                checkedChildren={<CheckOutlined />}
-                                unCheckedChildren={<CloseOutlined />}
-                                defaultChecked={promo?.status === true} onChange={() => handleSwitchChange(promo)} />
+                                checked={promo?.status === true ? true : false} onChange={() => handleSwitchChange(promo)} />
                         </span>
                     </Card.Body>
 
