@@ -55,6 +55,41 @@ export function getCms() {
         })
     )
 }
+export function getPromoCode() {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/promocode')
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function updatePromoCode(data) {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + `/admin/changepromocodestatus?id=${data?._id}`)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
 
 export function addCms(data) {
     return dispatch => (

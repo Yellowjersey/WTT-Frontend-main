@@ -39,6 +39,7 @@ import Cms from "./pages/Setting/Cms";
 import Tutorial from "./pages/Setting/Tutorial";
 import UserSubscriptions from "./pages/User/UserSubscriptions";
 import Transaction from "./pages/User/Transaction";
+import PromoCode from "./pages/Setting/PromoCode";
 
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
@@ -77,6 +78,7 @@ const Markup = () => {
     { url: "about-us", component: AboutUs },
     { url: "cms", component: Cms },
     { url: "tutorials", component: Tutorial },
+    { url: "promocode", component: PromoCode },
 
     /// pages
     { url: "page-register", component: Registration },
