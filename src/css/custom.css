@@ -81,6 +81,7 @@ body[data-theme-version="dark"] .table-responsive .table_custom .ant-table .ant-
     margin: 10px;
     padding: 8px;
     border-radius: 8px;
+    max-width: 80%;
   }
   
   .admin {

@@ -40,8 +40,7 @@ const ViewTicket = () => {
 
     values.support_ticket_id = state.state
     values.user_id = data.user_id
-
-    console.log(values)
+    // console.log(values)
     if (values.message == undefined) {
       const image = new FormData();
       image.append('image', imageData);
@@ -121,7 +120,7 @@ const ViewTicket = () => {
   const messagesEndRef = useRef(null)
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ block: 'end', behavior: "smooth" })
+    messagesEndRef.current?.scrollIntoView({ block: 'end', behavior: "instant" })
   }
 
   useEffect(() => {
