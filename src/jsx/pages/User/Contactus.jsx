@@ -20,7 +20,7 @@ const Contactus = (props) => {
     const [loading, setLoading] = useState(true);
     const location = useLocation();
     const [visible, setVisible] = useState(false);
-    const [visiblemail, setVisiblemail] = useState(false);
+    const [visiblemail, setVisiblemail] = useState();
     const [Id, setId] = useState("");
     const [mailAddress, setMailAddress] = useState("");
     const subUserdata = location.state;
@@ -30,12 +30,15 @@ const Contactus = (props) => {
             .then((res) => {
                 var newArr = [];
                 for (var i = 0; i < res.data.length; i++) {
-                    setMailAddress({mailAddress: res.data[0].mailAddress,id:res.data[0]._id})
+                    setMailAddress({
+                        mailAddress: res.data[res?.data?.length - 1]?.mailAddress || '',
+                        id: res.data[res?.data?.length - 1]?._id || '',
+                    });
                     if (res?.data[i]?.name) {
 
                         newArr.push(
                             {
-                                key: i-1,
+                                key: i,
                                 id: res.data[i]._id,
                                 name: res.data[i].name,
                                 email: res.data[i].email,
@@ -142,9 +145,10 @@ const Contactus = (props) => {
         dispatch(apicall)
             .then((res) => {
                 setVisible(false);
-                setVisiblemail(false);
+                setVisiblemail("");
                 setId('');
                 getcontactus();
+                form.resetFields();
                 ToastMe(res.data.message, "success");
             })
             .catch((errors) => {
@@ -153,6 +157,7 @@ const Contactus = (props) => {
     };
 
     const editModal = (e) => {
+        setVisiblemail("");
         setId("")
         setVisible(true);
         if (e) {
@@ -163,12 +168,15 @@ const Contactus = (props) => {
                 phone: e.phone,
             });
         } else {
+            setVisiblemail("");
             form.resetFields();
         }
     }
 
     const editModalmail = (e) => {
-        setVisiblemail(true);
+        setVisiblemail("");
+        setVisible(true);
+        setVisiblemail("MailAddress");
         setId(e?.id)
         form.setFieldsValue({
             mailAddress: e.mailAddress,
@@ -189,13 +197,13 @@ const Contactus = (props) => {
                 <div className="card-body">
                     <div style={{ textAlign: "center" }}>
                         {/* {data.map((mail) => { */}
-                            { mailAddress?.mailAddress ? <p ><span style={{ fontSize: "18px", fontWeight: 700 }}> MailAddress </span>  :- <span style={{ fontSize: "15px" }}> {mailAddress?.mailAddress}</span>
-                                <span
-                                    style={{ margin: "0 10px", fontSize: "16px", color: "#1677ff", cursor: "pointer" }}
-                                    onClick={() => editModalmail(mailAddress)}>
-                                    <i className="fa fa-edit" aria-hidden="true"></i>
-                                </span>
-                            </p> : ""}
+                        {mailAddress?.mailAddress ? <p ><span style={{ fontSize: "18px", fontWeight: 700 }}> MailAddress </span>  :- <span style={{ fontSize: "15px" }}> {mailAddress?.mailAddress}</span>
+                            <span
+                                style={{ margin: "0 10px", fontSize: "16px", color: "#1677ff", cursor: "pointer" }}
+                                onClick={() => editModalmail(mailAddress)}>
+                                <i className="fa fa-edit" aria-hidden="true"></i>
+                            </span>
+                        </p> : ""}
                         {/* })} */}
                     </div>
                     <Table columns={columnss} className='table_custom' dataSource={data} />
@@ -220,100 +228,70 @@ const Contactus = (props) => {
                     autoComplete="off"
                     onFinish={handleSubmit}
                 >
-                    <label className="label-name">Name</label>
-                    <Form.Item
-                        name="name"
-                        rules={[
-                            { required: true, message: "Please Enter Your Name" },
-                            { max: 20, message: "Miximum 20 character allow!" },
-                            { pattern: /^[A-Za-z\s]+$/, message: "Only character allow!" }
-                        ]}
-                    >
-                        <Input
-                            type="text"
-                            placeholder="Enter Your Name"
-                        />
-                    </Form.Item>
+                    {visiblemail === "MailAddress" ?
+                        <>
+                            <label className="label-name">Mail Address</label>
+                            <Form.Item
+                                name="mailAddress"
+                                rules={[
+                                    { required: true, message: "Please Enter Your Email" }
+                                ]}
+                            >
+                                <TextArea
+                                    autoSize={{ minRows: 2, maxRows: 6 }}
+                                    type="text"
+                                    placeholder="Enter Your Mail Address"
+                                />
+                            </Form.Item>
+                        </>
+                        : <>
+                            <label className="label-name">Name</label>
+                            <Form.Item
+                                name="name"
+                                rules={[
+                                    { required: true, message: "Please Enter Your Name" },
+                                    { max: 20, message: "Miximum 20 character allow!" },
+                                    { pattern: /^[A-Za-z\s]+$/, message: "Only character allow!" }
+                                ]}
+                            >
+                                <Input
+                                    type="text"
+                                    placeholder="Enter Your Name"
+                                />
+                            </Form.Item>
 
-                    <label className="label-name">Email</label>
-                    <Form.Item
-                        name="email"
-                        rules={[
-                            { required: true, message: "Please Enter Your Email" },
-                            { pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: "Invalid email!" }
-                        ]}
-                    >
-                        <Input
-                            type="email"
-                            placeholder="Enter Your Email"
-                        />
-                    </Form.Item>
+                            <label className="label-name">Email</label>
+                            <Form.Item
+                                name="email"
+                                rules={[
+                                    { required: true, message: "Please Enter Your Email" },
+                                    { pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: "Invalid email!" }
+                                ]}
+                            >
+                                <Input
+                                    type="email"
+                                    placeholder="Enter Your Email"
+                                />
+                            </Form.Item>
 
-                    <label className="label-name">Phone No.</label>
-                    <Form.Item
-                        name="phone"
-                        rules={[
-                            { required: true, message: "Please Enter Your Phone No." },
-                            { pattern: /^[0-9+]+$/, message: "Only Number allow!" },
-                            { min: 8, message: "Minimum 8 number allow!" },
-                            { max: 12, message: "Miximum 12 number allow!" },
-                        ]}
-                    >
-                        <Input
-                            type="text"
-                            placeholder="Enter Your Phone No."
-                        />
-                    </Form.Item>
+                            <label className="label-name">Phone No.</label>
+                            <Form.Item
+                                name="phone"
+                                rules={[
+                                    { required: true, message: "Please Enter Your Phone No." },
+                                    { pattern: /^[0-9+]+$/, message: "Only Number allow!" },
+                                    { min: 8, message: "Minimum 8 number allow!" },
+                                    { max: 12, message: "Miximum 12 number allow!" },
+                                ]}
+                            >
+                                <Input
+                                    type="text"
+                                    placeholder="Enter Your Phone No."
+                                />
+                            </Form.Item>
+                        </>}
                     <div style={{ textAlign: "right" }}>
                         <Button key="cancel" onClick={() => setVisible(false)}>
-                            {" "}
-                            Cancel{" "}
-                        </Button>
-                        <Button
-                            style={{ marginLeft: "7px" }}
-                            htmlType="submit"
-                            type="primary"
-                            key="submit"
-                        >
-                            Save
-                        </Button>
-                    </div>
-                </Form>
-            </Modal>
-            <Modal
-                open={visiblemail}
-                title={"Edit Contact"}
-                okText="Submit"
-                cancelText="Cancel"
-                onCancel={() => {
-                    setVisiblemail(false);
-                }}
-                footer={
-                    [
-                    ]
-                }
-            >
-                <Form
-                    form={form}
-                    layout="vertical"
-                    autoComplete="off"
-                    onFinish={handleSubmit}
-                >
-                    <label className="label-name">Mail Address</label>
-                    <Form.Item
-                        name="mailAddress"
-                        rules={[
-                            { required: true, message: "Please Enter Your Email" }
-                        ]}
-                    >
-                        <TextArea
-                            autoSize={{ minRows: 2, maxRows: 6 }}
-                            type="text"
-                            placeholder="Enter Your Mail Address"
-                        />
-                    </Form.Item>
-                    <div style={{ textAlign: "right" }}>
-                        <Button key="cancel" onClick={() => setVisiblemail(false)}>
                             {" "}
                             Cancel{" "}
                         </Button>
