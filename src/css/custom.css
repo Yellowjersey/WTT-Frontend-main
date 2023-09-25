@@ -195,4 +195,8 @@ body[data-theme-version="dark"] .table-responsive .table_custom .ant-table .ant-
     min-width: 200px;
     max-width: 200px;
   }
-  
+
+  .promo_wrapper .ant-switch-checked,
+  .promo_wrapper .ant-switch-checked:hover{
+    background: #44814e !important;
+  }

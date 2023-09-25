@@ -53,19 +53,19 @@ const PromoCode = () => {
         <>
             <PageLoader loading={loading} />
             <Col xl="12">
-                <Card className='table_custom'>
+                <Card className='table_custom promo_wrapper'>
                     <Card.Header className=" border-0 pb-0">
                         <Card.Title style={{ fontWeight: 700 }}>PROMOCODE</Card.Title>
                     </Card.Header>
                     <Card.Body>
-                        <span style={{ display: "flex", alignItems: "center" }}>
-                            <h1>PromoCode : </h1>
-                            <h3 style={{ marginRight: "10px" }}>{promo?.promo_code} </h3>
-                            {console.log(promo?.status)}
-                            {console.log(promo?.status === true ? true : false,"1234")}
+                        <div className="text-center">
+                            <p className="fs-16">This promo code is for subscription process. if you active this than user can use it otherwise not.</p>
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: 'center', gap: '20px' }}>
+                            <h3 style={{ marginBottom: '0' }}>{promo?.promo_code} </h3>
                             <Switch
                                 checked={promo?.status === true ? true : false} onChange={() => handleSwitchChange(promo)} />
-                        </span>
+                        </div>
                     </Card.Body>
 
                 </Card>
