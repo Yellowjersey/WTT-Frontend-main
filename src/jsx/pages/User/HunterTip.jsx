@@ -83,9 +83,9 @@ const HunterTip = (props) => {
       dataIndex: 'image',
       key: 'image',
       render: (data) => (
-        <img src={ process.env.REACT_APP_PROFILE_URL + 'admin/' + data} 
-        style={{ borderRadius: "50%", height: "80px", width: "80px" }}
-        alt="" srcset="" />
+        <img src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data}
+          style={{ borderRadius: "50%", height: "80px", width: "80px" }}
+          alt="" srcset="" />
       )
     },
     {
@@ -142,6 +142,7 @@ const HunterTip = (props) => {
       form.setFieldsValue({
         title: text.title,
         description: text.description,
+        // imagePath: text.image
       });
     } else {
       form.resetFields();
@@ -172,7 +173,7 @@ const HunterTip = (props) => {
     return data;
   }
 
-  const handleSubmit =async (values) => {
+  const handleSubmit = async (values) => {
     const dataimage = await uploadimage()
     values.image = dataimage
     if (Id) {
@@ -192,7 +193,6 @@ const HunterTip = (props) => {
         console.log({ errors });
       });
   };
-
   return (
     <>
       <PageLoader loading={loading} />
@@ -234,9 +234,9 @@ const HunterTip = (props) => {
         >
           <label className="label-name">Image</label>
           <Form.Item
-            name="image"
+            name="imagePath"
             rules={[
-              { required: true, message: "Please Enter Title" },
+              { required: Id?false:true, message: "Please Enter Image" },
             ]}
           >
             <Input
@@ -245,15 +245,14 @@ const HunterTip = (props) => {
             />
           </Form.Item>
           {userImg ?
-          <div className="img_wrapper">
-            <img
-              src={userImg}
-              className=""
-              alt="profile"
-              style={{ borderRadius: "8px", height: "150px", width: "150px" }}
+            <div className="img_wrapper">
+              <img
+                src={userImg}
+                alt="profile"
+                style={{ borderRadius: "8px", height: "150px", width: "150px" }}
               />
-          </div>
-           :"" }
+            </div>
+            : ""}
 
           <label className="label-name">Title</label>
           <Form.Item
