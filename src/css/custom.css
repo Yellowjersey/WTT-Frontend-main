@@ -210,3 +210,14 @@ body[data-theme-version="dark"] .table-responsive .table_custom .ant-table .ant-
     font-size:50px;
     color: red;
   }
+
+  .password_feild {
+    position: relative;
+  }
+
+  .password_feild span{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  } 

@@ -28,24 +28,24 @@ function Login(props) {
   let errorsObj = { email: '', password: '' };
   const [errors, setErrors] = useState(errorsObj);
   const [password, setPassword] = useState('');
-
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
   function onLogin(e) {
     e.preventDefault();
     loginSchema.validate({ email, password }, { abortEarly: false })
-    .then(() => {
-      // Validation successful, proceed with login action
-      dispatch(loadingToggleAction(true));
-      dispatch(loginAction(email, password, props.history));
-    })
-    .catch(validationErrors => {
-      const newErrors = {};
-      validationErrors.inner.forEach(error => {
-        newErrors[error.path] = error.message;
+      .then(() => {
+        // Validation successful, proceed with login action
+        dispatch(loadingToggleAction(true));
+        dispatch(loginAction(email, password, props.history));
+      })
+      .catch(validationErrors => {
+        const newErrors = {};
+        validationErrors.inner.forEach(error => {
+          newErrors[error.path] = error.message;
+        });
+        setErrors(newErrors);
       });
-      setErrors(newErrors);
-    });
   }
 
   return (
@@ -93,7 +93,7 @@ function Login(props) {
                       )}
                       <form onSubmit={onLogin}>
                         <div className="form-group">
-                          <label  htmlFor="email" className="mb-2 ">
+                          <label htmlFor="email" className="mb-2 ">
                             <strong>Email</strong>
                           </label>
                           <input type="email" className="form-control"
@@ -101,25 +101,34 @@ function Login(props) {
                             id="email"
                             data-validation-schema={loginSchema}
                             onChange={(e) => setEmail(e.target.value)}
-                            autoComplete="email" 
+                            autoComplete="email"
                             placeholder="Type Your Email Address"
                           />
                           {errors.email && <div className="text-danger fs-12">{errors.email}</div>}
                         </div>
                         <div className="form-group">
                           <label htmlFor="password" className="mb-2 "><strong>Password</strong></label>
-                          <input
-                            type="password"
-                            className="form-control"
-                            id="password"
-                            data-validation-schema={loginSchema}
-                            value={password}
-                            placeholder="Type Your Password"
-                            autoComplete="current-password"
-                            onChange={(e) =>
-                              setPassword(e.target.value)
-                            }
-                          />
+                          <div className='password_feild'>
+                            <input
+                              type={show ? 'text' : 'password'}
+                              className="form-control"
+                              id="password"
+                              data-validation-schema={loginSchema}
+                              value={password}
+                              placeholder="Type Your Password"
+                              autoComplete="current-password"
+                              onChange={(e) =>
+                                setPassword(e.target.value)
+                              }
+
+                            />
+                            <span onClick={() => setShow(!show)}>
+                              {show ?
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15.58 12c0 1.98-1.6 3.58-3.58 3.58S8.42 13.98 8.42 12s1.6-3.58 3.58-3.58 3.58 1.6 3.58 3.58Z" stroke="#44814e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 20.27c3.53 0 6.82-2.08 9.11-5.68.9-1.41.9-3.78 0-5.19-2.29-3.6-5.58-5.68-9.11-5.68-3.53 0-6.82 2.08-9.11 5.68-.9 1.41-.9 3.78 0 5.19 2.29 3.6 5.58 5.68 9.11 5.68Z" stroke="#44814e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg> :
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m14.53 9.47-5.06 5.06a3.576 3.576 0 1 1 5.06-5.06Z" stroke="#44814e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.82 5.77C16.07 4.45 14.07 3.73 12 3.73c-3.53 0-6.82 2.08-9.11 5.68-.9 1.41-.9 3.78 0 5.19.79 1.24 1.71 2.31 2.71 3.17M8.42 19.53c1.14.48 2.35.74 3.58.74 3.53 0 6.82-2.08 9.11-5.68.9-1.41.9-3.78 0-5.19-.33-.52-.69-1.01-1.06-1.47" stroke="#44814e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.51 12.7a3.565 3.565 0 0 1-2.82 2.82M9.47 14.53 2 22M22 2l-7.47 7.47" stroke="#44814e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                              }
+                            </span>
+                          </div>
                           {errors.password && <div className="text-danger fs-12">{errors.password}</div>}
                         </div>
                         {/* <div className="form-row d-flex justify-content-between mt-4 mb-2">
