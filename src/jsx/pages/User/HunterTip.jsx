@@ -189,6 +189,8 @@ const HunterTip = (props) => {
         gethuntertip();
         setId("");
         setVisible(false);
+        setUserImg('')
+        setUserImgpath("")
         ToastMe(res.data.message, "success");
         setLoadingbutton(false);
       })
