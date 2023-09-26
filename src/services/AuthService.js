@@ -27,11 +27,11 @@ export function login(email, password) {
         returnSecureToken: true,
     };
     return axios.post(
-        `${BaseUrl}/admin/login`,
-        JSON.stringify(postData), {
-            headers: { "Content-Type": "application/json", "env": "test" },
-            withCredentials: true,
-          },
+        `${BaseUrl}/admin/login`,postData
+        // JSON.stringify(postData), {
+        //     headers: { "Content-Type": "application/json", "env": "test" },
+        //     // withCredentials: true,
+        //   },
         // `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
         // postData,
     );

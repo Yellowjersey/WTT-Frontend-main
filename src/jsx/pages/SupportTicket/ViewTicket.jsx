@@ -186,7 +186,7 @@ const ViewTicket = () => {
               <div className="col-6">
                 <Card.Text>
                   <div>
-                    <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>User Name :&nbsp;</label>
+                    <label className="label-name" style={{ fontWeight: 'bold', fontSize: '20px' }}>User Name :&nbsp;</label>
                     <span style={{ fontWeight: 'initial', fontSize: 'large' }}>{data?.user_name ? data?.user_name : '-'}</span>
                   </div>
                 </Card.Text>
@@ -194,8 +194,8 @@ const ViewTicket = () => {
               <div className="col-6">
                 <Card.Text>
                   <div>
-                    <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>Requested On :&nbsp;</label>
-                    <span style={{ fontWeight: 'initial', fontSize: 'large' }}>{data?.createdAt ? moment(data?.createdAt).format('hh:mm A') : '-'}</span>
+                    <label className="label-name" style={{ fontWeight: 'bold', fontSize: '20px' }}>Requested On :&nbsp;</label>
+                    <span style={{ fontWeight: 'initial', fontSize: 'large' }}>{data?.createdAt ? moment(data?.createdAt).format('Do MMMM, YYYY') : '-'}</span>
                   </div>
                 </Card.Text>
               </div>
@@ -205,7 +205,7 @@ const ViewTicket = () => {
                 <div className="col-6">
                   <Card.Text>
                     <div>
-                      <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>Subject :&nbsp;</label>
+                      <label className="label-name" style={{ fontWeight: 'bold', fontSize: '20px' }}>Subject :&nbsp;</label>
                       <span style={{ fontWeight: 'initial', fontSize: 'large' }}>{data?.subject ? data?.subject : '-'}</span>
                     </div>
                   </Card.Text>
@@ -213,7 +213,7 @@ const ViewTicket = () => {
                 <div className="col-6">
                   <Card.Text>
                     <div>
-                      <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>Status :&nbsp;</label>
+                      <label className="label-name" style={{ fontWeight: 'bold', fontSize: '20px' }}>Status :&nbsp;</label>
                       {data?.status == 1 ? <span className="badge badge-warning" >Open</span>
                         : <span className="badge badge-success" >Close</span>}
                     </div>
@@ -224,7 +224,7 @@ const ViewTicket = () => {
                 <div className="col-6">
                   <Card.Text>
                     <div>
-                      <label className="label-name" style={{ fontWeight: 'bold', fontSize: '16px' }}>Message :&nbsp;</label>
+                      <label className="label-name" style={{ fontWeight: 'bold', fontSize: '20px' }}>Message :&nbsp;</label>
                       <span style={{ fontWeight: 'initial', fontSize: 'large' }}>  {data?.description ? data?.description : '-'}
                       </span>
                     </div>
