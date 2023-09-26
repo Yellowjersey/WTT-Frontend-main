@@ -168,6 +168,8 @@ const ViewTicket = () => {
     })
 
   }
+  const imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+  const documentExtensions = ['pdf', 'doc', 'docx'];
 
   return (
 
@@ -251,7 +253,55 @@ const ViewTicket = () => {
                 {m.type === 1 ? (
                   <div className="message-text">{m.message}</div>
                 ) : (
-                  <img src={process.env.REACT_APP_PROFILE_URL + 'support/' + m.message} alt="Message" height="250px" width="250px" />
+                  (() => {
+                    // Extract the file extension from the message
+                    const fileExtension = m.message.split('.').pop().toLowerCase();
+
+                    // Define allowed extensions for different content types
+                    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                    const documentExtensions = ['pdf'];
+                    const wordExtensions = ['doc', 'docx'];
+
+                    if (imageExtensions.includes(fileExtension)) {
+                      // Render image
+                      return (
+                        <img
+                          src={process.env.REACT_APP_PROFILE_URL + 'support/' + m.message}
+                          alt="Message"
+                          height="250px"
+                          width="250px"
+                        />
+                      );
+                    } else if (documentExtensions.includes(fileExtension)) {
+                      // Render document link
+                      return (
+                        <a
+                          href={process.env.REACT_APP_PROFILE_URL + 'support/' + m.message}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="custom_fontsize_pdf"
+                        >
+                          <i class="fa fa-file-pdf" aria-hidden="true"></i>
+                        </a>
+                      );
+                    } else if (wordExtensions.includes(fileExtension)) {
+                      // Render document link
+                      return (
+                        <a
+                          href={process.env.REACT_APP_PROFILE_URL + 'support/' + m.message}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="custom_fontsize_word"
+                        >
+                          <i class="fa fa-file-word" aria-hidden="true"></i>
+                        </a>
+                      );
+                    }
+                    else {
+                      // Handle unsupported file types here
+                      return <div>Unsupported file type</div>;
+                    }
+                  })()
                 )}
               </div>
             ))}

@@ -200,3 +200,13 @@ body[data-theme-version="dark"] .table-responsive .table_custom .ant-table .ant-
   .promo_wrapper .ant-switch-checked:hover{
     background: #44814e !important;
   }
+
+  .custom_fontsize_word{
+    font-size:50px;
+    color: blue;
+  }
+
+  .custom_fontsize_pdf{
+    font-size:50px;
+    color: red;
+  }
