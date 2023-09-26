@@ -14,6 +14,7 @@ const HunterTip = (props) => {
   const [data, setData] = useState([]);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [loadingbutton, setLoadingbutton] = useState(false);
   const [Id, setId] = useState("");
   const [imageName, setImageName] = useState();
   const [userImgpath, setUserImgpath] = useState("");
@@ -174,6 +175,7 @@ const HunterTip = (props) => {
   }
 
   const handleSubmit = async (values) => {
+    setLoadingbutton(true);
     const dataimage = await uploadimage()
     values.image = dataimage
     if (Id) {
@@ -188,6 +190,7 @@ const HunterTip = (props) => {
         setId("");
         setVisible(false);
         ToastMe(res.data.message, "success");
+        setLoadingbutton(false);
       })
       .catch((errors) => {
         console.log({ errors });
@@ -236,7 +239,7 @@ const HunterTip = (props) => {
           <Form.Item
             name="imagePath"
             rules={[
-              { required: Id?false:true, message: "Please Enter Image" },
+              { required: Id ? false : true, message: "Please Enter Image" },
             ]}
           >
             <Input
@@ -286,6 +289,7 @@ const HunterTip = (props) => {
               Cancel{" "}
             </Button>
             <Button
+              loading={loadingbutton}
               style={{ marginLeft: "7px" }}
               htmlType="submit"
               type="primary"
