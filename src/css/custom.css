@@ -201,12 +201,14 @@ body[data-theme-version="dark"] .table-responsive .table_custom .ant-table .ant-
     background: #44814e !important;
   }
 
-  .custom_fontsize_word{
+  .custom_fontsize_word
+  .custom_fontsize_word:hover{
     font-size:50px;
     color: blue;
   }
 
-  .custom_fontsize_pdf{
+  .custom_fontsize_pdf,
+  .custom_fontsize_pdf:hover{
     font-size:50px;
     color: red;
   }

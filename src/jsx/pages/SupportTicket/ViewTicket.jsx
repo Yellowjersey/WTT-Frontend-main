@@ -21,18 +21,9 @@ const ViewTicket = () => {
   const [form] = Form.useForm();
   const [userImg, setUserImg] = useState('');
   const [imageData, setimageData] = useState();
-  const [image, setUploadedImage] = useState();
   const [messageList, setMessageList] = useState([]);
   const [data, setData] = useState();
   const history = useHistory();
-  const bottum = useRef();
-
-
-  const [getTicketClose, setTicketClose] = useState();
-
-  const formatRelativeTime = (timestamp) => {
-    return moment(timestamp).format('HH:mm');;
-  };
 
   // Add Ticket 
 
