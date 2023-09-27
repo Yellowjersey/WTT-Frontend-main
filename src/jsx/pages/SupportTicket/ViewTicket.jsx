@@ -330,7 +330,7 @@ const ViewTicket = () => {
                     <input
                       id="file_upload"
                       type="file"
-                      // accept="image/*"
+                      accept="image/*"
                       onChange={(e) => {
                         previewUserImageOnChange(e);
                       }}
