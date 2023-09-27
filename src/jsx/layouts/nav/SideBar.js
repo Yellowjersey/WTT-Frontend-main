@@ -108,7 +108,7 @@ const SideBar = (props) => {
         <Dropdown className="dropdown header-profile2">
           <Dropdown.Toggle variant="" as="a" className="nav-link i-false c-pointer">
             <div className="header-info2 d-flex align-items-center border">
-              <img src={adminData?.profileImage != null ? profileImage : dummy} width={20} alt="" />
+              <img src={adminData?.profileImage != null ? profileImage : dummy} width={20} alt="" loading="lazy"/>
               {/* <img src={profile} width={20} alt="" /> */}
               <div className="d-flex align-items-center sidebar-info">
                 <div>

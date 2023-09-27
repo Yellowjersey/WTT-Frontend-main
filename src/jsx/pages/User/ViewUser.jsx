@@ -49,7 +49,7 @@ const ViewUser = () => {
             <div class="row gy-4">
               <div class="col-md-12 col-lg-4">
                 <div class="img_wrapper_h100">
-                  <img src={userDetail?.img ? process.env.REACT_APP_PROFILE_URL + 'users/' + userDetail?.img : dummy} class="imaga_fluid" alt="" />
+                  <img src={userDetail?.img ? process.env.REACT_APP_PROFILE_URL + 'users/' + userDetail?.img : dummy} class="imaga_fluid" alt="" loading="lazy"/>
                 </div>
               </div>
               <div class="col-md-12 col-lg-8">
@@ -76,7 +76,7 @@ const ViewUser = () => {
                 sharedPost.length !== 0 ? sharedPost.map((post, key) => {
                   return (
                     <div key={key} className="image_wrapper">
-                      <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" />
+                      <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" loading="lazy" />
                     </div>
                   )
                 }) : 'No Post'
@@ -99,7 +99,7 @@ const ViewUser = () => {
                 savedPost.length !== 0 ? savedPost.map((post, key) => {
                   return (
                     <div key={key} className="image_wrapper">
-                      <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" />
+                      <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" loading="lazy"/>
                     </div>
                   )
                 }) : 'No Post'

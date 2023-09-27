@@ -53,7 +53,7 @@ function Login(props) {
       <div className="login-wrapper">
         <div className="login-aside-left" >
           <Link to={"#"} className="login-logo">
-            <img src={logo} alt="" width="130px" />
+            <img src={logo} alt="" width="130px" loading="lazy"/>
           </Link>
           <div className="login-description">
             <h2 className="main-title mb-2">Welcome To WTDO</h2>

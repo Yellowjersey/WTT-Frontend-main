@@ -32,13 +32,13 @@ const NavHader = () => {
         {background.value === "dark" ? (
           <Fragment>
             <div className="App text-center mt-3">
-            {toggle ? <img src={white_logo} width="50px" className="logo" /> : <img src={white_logo} width="160px" />}
+            {toggle ? <img src={white_logo} width="50px" className="logo" loading="lazy"/> : <img src={white_logo} width="160px" loading="lazy"/>}
             </div>
           </Fragment>
         ) : (
           <Fragment>
             <div className="App text-center mt-3" style={{margin:"0 auto"}}>
-              {toggle ? <img src={dark_logo} width="50px" className="logo" /> : <img src={dark_logo} width="80px"  />}
+              {toggle ? <img src={dark_logo} width="50px" className="logo" loading="lazy"/> : <img src={dark_logo} width="80px" loading="lazy"/>}
             </div>
           </Fragment>
         )}

@@ -86,7 +86,7 @@ const HunterTip = (props) => {
       render: (data) => (
         <img src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data}
           style={{ borderRadius: "50%", height: "80px", width: "80px" }}
-          alt="" srcset="" />
+          alt="" loading="lazy"/>
       )
     },
     {

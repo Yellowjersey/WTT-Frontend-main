@@ -124,7 +124,7 @@ const User = (props) => {
       render: (text) => {
         return (
           text
-            ? <img src={process.env.REACT_APP_PROFILE_URL + 'users/' + text} width="50px" height="50px" style={{ borderRadius: "50%" }} />
+            ? <img src={process.env.REACT_APP_PROFILE_URL + 'users/' + text} width="50px" height="50px" style={{ borderRadius: "50%" }} loading="lazy"/>
             : (<div id="profileImage" style={{ background: '#a6a7ac', borderRadius: "50%", color: '#fff', textAlign: 'center', width: '50px', height: '50px', lineHeight: '50px', margin: '20px 0' }}>
               {firstInitial + lastInitial}
             </div>)

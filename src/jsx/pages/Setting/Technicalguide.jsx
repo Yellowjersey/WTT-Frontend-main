@@ -458,7 +458,7 @@ const Technicalguide = () => {
                                         <div className='img_video_wrapper'>
                                             <span id="close" onClick={() => removeImage(item)} className='close_icon'>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10ZM9.17 14.83l5.66-5.66M14.83 14.83 9.17 9.17" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
-                                            <img src={process.env.REACT_APP_PROFILE_URL + 'images/' + item} style={{ width: "100%" }} alt="gallery" />
+                                            <img src={process.env.REACT_APP_PROFILE_URL + 'images/' + item} style={{ width: "100%" }} alt="gallery" loading="lazy" />
                                         </div>
                                     </a>
                                 </>
@@ -471,7 +471,7 @@ const Technicalguide = () => {
                                                 <div className='img_video_wrapper'>
                                                     <span id="close" onClick={() => removeImageUrl(item)} className='close_icon'>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10ZM9.17 14.83l5.66-5.66M14.83 14.83 9.17 9.17" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
-                                                    <img src={URL.createObjectURL(item)} alt="profile" width="190px" height="100px" />
+                                                    <img src={URL.createObjectURL(item)} alt="profile" width="190px" height="100px" loading="lazy"/>
                                                 </div>
                                             </a> : <></>
                                     )
