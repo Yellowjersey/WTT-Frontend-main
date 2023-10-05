@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import UserService from "../../../services/user";
 import { useDispatch } from "react-redux";
-import { Badge, Button, Col, Empty, Form, Input, Modal, Row, Table } from "antd";
-import ToastMe from "../Common/ToastMe";
+import { Empty, Table } from "antd";
 import "react-phone-input-2/lib/style.css";
 import PageLoader from "../Common/PageLoader";
-import TextArea from "antd/es/input/TextArea";
-import Swal from "sweetalert2";
 import moment from "moment";
 
 
@@ -20,16 +17,15 @@ const UserSubscriptions = () => {
   const transaction = (value) => {
     dispatch(UserService.gettransaction(value))
       .then((res) => {
-        console.log(res);
         var newArr = [];
         for (var i = 0; i < res.length; i++) {
           newArr.push({
             key: i,
-            firstName: res[i].firstname,
-            lastName: res[i].lastname,
-            email: res[i].email,
-            img: res[i].image,
-            createdAt: res[i].createdAt,
+            firstName: res[i]?.firstname,
+            lastName: res[i]?.lastname,
+            email: res[i]?.email,
+            img: res[i]?.image,
+            createdAt: res[i]?.createdAt,
           });
         }
         setData(newArr);

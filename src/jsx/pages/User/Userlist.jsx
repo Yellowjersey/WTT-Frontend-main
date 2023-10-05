@@ -104,8 +104,8 @@ const User = (props) => {
       dataIndex: "firstName",
       key: "firstName",
       render: (text) => {
-        firstInitial = text ? text[0].toUpperCase() : '';;
-        return text;
+        firstInitial = text ? text[0].toUpperCase() : '-';
+        return (text  ? text : "-")
       }
     },
     {
@@ -113,8 +113,8 @@ const User = (props) => {
       dataIndex: "lastName",
       key: "lastName",
       render: (text) => {
-        lastInitial = text ? text[0].toUpperCase() : '';;
-        return text
+        lastInitial = text ? text[0].toUpperCase() : '';
+        return (text  ? text : "-")
       }
     },
     {
