@@ -27,8 +27,9 @@ const Transaction = () => {
             lastName: res[i].user_last,
             orderId: res[i].order_id,
             SubscriptionPrice: res[i].subscription_price,
+            total: res[i].total_price,
             subscriptionCurrency: res[i].subscription_currency,
-            discount: res[i].discount,
+            coupon_id: res[i].coupon_id,
             startdate: res[i].start_date,
             enddate: res[i].end_date,
             paymentstatus: res[i].payment_status,
@@ -90,10 +91,18 @@ const Transaction = () => {
     },
     {
       title: "Discount",
-      dataIndex: "discount",
-      key: "discount",
+      dataIndex: "coupon_id",
+      key: "coupon_id",
       render: (text) => {
-        return <span>{text ? text + "%" : '-'}</span>;
+        return <span>{text == null ?  '-' : "10%"}</span>;
+      },
+    },
+    {
+      title: "Total Price",
+      dataIndex: "total",
+      key: "total",
+      render: (text) => {
+        return <span>{`$${text?.toFixed(2)}` ?? "-"}</span>;
       },
     },
     {
