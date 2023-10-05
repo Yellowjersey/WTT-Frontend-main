@@ -201,7 +201,7 @@ const AboutUs = (props) => {
                         <Form.Item
                             name="question"
                             rules={[
-                                { required: true, message: "Please Question" },
+                                { required: true, message: "Please Enter Question" },
                                 { pattern: new RegExp(".*\\S.*[a-zA-z0-9 ]"), message: 'Only space is not allowed' }
 
                             ]}
@@ -219,7 +219,7 @@ const AboutUs = (props) => {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Please Answer"
+                                    message: "Please Enter Answer"
                                 },
                                 { pattern: new RegExp(".*\\S.*[a-zA-z0-9 ]"), message: 'Only space is not allowed' }
                             ]}
