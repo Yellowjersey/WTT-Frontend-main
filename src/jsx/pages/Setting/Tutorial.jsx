@@ -207,7 +207,7 @@ const Tutorial = (props) => {
                         <Form.Item
                             name="title"
                             rules={[
-                                { required: true, message: "Please Title" },
+                                { required: true, message: "Please enter Title" },
                                 { pattern: new RegExp(".*\\S.*[a-zA-z0-9 ]"), message: 'Only space is not allowed' }
 
                             ]}
@@ -223,7 +223,7 @@ const Tutorial = (props) => {
                         <Form.Item
                             name="link"
                             rules={[
-                                { required: true, message: "Please Link" },
+                                { required: true, message: "Please enter Link" },
                                 {
                                     pattern: /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?$/,
                                     message: 'Enter a valid YouTube URL'
@@ -243,7 +243,7 @@ const Tutorial = (props) => {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Please Description"
+                                    message: "Please enter Description"
                                 },
                                 { pattern: new RegExp(".*\\S.*[a-zA-z0-9 ]"), message: 'Only space is not allowed' }
                             ]}
