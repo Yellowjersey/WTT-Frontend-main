@@ -15,13 +15,11 @@ const AppProfile = (props) => {
   const [userImg, setUserImg] = useState("");
   const [userImgpath, setUserImgpath] = useState("");
   const [imageName, setImageName] = useState();
-  const [loading, setLoading] = useState(true);
 
   const getProfile = () => {
     dispatch(UserService.getProfile())
       .then((res) => {
         setUser(res.data);
-        setLoading(false)
       })
       .catch((errors) => {
         console.log({ errors });
@@ -99,7 +97,6 @@ const AppProfile = (props) => {
 
   return (
     <>
-      <PageLoader loading={loading} />
       <Fragment>
         <div className="row">
           <div className="col-lg-12">
