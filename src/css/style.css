@@ -30560,6 +30560,11 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 .data_fetch_loader .ant-spin .ant-spin-dot-item {
   background-color: #44814e !important;
 }
+
+.login_btn .ant-spin .ant-spin-dot-item {
+  background-color: #44814e !important;
+}
+
 .badge_label{
   position: relative;
 }

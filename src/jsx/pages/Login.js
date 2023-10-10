@@ -151,7 +151,7 @@ function Login(props) {
                             </div>
                           </div>
                         </div> */}
-                        <div className="text-center ant-spin ant-spin-dot-item">
+                        <div className="text-center login_btn">
                           <Spin  spinning={loding}>
                             <button
                               type="submit"
