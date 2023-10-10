@@ -9,6 +9,7 @@ import {
 import logo from "../../icons/Group 1000003498.png";
 import loginbg from "../../images/bg-login.jpg";
 import * as Yup from "yup";
+import { Spin } from 'antd';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -29,9 +30,11 @@ function Login(props) {
   const [errors, setErrors] = useState(errorsObj);
   const [password, setPassword] = useState('');
   const [show, setShow] = useState(false);
+  const [loding, setLoding] = useState(false);
   const dispatch = useDispatch();
 
   function onLogin(e) {
+    setLoding(true);
     e.preventDefault();
     loginSchema.validate({ email, password }, { abortEarly: false })
       .then(() => {
@@ -53,7 +56,7 @@ function Login(props) {
       <div className="login-wrapper">
         <div className="login-aside-left" >
           <Link to={"#"} className="login-logo">
-            <img src={logo} alt="" width="130px" loading="lazy"/>
+            <img src={logo} alt="" width="130px" loading="lazy" />
           </Link>
           <div className="login-description">
             <h2 className="main-title mb-2">Welcome To WTDO</h2>
@@ -148,13 +151,15 @@ function Login(props) {
                             </div>
                           </div>
                         </div> */}
-                        <div className="text-center">
-                          <button
-                            type="submit"
-                            className="btn btn-primary btn-block"
-                          >
-                            Sign In
-                          </button>
+                        <div className="text-center ant-spin ant-spin-dot-item">
+                          <Spin  spinning={loding}>
+                            <button
+                              type="submit"
+                              className="btn btn-primary btn-block"
+                            >
+                              Sign In
+                            </button>
+                          </Spin>
                         </div>
                       </form>
                       {/* <div className="new-account mt-2">
