@@ -58,6 +58,9 @@ const Home = () => {
 	 const UserRedirectTicket = () => {
 		history.push('/support-list' , 1)
 	 }
+	 const Redirecttrascation = () =>{
+		history.push('/transaction')
+	 }
 
 	return (
 		<>
@@ -239,7 +242,7 @@ const Home = () => {
 
 							</div>
 						</div>
-						<div className="col-xl-3 col-sm-6" style={{cursor:"pointer"}}>
+						<div className="col-xl-3 col-sm-6" onClick={Redirecttrascation} style={{cursor:"pointer"}}>
 							<div className="card overflow-hidden">
 								<div className="card-header border-0">
 									<div className="d-flex">
