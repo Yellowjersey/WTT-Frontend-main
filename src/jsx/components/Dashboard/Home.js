@@ -80,7 +80,7 @@ const Home = () => {
 											</svg>
 										</span>
 										<div className="invoices">
-											<h4>{countData?.user?.todaytotaluser}</h4>
+											<h4>{countData?.user?.todaytotaluser ?? 0}</h4>
 											<span>Today Joined</span>
 										</div>
 									</div>
@@ -126,7 +126,7 @@ const Home = () => {
 											</svg>
 										</span>
 										<div className="invoices">
-											<h4>{countData?.user?.FreeUser}</h4>
+											<h4>{countData?.user?.FreeUser ?? 0}</h4>
 											<span>Free User</span>
 										</div>
 									</div>
@@ -179,7 +179,7 @@ const Home = () => {
 											</svg>
 										</span>
 										<div className="invoices">
-										<h4>{countData?.user?.totalpaymenttoday.toFixed(2)}$</h4>
+										<h4>{countData?.user?.totalpaymenttoday.toFixed(2) ?? 0}$</h4>
 											<span>Today Received Payment</span>
 										</div>
 									</div>
@@ -204,7 +204,7 @@ const Home = () => {
 
 										</span>
 										<div className="invoices">
-										<h4>{countData?.user?.totalpayment.toFixed(2)}$</h4>
+										<h4>{countData?.user?.totalpayment.toFixed(2) ?? 0}$</h4>
 											<span>Total Received Payment</span>
 										</div>
 									</div>
@@ -229,7 +229,7 @@ const Home = () => {
 
 										</span>
 										<div className="invoices">
-										<h4>{countData?.user?.TodayPaidUser}</h4>
+										<h4>{countData?.user?.TodayPaidUser ?? 0}</h4>
 											<span>Today Paid User</span>
 										</div>
 									</div>
@@ -281,7 +281,7 @@ const Home = () => {
 											</svg>
 										</span>
 										<div className="invoices">
-										<h4>{countData?.user?.supportticket}</h4>
+										<h4>{countData?.user?.supportticket ?? 0}</h4>
 											<span>New Tickets</span>
 										</div>
 									</div>
