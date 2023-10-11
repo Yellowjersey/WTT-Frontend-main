@@ -5,15 +5,33 @@ import { Table, Empty } from 'antd';
 import { Badge, Dropdown, DropdownButton } from "react-bootstrap";
 import PageLoader from '../Common/PageLoader';
 import supportService from '../../../services/support';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 
 
 const SupportTicket = (props) => {
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
+    const locations = useLocation()
     const [loading, setLoading] = useState(true);
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [statusFilterName, setStatusFilterName] = useState('Filter By Status');
+    const locationdata = locations.state
 
+    const handleFilterChange = (filterOption) => {
+        if (filterOption === 2) {
+            setStatusFilterName('Close')
+        } else if (filterOption === 1) {
+            setStatusFilterName('Open')
+        } else {
+            setStatusFilterName('All')
+        }
+        setSelectedFilter(filterOption);
+    };
+    useEffect(()=>{ 
+        if(locationdata === 1 ){
+            handleFilterChange(1)
+        }
+    },[locations])
     const viewTicket = (text) => {
         props.history.push("/view-ticket", { state: text.id })
     }
@@ -118,16 +136,7 @@ const SupportTicket = (props) => {
         },
     ];
 
-    const handleFilterChange = (filterOption) => {
-        if (filterOption === 2) {
-            setStatusFilterName('Close')
-        } else if (filterOption === 1) {
-            setStatusFilterName('Open')
-        } else {
-            setStatusFilterName('All')
-        }
-        setSelectedFilter(filterOption);
-    };
+   
 
     const filteredData = useMemo(() => {
         if (selectedFilter === null) return data;

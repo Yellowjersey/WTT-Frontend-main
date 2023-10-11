@@ -33,7 +33,7 @@ const Work = () => {
 
   useEffect(() => {
     gerWork();
-  },[]);
+  }, []);
 
   const handleSubmit = (values) => {
     if (Id !== "") {
@@ -67,8 +67,7 @@ const Work = () => {
     if (text) {
       setId(text?._id);
       form.setFieldsValue({
-        humandescription: text.humandescription,
-        deerdescription: text.deerdescription,
+        description: text.description
       });
     } else {
       form.resetFields();
@@ -127,9 +126,9 @@ const Work = () => {
       <div className="card">
         <div className="card-header">
           <h4 className="card-title">How it Work</h4>
-          <Button type="primary" onClick={() => editModal()}>
+          {/* <Button type="primary" onClick={() => editModal()}>
             Add Description
-          </Button>
+          </Button> */}
         </div>
         <div className="card-body">
           <Row span={24}>
@@ -137,7 +136,7 @@ const Work = () => {
               <h1 style={{ textAlign: "center" }}>Human Vision</h1>
               <div style={{ position: "relative" }}>
                 <img
-                  style={{ objectFit: "cover"  ,borderRadius:"6px" }}
+                  style={{ objectFit: "cover", borderRadius: "6px" }}
                   src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data[0]?.humanimage}
                   width="100%"
                   height="350px"
@@ -154,11 +153,6 @@ const Work = () => {
                   <i className="fa fa-edit" style={{ fontSize: "16px", color: "#1677ff" }} aria-hidden="true"></i>
                 </Button>
               </div>
-              {/* <div>
-                {data?.map((text) => {
-                  return <p>{text?.humandescription}</p>;
-                })}
-              </div> */}
             </Col>
             <Col style={{ margin: "0 10px" }} xs={24} lg={11}>
               <h1 style={{ textAlign: "center" }}>Deer Vision</h1>
@@ -167,7 +161,7 @@ const Work = () => {
                   src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data[0]?.deerimage}
                   width="100%"
                   height="350px"
-                  style={{ objectFit: "cover" ,borderRadius:"6px" }}
+                  style={{ objectFit: "cover", borderRadius: "6px" }}
                   loading="lazy"
                 />
                 <Button
@@ -186,14 +180,11 @@ const Work = () => {
           {data?.map((text, key) => {
             return (
               <Row style={{ margin: "10px 0" }} span={24} key={key}>
-                <Col style={{ margin: "0 10px" }} xs={24} lg={11}>
-                  {text?.humandescription}
-                </Col>
-                <Col style={{ margin: "0 10px" }} xs={24} lg={11}>
-                  {text?.deerdescription}
+                <Col style={{ margin: "0 10px" }} xs={24} lg={22}>
+                  {text?.description}
                 </Col>
                 {
-                  (text?.humandescription || text?.deerdescription) ?
+                  (text?.description) ?
                     <>
                       <Button
                         style={{ position: "absolute", right: "50px" }}
@@ -237,33 +228,20 @@ const Work = () => {
           autoComplete="off"
           onFinish={handleSubmit}
         >
-          <label className="label-name">Human Description</label>
+          <label className="label-name">Description</label>
           <Form.Item
-            name="humandescription"
+            name="description"
             rules={[
-              { required: true, message: "Please Enter Human Description" },
+              { required: true, message: "Please Enter Description" },
             ]}
           >
             <TextArea
               autoSize={{ minRows: 4, maxRows: 6 }}
               type="text"
-              placeholder="Enter Human Description"
+              placeholder="Enter Description"
             />
           </Form.Item>
 
-          <label className="label-name">Deer Description</label>
-          <Form.Item
-            name="deerdescription"
-            rules={[
-              { required: true, message: "Please Enter Deer Description" },
-            ]}
-          >
-            <TextArea
-              autoSize={{ minRows: 4, maxRows: 6 }}
-              type="text"
-              placeholder="Enter Deer Description"
-            />
-          </Form.Item>
           <div style={{ textAlign: "right" }}>
             <Button key="cancel" onClick={() => setVisible(false)}>
               {" "}

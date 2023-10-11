@@ -657,10 +657,11 @@ export function creatework(data) {
 }
 
 export function updatework(data) {
+    const ID = data.id
     data.env = 'test'
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('patch', BaseUrl + '/admin/updatework', data)
+            Http.callApi('patch', BaseUrl + `/admin/updatework?id=${ID}`, data)
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -1192,7 +1193,6 @@ export function getSavedPostList(id) {
     )
 }
 export function sendNotification(data) {
-    console.log(data)
     data.env = 'test'
     return dispatch => (
         new Promise((resolve, reject) => {
