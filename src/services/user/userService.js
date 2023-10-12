@@ -249,6 +249,24 @@ export function gethuntertip(value) {
     )
 }
 
+export function gettechniques(value) {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/gettechniques')
+                .then(function (res) {
+                    // dispatch(action.setNotificationData(res));
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
 
 
 export function deletework(data) {
@@ -396,6 +414,27 @@ export function changehunterTipStatus(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('post', BaseUrl + `/admin/changestatushuntertip?id=${Id}`, data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function changetechniquesStatus(data) {
+    const Id = data._id
+
+    data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + `/admin/changestatustechniques?id=${Id}`, data)
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -715,12 +754,51 @@ export function createhntertip(data) {
     )
 }
 
+export function createtechniques(data) {
+    data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + '/admin/createtechniques', data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.data.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
 export function Edithntertip(data) {
     const ID = data?.id;
     data.env = 'test'
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('patch', BaseUrl + `/admin/updatehuntertip?id=${ID}`, data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function Edittechniques(data) {
+    const ID = data?.id;
+    data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('patch', BaseUrl + `/admin/updatetechniques?id=${ID}`, data)
                 .then(function (res) {
                     return resolve(res);
                 })

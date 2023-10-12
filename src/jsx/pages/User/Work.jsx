@@ -36,6 +36,7 @@ const Work = () => {
   }, []);
 
   const handleSubmit = (values) => {
+    console.log(values);
     if (Id !== "") {
       values.id = Id;
       if (Name === "deer") {
@@ -89,6 +90,7 @@ const Work = () => {
     dispatch(UserService.updateimage(formData))
       .then((res) => {
         setimages(res?.data?.file_name);
+        console.log(res,123456789);
         ToastMe(res.data.message, "success");
       })
       .catch((errors) => {
