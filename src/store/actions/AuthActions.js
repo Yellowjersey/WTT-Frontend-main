@@ -66,7 +66,7 @@ export function logout(history) {
     };
 }
 
-export function loginAction(email, password, history) {
+export function loginAction(email, password, history,setLoding) {
     return (dispatch) => {
         login(email, password)
             .then((response) => {
@@ -94,6 +94,7 @@ export function loginAction(email, password, history) {
                 dispatch(loginConfirmedAction(resObject));
             })
             .catch((error) => {
+                            
                 ToastMe(error?.response?.data?.message, 'error')
                 const errorMessage = formatError(error?.response?.data?.message);
                 dispatch(loginFailedAction(errorMessage));

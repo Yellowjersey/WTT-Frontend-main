@@ -39,7 +39,6 @@ export function login(email, password) {
 
 
 export function formatError(errorResponse) {
-    console.log('errorResponse',errorResponse);
     switch (errorResponse) {
         case 'EMAIL_EXISTS':
             //return 'Email already exists';

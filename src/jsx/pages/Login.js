@@ -40,7 +40,7 @@ function Login(props) {
       .then(() => {
         // Validation successful, proceed with login action
         dispatch(loadingToggleAction(true));
-        dispatch(loginAction(email, password, props.history));
+        dispatch(loginAction(email, password, props.history,setLoding));
       })
       .catch(validationErrors => {
         const newErrors = {};
