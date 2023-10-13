@@ -94,7 +94,7 @@ export function loginAction(email, password, history,setLoding) {
                 dispatch(loginConfirmedAction(resObject));
             })
             .catch((error) => {
-                            
+                setLoding(false)
                 ToastMe(error?.response?.data?.message, 'error')
                 const errorMessage = formatError(error?.response?.data?.message);
                 dispatch(loginFailedAction(errorMessage));
