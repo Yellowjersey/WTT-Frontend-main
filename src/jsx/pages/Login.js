@@ -47,6 +47,7 @@ function Login(props) {
         validationErrors.inner.forEach(error => {
           newErrors[error.path] = error.message;
         });
+        setLoding(false);
         setErrors(newErrors);
       });
   }
