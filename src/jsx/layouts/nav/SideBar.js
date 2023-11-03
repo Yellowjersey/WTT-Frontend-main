@@ -81,6 +81,8 @@ const SideBar = (props) => {
     "card-center",
     "transaction-details",
     "task",
+    "post-report",
+    "user-report"
   ],
     user = [
       "user-list",
@@ -183,6 +185,17 @@ const SideBar = (props) => {
             <ul >
               <li><Link className={`${path === "user-subscriptions" ? "mm-active" : ""}`} to="/user-subscriptions">Subscribed Users</Link></li>
               <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/transaction">Transaction</Link></li>
+
+            </ul>
+          </li>
+          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
+            <Link className="has-arrow ai-icon" to="#" >
+              <i className="fa fa-flag" aria-hidden="true"></i>
+              <span className="nav-text">Report</span>
+            </Link>
+            <ul >
+              <li><Link className={`${path === "post-report" ? "mm-active" : ""}`} to="/post-report">post report</Link></li>
+              <li><Link className={`${path === "user-report" ? "mm-active" : ""}`} to="/user-report">user report</Link></li>
 
             </ul>
           </li>

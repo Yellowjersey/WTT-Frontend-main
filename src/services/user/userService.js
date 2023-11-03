@@ -115,6 +115,40 @@ export function gettransaction(value) {
     )
 }
 
+export function getpostreport(value) {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/getpostreport')
+                .then(function (res) {
+                    return resolve(res?.data);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function getuserreport(value) {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/getuserreport')
+                .then(function (res) {
+                    return resolve(res?.data);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
 
 export function getSubUserList(data) {
     return dispatch => (
@@ -140,6 +174,43 @@ export function changeUserStatus(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('post', BaseUrl + '/admin/changeUserStatus', data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    // const data = {
+                    //     // errorData: error.response.data.message,
+                    //     // statusCode: error.response.status,
+                    // };
+                    return reject(data);
+                })
+        })
+    )
+}
+export function changereportUserStatus(data) {
+    data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + '/admin/changeReportUserStatus', data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    // const data = {
+                    //     // errorData: error.response.data.message,
+                    //     // statusCode: error.response.status,
+                    // };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function changereportPostStatus(data) {
+    data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + '/admin/changeReportPostStatus', data)
                 .then(function (res) {
                     return resolve(res);
                 })

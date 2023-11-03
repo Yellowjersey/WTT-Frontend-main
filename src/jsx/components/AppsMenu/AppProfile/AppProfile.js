@@ -46,18 +46,18 @@ const AppProfile = (props) => {
     const image = new FormData();
     image.append('image', userImgpath);
 
-    let data = await dispatch(UserService.uploadUserProfile(image))
-      .then((res) => {
-        if (res.data) {
-          setImageName(res.data.file_name)
-          return res.data.file_name
-        }
-      })
-      .catch((errors, statusCode) => {
-        setUserImg('')
-        // ToastMe(errors.errorData, "error");
-      });
-    return data;
+    // let data = await dispatch(UserService.uploadUserProfile(image))
+    //   .then((res) => {
+    //     if (res.data) {
+    //       setImageName(res.data.file_name)
+    //       return res.data.file_name
+    //     }
+    //   })
+    //   .catch((errors, statusCode) => {
+    //     setUserImg('')
+    //     // ToastMe(errors.errorData, "error");
+    //   });
+    // return data;
   }
 
   const onFinish = async (data) => {

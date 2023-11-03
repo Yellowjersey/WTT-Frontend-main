@@ -41,6 +41,8 @@ import UserSubscriptions from "./pages/User/UserSubscriptions";
 import Transaction from "./pages/User/Transaction";
 import PromoCode from "./pages/Setting/PromoCode";
 import Techniques from "./pages/User/Techniques";
+import Postreport from "./pages/User/Postreport";
+import Userreport from "./pages/User/Userreport";
 
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
@@ -57,6 +59,8 @@ const Markup = () => {
     { url: "hunter-tip", component: HunterTip },
     { url: "techniques-guide", component: Techniques },
     { url: "user-subscriptions", component: UserSubscriptions },
+    { url: "post-report", component: Postreport },
+    { url: "user-report", component: Userreport },
     { url: "transaction", component: Transaction },
     
 
