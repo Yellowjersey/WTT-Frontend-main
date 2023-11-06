@@ -21,15 +21,15 @@ const Userreport = () => {
     dispatch(UserService.getuserreport(value))
       .then((res) => {
         var newArr = [];
-        console.log(res);
         for (var i = 0; i < res.length; i++) {
           newArr.push({
             key: i,
             id: res[i]?._id,
             reported_user_id: res[i]?.reported_user_id,
-            user_data: res[i]?.user_data,
+            user_data: res[i]?.user_name,
             reported_user: res[i]?.reported_user,
-            report_data: res[i]?.report_data,
+            report_data: res[i]?.reports,
+            report_subject: res[i]?.report_subject,
             status: res[i]?.status,
           });
         }
@@ -61,22 +61,22 @@ const Userreport = () => {
     }).then((result) => {
       console.log(result);
       if (result.isConfirmed == true) {
-        data.type =  1
+        data.type = 1
       }
-      else{
+      else {
         data.type = 2
       }
       console.log(data);
-        dispatch(UserService.changereportUserStatus(data))
-          .then((res) => {
-            transaction();
-            setSelectedFilter(null);
-            ToastMe("User status change successfully", 'success')
-          })
-          .catch((errors) => {
-            console.log({ errors })
-            setLoading(false);
-          })
+      dispatch(UserService.changereportUserStatus(data))
+        .then((res) => {
+          transaction();
+          setSelectedFilter(null);
+          ToastMe("User status change successfully", 'success')
+        })
+        .catch((errors) => {
+          console.log({ errors })
+          setLoading(false);
+        })
     })
   }
 
@@ -91,45 +91,45 @@ const Userreport = () => {
       key: "key",
       render: (text) => <div>{text + 1}</div>,
     },
-   
     {
-      title: "User Name",
-      dataIndex: "user_data",
-      key: "firstuser_dataName",
-      render: (text) => {
-        firstInitial = text ? text[0].toUpperCase() : '';;
-        return text;
-      }
-    },
-    {
-      title: "Reported user name",
+      title: "Reported user ",
       dataIndex: "reported_user",
       key: "reported_user",
       render: (text) => {
-       lastInitial = text ? text[0].toUpperCase() : '';;
+        lastInitial = text ? text[0].toUpperCase() : '';;
         return text
       }
     },
     {
-      title: "Report Name",
+      title: "Who report the user",
       dataIndex: "report_data",
       key: "report_data",
+      render: (text) => (
+        <div>
+          {text.map((name) => name?.user_name).join(',')}
+        </div>
+      )
+    },
+    {
+      title: "Report Name",
+      dataIndex: "report_subject",
+      key: "report_subject",
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-     render: (text, data) => (
-    <div>
-      {data.status === 0 ? (
-        <Badge bg="badge-lg" className="badge-warning light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Pending</Badge>
-      ) : data.status === 1 ? (
-        <Badge bg="badge-lg" className="badge-primary light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Accept</Badge>
-      ) : (
-        <Badge bg="badge-lg" className="badge-danger light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Reject</Badge>
-      )}
-    </div>
-  ),
+      render: (text, data) => (
+        <div>
+          {data.status === 0 ? (
+            <Badge bg="badge-lg" className="badge-warning light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Pending</Badge>
+          ) : data.status === 1 ? (
+            <Badge bg="badge-lg" className="badge-primary light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Accept</Badge>
+          ) : (
+            <Badge bg="badge-lg" className="badge-danger light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Reject</Badge>
+          )}
+        </div>
+      ),
     }
   ];
 
@@ -143,14 +143,14 @@ const Userreport = () => {
         </div>
         <div className="card-body">
           {data && data.length > 0 ? (
-              <Table
-                dataSource={data}
-                columns={columnss}
-                className="table_custom"
-              />
-            ) : (
-              <Empty />
-            )}
+            <Table
+              dataSource={data}
+              columns={columnss}
+              className="table_custom"
+            />
+          ) : (
+            <Empty />
+          )}
         </div>
       </div>
 

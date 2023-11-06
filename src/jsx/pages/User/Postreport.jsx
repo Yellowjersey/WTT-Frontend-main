@@ -21,13 +21,12 @@ const Postreport = () => {
     dispatch(UserService.getpostreport(value))
       .then((res) => {
         var newArr = [];
-        console.log(res,1234);
         for (var i = 0; i < res.length; i++) {
           newArr.push({
             key: i,
             post_id: res[i]?.post_id,
-            user_data: res[i]?.user_data,
-            report_user: res[i]?.report_user,
+            user_data: res[i]?.user_name,
+            report_user: res[i]?.reports,
             post_image: res[i]?.post_image,
             report_name: res[i]?.report_name,
             status: res[i]?.status,
@@ -61,22 +60,22 @@ const Postreport = () => {
     }).then((result) => {
       console.log(result);
       if (result.isConfirmed == true) {
-        data.type =  1
+        data.type = 1
       }
-      else{
+      else {
         data.type = 2
       }
       console.log(data);
-        dispatch(UserService.changereportPostStatus(data))
-          .then((res) => {
-            transaction();
-            setSelectedFilter(null);
-            ToastMe("User status change successfully", 'success')
-          })
-          .catch((errors) => {
-            console.log({ errors })
-            setLoading(false);
-          })
+      dispatch(UserService.changereportPostStatus(data))
+        .then((res) => {
+          transaction();
+          setSelectedFilter(null);
+          ToastMe("User status change successfully", 'success')
+        })
+        .catch((errors) => {
+          console.log({ errors })
+          setLoading(false);
+        })
     })
   }
 
@@ -91,7 +90,7 @@ const Postreport = () => {
       key: "key",
       render: (text) => <div>{text + 1}</div>,
     },
-   
+
     {
       title: "User Name",
       dataIndex: "user_data",
@@ -105,10 +104,11 @@ const Postreport = () => {
       title: "Report user name",
       dataIndex: "report_user",
       key: "report_user",
-      render: (text) => {
-       lastInitial = text ? text[0].toUpperCase() : '';;
-        return text
-      }
+      render: (text) => (
+        <div>
+          {text.map((name) => name?.user_name).join(',')}
+        </div>
+      )
     },
     {
       title: "Post image",
@@ -116,8 +116,8 @@ const Postreport = () => {
       key: "post_image",
       render: (text) => {
         return (
-          text 
-            ? <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + text} width="50px"   height="50px" style={{ borderRadius: "50%" }} loading="lazy"/>
+          text
+            ? <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + text} width="50px" height="50px" style={{ borderRadius: "50%" }} loading="lazy" />
             : (<div id="profileImage" style={{ background: '#a6a7ac', borderRadius: "50%", color: '#fff', textAlign: 'center', width: '50px', height: '50px', lineHeight: '50px', margin: '20px 0' }}>
               {firstInitial + lastInitial}
             </div>)
@@ -136,12 +136,12 @@ const Postreport = () => {
       render: (text, data) => (
         <div>
           {data.status === 0 ? (
-        <Badge bg="badge-lg" className="badge-warning light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Pending</Badge>
-      ) : data.status === 1 ? (
-        <Badge bg="badge-lg" className="badge-primary light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Accept</Badge>
-      ) : (
-        <Badge bg="badge-lg" className="badge-danger light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Reject</Badge>
-      )}
+            <Badge bg="badge-lg" className="badge-warning light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Pending</Badge>
+          ) : data.status === 1 ? (
+            <Badge bg="badge-lg" className="badge-primary light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Accept</Badge>
+          ) : (
+            <Badge bg="badge-lg" className="badge-danger light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Reject</Badge>
+          )}
         </div>
       ),
     }
@@ -157,14 +157,14 @@ const Postreport = () => {
         </div>
         <div className="card-body">
           {data && data.length > 0 ? (
-              <Table
-                dataSource={data}
-                columns={columnss}
-                className="table_custom"
-              />
-            ) : (
-              <Empty />
-            )}
+            <Table
+              dataSource={data}
+              columns={columnss}
+              className="table_custom"
+            />
+          ) : (
+            <Empty />
+          )}
         </div>
       </div>
 
