@@ -4,7 +4,7 @@ import React, { Component, useContext, useEffect, useState } from "react";
 /// Scroll
 import PerfectScrollbar from "react-perfect-scrollbar";
 /// Link
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { ThemeContext } from "../../../context/ThemeContext";
 import LogoutPage from './Logout';
@@ -71,7 +71,7 @@ const SideBar = (props) => {
   // let path = window.location.pathname;
   // path = path.split("/");
   // path = path[path.length - 1];
-  let deshBoard = [ 
+  let deshBoard = [
     "",
     "dashboard",
     "dashboard-dark",
@@ -109,7 +109,7 @@ const SideBar = (props) => {
         <Dropdown className="dropdown header-profile2">
           <Dropdown.Toggle variant="" as="a" className="nav-link i-false c-pointer">
             <div className="header-info2 d-flex align-items-center border">
-              <img src={adminData?.profileImage != null ? profileImage : dummy} width={20} alt="" loading="lazy"/>
+              <img src={adminData?.profileImage != null ? profileImage : dummy} width={20} alt="" loading="lazy" />
               {/* <img src={profile} width={20} alt="" /> */}
               <div className="d-flex align-items-center sidebar-info">
                 <div>
@@ -175,6 +175,12 @@ const SideBar = (props) => {
             <Link to="/support-list" >
               <i className="fa fa-envelope"></i>
               <span className="nav-text">Support Tickets</span>
+            </Link>
+          </li>
+          <li className={`${path === "late-season" || path.pathname === "/late-season" ? "mm-active" : ""}`}>
+            <Link to="/late-season" >
+              <i className="fa fa-lightbulb"></i>
+              <span className="nav-text">Last season</span>
             </Link>
           </li>
           <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>

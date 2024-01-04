@@ -231,7 +231,7 @@ export function createTutorial(data) {
     )
 }
 export function updateTutorial(id, data) {
-    data.env ='test'
+    data.env = 'test'
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('put', BaseUrl + '/admin/updateTutorial/' + id, data)
@@ -240,6 +240,86 @@ export function updateTutorial(id, data) {
                 })
                 .catch(function (error) {
                     console.log(error)
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+
+export function getSeason(id, data) {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/getlateseason')
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function createlateseason(data) {
+    data.env = 'test';
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + '/admin/addlateseason', data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function updatelateseason(id, data) {
+    data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('put', BaseUrl + '/admin/updatelateseason?id=' + id, data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
+export function deletelateseason(id) {
+    const Id = id?.id
+    console.log(Id);
+
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('put', BaseUrl + '/admin/deletelateseason?id=' + Id)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
                     const data = {
                         errorData: error.response.data,
                         statusCode: error.response.status,
