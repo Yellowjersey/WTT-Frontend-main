@@ -4,7 +4,7 @@ import React, { Component, useContext, useEffect, useState } from "react";
 /// Scroll
 import PerfectScrollbar from "react-perfect-scrollbar";
 /// Link
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { ThemeContext } from "../../../context/ThemeContext";
 import LogoutPage from './Logout';
@@ -71,7 +71,7 @@ const SideBar = (props) => {
   // let path = window.location.pathname;
   // path = path.split("/");
   // path = path[path.length - 1];
-  let deshBoard = [ 
+  let deshBoard = [
     "",
     "dashboard",
     "dashboard-dark",
@@ -81,6 +81,8 @@ const SideBar = (props) => {
     "card-center",
     "transaction-details",
     "task",
+    "post-report",
+    "user-report"
   ],
     user = [
       "user-list",
@@ -107,7 +109,7 @@ const SideBar = (props) => {
         <Dropdown className="dropdown header-profile2">
           <Dropdown.Toggle variant="" as="a" className="nav-link i-false c-pointer">
             <div className="header-info2 d-flex align-items-center border">
-              <img src={adminData?.profileImage != null ? profileImage : dummy} width={20} alt="" loading="lazy"/>
+              <img src={adminData?.profileImage != null ? profileImage : dummy} width={20} alt="" loading="lazy" />
               {/* <img src={profile} width={20} alt="" /> */}
               <div className="d-flex align-items-center sidebar-info">
                 <div>
@@ -187,6 +189,12 @@ const SideBar = (props) => {
               <span className="nav-text">Support Tickets</span>
             </Link>
           </li>
+          <li className={`${path === "late-season" || path.pathname === "/late-season" ? "mm-active" : ""}`}>
+            <Link to="/late-season" >
+              <i className="fa fa-lightbulb"></i>
+              <span className="nav-text">Late season</span>
+            </Link>
+          </li>
           <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
               <i className="fa fa-user-plus" aria-hidden="true"></i>
@@ -195,6 +203,17 @@ const SideBar = (props) => {
             <ul >
               <li><Link className={`${path === "user-subscriptions" ? "mm-active" : ""}`} to="/user-subscriptions">Subscribed Users</Link></li>
               <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/transaction">Transaction</Link></li>
+
+            </ul>
+          </li>
+          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
+            <Link className="has-arrow ai-icon" to="#" >
+              <i className="fa fa-flag" aria-hidden="true"></i>
+              <span className="nav-text">Report</span>
+            </Link>
+            <ul >
+              <li><Link className={`${path === "post-report" ? "mm-active" : ""}`} to="/post-report">post report</Link></li>
+              <li><Link className={`${path === "user-report" ? "mm-active" : ""}`} to="/user-report">user report</Link></li>
 
             </ul>
           </li>

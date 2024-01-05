@@ -43,6 +43,9 @@ import PromoCode from "./pages/Setting/PromoCode";
 import State from "./pages/Setting/State";
 import Techniques from "./pages/User/Techniques";
 import RifleSeasons from "./pages/Setting/RifleSeason";
+import Postreport from "./pages/User/Postreport";
+import Userreport from "./pages/User/Userreport";
+import LastSesason from "./pages/Setting/LastSesason";
 
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
@@ -57,12 +60,16 @@ const Markup = () => {
     { url: "how-it-work", component: Work },
     { url: "contact-us", component: Contactus },
     { url: "hunter-tip", component: HunterTip },
+    { url: "late-season", component: LastSesason },
     { url: "techniques-guide", component: Techniques },
     { url: "user-subscriptions", component: UserSubscriptions },
+    { url: "post-report", component: Postreport },
+    { url: "user-report", component: Userreport },
     { url: "transaction", component: Transaction },
     { url: "states", component: State },
     { url: "rifle-seasons", component: RifleSeasons },
     
+
 
     //Notification
     { url: "general-notification", component: Notification },
