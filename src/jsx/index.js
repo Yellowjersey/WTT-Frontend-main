@@ -40,7 +40,9 @@ import Tutorial from "./pages/Setting/Tutorial";
 import UserSubscriptions from "./pages/User/UserSubscriptions";
 import Transaction from "./pages/User/Transaction";
 import PromoCode from "./pages/Setting/PromoCode";
+import State from "./pages/Setting/State";
 import Techniques from "./pages/User/Techniques";
+import RifleSeasons from "./pages/Setting/RifleSeason";
 
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
@@ -58,6 +60,8 @@ const Markup = () => {
     { url: "techniques-guide", component: Techniques },
     { url: "user-subscriptions", component: UserSubscriptions },
     { url: "transaction", component: Transaction },
+    { url: "states", component: State },
+    { url: "rifle-seasons", component: RifleSeasons },
     
 
     //Notification

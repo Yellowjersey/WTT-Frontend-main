@@ -169,6 +169,18 @@ const SideBar = (props) => {
               <span className="nav-text">Hunter Tip</span>
             </Link>
           </li>
+          <li className={`${path === "states" || path.pathname === "/states" ? "mm-active" : ""}`}>
+            <Link to="/states" >
+              <i className="fa fa-star"></i>
+              <span className="nav-text">States</span>
+            </Link>
+          </li>
+          <li className={`${path === "rifle-seasons" || path.pathname === "/rifle-seasons" ? "mm-active" : ""}`}>
+            <Link to="/rifle-seasons" >
+              <i className="fa fa-star"></i>
+              <span className="nav-text">Rifle Seasons</span>
+            </Link>
+          </li>
           <li className={`${path.pathname === "/support-list" || path.pathname === "/support-tickets" ? "mm-active" : ""}`}>
             <Link to="/support-list" >
               <i className="fa fa-envelope"></i>
