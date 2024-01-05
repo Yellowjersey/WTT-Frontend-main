@@ -1,11 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Empty, Form, Input, Modal, Table } from "antd";
+import { Button, Empty, DatePicker, Form, Input, Modal, Table } from "antd";
 import "react-phone-input-2/lib/style.css";
 import PageLoader from "../Common/PageLoader";
 import ToastMe from "../Common/ToastMe";
 import { SearchOutlined } from "@ant-design/icons";
 import SettingService from "../../../services/setting";
+import moment from "moment";
+import dayjs from 'dayjs';
+import Swal from "sweetalert2";
+
 
 const RifleSeason = (props) => {
     const dispatch = useDispatch();
@@ -16,6 +20,11 @@ const RifleSeason = (props) => {
     const [visible, setVisible] = useState(false);
     const [Id, setId] = useState("");
     const [form] = Form.useForm();
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+
+    console.log(startDate);
+    console.log(endDate);
 
     const filteredData = useMemo(() => {
         if (selectedFilter === null) return data;
@@ -43,6 +52,8 @@ const RifleSeason = (props) => {
                     key: i,
                     id: res?.data[i]._id,
                     date: res?.data[i].date,
+                    to_date: res?.data[i].to_date,
+                    from_date: res?.data[i].from_date,
                     status: res?.data[i].status,
                     createdAt: res?.data[i].createdAt,
                 });
@@ -59,6 +70,36 @@ const RifleSeason = (props) => {
     useEffect(() => {
         getRifleSeasons();
     }, [serach]);
+
+    const activeInactive = (text) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "To Delete it!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(SettingService.deleterifleseason(text))
+                    .then((res) => {
+                        getRifleSeasons();
+                        ToastMe(res?.data?.message, 'success')
+                    })
+                    .catch((errors) => {
+                        console.log({ errors })
+                    })
+            }
+        })
+    }
+
+    const handleDateChange = (dates, dateStrings) => {
+        if (!moment(dateStrings[0]).isSame(startDate) || !moment(dateStrings[1]).isSame(endDate)) {
+            setStartDate(moment(dateStrings[0], "YYYY-MM-DD"));
+            setEndDate(moment(dateStrings[1], "YYYY-MM-DD"));
+        }
+    };
 
     const columnss = [
         {
@@ -83,6 +124,11 @@ const RifleSeason = (props) => {
                             onClick={() => editModal(data)}>
                             <i className="fa fa-edit" aria-hidden="true"></i>
                         </span>
+                        <span
+                            style={{ margin: "0 10px", fontSize: "16px", color: "#f92b2b", cursor: "pointer" }}
+                            onClick={() => activeInactive(data)}>
+                            <i className="fa fa-trash" aria-hidden="true"></i>
+                        </span>
                     </div>
                 </>
             ),
@@ -93,7 +139,10 @@ const RifleSeason = (props) => {
         setSerach(e.target.value)
     }
     const handleSubmit = (values) => {
+        values.from_date = moment(startDate)
+        values.to_date = endDate
         values.id = Id;
+
         const apicall =
             Id === ""
                 ? SettingService.addRifle(values) : SettingService.updateRifle(values);
@@ -103,6 +152,7 @@ const RifleSeason = (props) => {
                 ToastMe(res?.data?.message, 'success')
                 setVisible(false)
                 setId('')
+                form.resetFields()
             })
             .catch((errors) => {
                 console.log(errors)
@@ -111,23 +161,27 @@ const RifleSeason = (props) => {
 
     const editModal = (e) => {
         setId("")
-        setVisible(true);
+        form.resetFields();
+        setStartDate(null);
+        setEndDate(null);
         if (e) {
-            setId(e?.id)
-            form.setFieldsValue({
-                date: e.date,
-            });
+            setId(e.id);
+            setStartDate(e?.from_date ? moment(e.from_date, "YYYY-MM-DD") : null);
+            setEndDate(e?.to_date ? moment(e.to_date, "YYYY-MM-DD") : null);
         } else {
+            setId("")
             form.resetFields();
+            setStartDate(null);
+            setEndDate(null);
         }
+        setVisible(true);
     }
-
     return (
         <>
             <PageLoader loading={loading} />
             <div className="card">
                 <div className="card-header">
-                    <h4 className="card-title">State List</h4>
+                    <h4 className="card-title">Rifle Season List</h4>
                     <div className="d-flex gap-2">
                         <div className="search_feild">
                             <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
@@ -153,7 +207,7 @@ const RifleSeason = (props) => {
             </div>
             <Modal
                 open={visible}
-                title={Id ? "Edit Rifle Season":"Add Rifle Season"}
+                title={Id ? "Edit Rifle Season" : "Add Rifle Season"}
                 okText="Submit"
                 cancelText="Cancel"
                 onCancel={() => {
@@ -173,15 +227,15 @@ const RifleSeason = (props) => {
                     <div>
                         <label className="label-name">Date</label>
                         <Form.Item
-                            name="date"
-                            rules={[
-                                { required: true, message: "Please Enter Date" },
-
-                            ]}
+                            name="from_date"
                         >
-                            <Input
-                                type="text"
-                                placeholder="Date.."
+                            <DatePicker.RangePicker
+                                defaultValue={[
+                                    startDate ? dayjs(startDate) : null,
+                                    endDate ? dayjs(endDate) : null
+                                ]}
+                                format="YYYY-MM-DD"
+                                onChange={handleDateChange}
                             />
                         </Form.Item>
                     </div>

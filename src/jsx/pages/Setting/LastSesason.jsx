@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import UserService from '../../../services/user';
 import { useDispatch } from 'react-redux';
 import { Button, DatePicker, Form, Input, Modal, Table } from 'antd';
-import { Badge, Dropdown } from "react-bootstrap";
 import moment from 'moment';
 import 'react-phone-input-2/lib/style.css';
 import PageLoader from '../Common/PageLoader';
 import ToastMe from "../Common/ToastMe";
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
-import TextArea from 'antd/es/input/TextArea';
-import { fromUnixTime } from 'date-fns';
 import Swal from 'sweetalert2';
 import supportService from '../../../services/support';
+import dayjs from 'dayjs';
 
 
 
@@ -20,12 +17,10 @@ const LastSesason = (props) => {
     const [data, setData] = useState([]);
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(true);
-    const location = useLocation();
     const [visible, setVisible] = useState(false);
-    const [visiblemail, setVisiblemail] = useState(false);
     const [Id, setId] = useState("");
-    const [date, setDate] = useState("");
-    const { RangePicker } = DatePicker;
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
 
     const getSeason = () => {
         dispatch(supportService.getSeason())
@@ -92,24 +87,19 @@ const LastSesason = (props) => {
     ];
 
     const handleSubmit = (values) => {
-        console.log("values", values);
-        return false
-        console.log(date);
-        const newdata = date[0] + " " + "To" + " " + date[1]
-        console.log(newdata);
-        values.name = newdata
-        // return false;
-        // values.question = values.question.trim();
+        values.from_date = startDate
+        values.to_date = endDate
+        values.id = Id;
+
         const apicall =
             Id === ""
                 ? supportService.createlateseason(values) : supportService.updatelateseason(Id, values);
         dispatch(apicall)
             .then((res) => {
                 setVisible(false);
-                setVisiblemail(false);
                 setId('');
                 getSeason();
-                ToastMe(res.data.message, "success");
+                ToastMe(res?.data?.message, "success");
             })
             .catch((errors) => {
                 console.log({ errors });
@@ -117,29 +107,21 @@ const LastSesason = (props) => {
     };
     // const [initialDateValues, setInitialDateValues] = useState([]);
     const editModal = (e) => {
-        // const dateArray = e?.name?.split(" To ");
-        // console.log({ dateArray });
-        // const startDate = moment(dateArray?.[0], 'DD/MM/YYYY').format('YYYY-MM-DD');
-        // console.log({ startDate });
-        // const endDate = moment(dateArray?.[1], 'DD/MM/YYYY').format('YYYY-MM-DD');
-        // console.log(44, startDate, endDate);
-        // const initialDateValue = [moment(startDate), moment(endDate)];
-        // // const initialDateValue = [moment('2023-01-01'), moment('2023-01-10')];
-
-        // setInitialDateValues(initialDateValue)
-        // return false
-        const dateRange = e?.name?.split(' To ').map(dateString => moment(dateString, 'DD/MM/YYYY'));
-        console.log(e);
         setId("")
-        setVisible(true);
+        form.resetFields();
+        setStartDate(null);
+        setEndDate(null);
         if (e) {
-            setId(e?.id)
-            form.setFieldsValue({
-                name: dateRange
-            });
+            setId(e.id);
+            setStartDate(e?.from_date ? moment(e.from_date, "YYYY-MM-DD") : null);
+            setEndDate(e?.to_date ? moment(e.to_date, "YYYY-MM-DD") : null);
         } else {
+            setId("")
             form.resetFields();
+            setStartDate(null);
+            setEndDate(null);
         }
+        setVisible(true);
     }
 
     const activeInactive = (text) => {
@@ -156,7 +138,7 @@ const LastSesason = (props) => {
                 dispatch(supportService.deletelateseason(text))
                     .then((res) => {
                         getSeason();
-                        ToastMe("Status Change Successfully", 'success')
+                        ToastMe(res?.data?.message, "success");
                     })
                     .catch((errors) => {
                         console.log({ errors })
@@ -165,9 +147,16 @@ const LastSesason = (props) => {
         })
     }
 
+    // const handleDateChange = (dates, dateStrings) => {
+    //     console.log('Formatted Date Strings:', dateStrings);
+    //     setDate(dateStrings)
+    // };
+
     const handleDateChange = (dates, dateStrings) => {
-        console.log('Formatted Date Strings:', dateStrings);
-        setDate(dateStrings)
+        if (!moment(dateStrings[0]).isSame(startDate) || !moment(dateStrings[1]).isSame(endDate)) {
+            setStartDate(moment(dateStrings[0], "YYYY-MM-DD"));
+            setEndDate(moment(dateStrings[1], "YYYY-MM-DD"));
+        }
     };
 
     return (
@@ -208,15 +197,13 @@ const LastSesason = (props) => {
                         <label className="label-name">Title</label>
                         <Form.Item
                             name="name"
-                            rules={[
-                                { required: true, message: "Please selected date" },
-
-                            ]}
                         >
-                            <RangePicker
-                                // showTime={{ format: 'HH:mm' }}
-                                // defaultValue={initialDateValues && initialDateValues}
-                                format="DD/MM/YYYY"
+                            <DatePicker.RangePicker
+                                defaultValue={[
+                                    startDate ? dayjs(startDate) : null,
+                                    endDate ? dayjs(endDate) : null
+                                ]}
+                                format="YYYY-MM-DD"
                                 onChange={handleDateChange}
                             />
                         </Form.Item>

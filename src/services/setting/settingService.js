@@ -72,6 +72,24 @@ export function getStates() {
         })
     )
 }
+export function updateStateDetails(data) {
+    data.env="test"
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + '/admin/updateStateDetail',data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
 export function getPromoCode() {
     return dispatch => (
         new Promise((resolve, reject) => {
@@ -142,6 +160,23 @@ export function getRifleSeasons() {
         })
     )
 }
+export function getlateseason() {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/getlateseason')
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
 export function addRifle(data) {
     data.env="test"
     return dispatch => (
@@ -165,6 +200,24 @@ export function updateRifle(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
             Http.callApi('post', BaseUrl + '/admin/updateRifleSeasons',data)
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+export function     deleterifleseason(data) {
+    data.env="test"
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('post', BaseUrl + '/admin/deleteRifleSeasons',data)
                 .then(function (res) {
                     return resolve(res);
                 })

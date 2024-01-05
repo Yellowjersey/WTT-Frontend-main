@@ -84,11 +84,11 @@ const State = (props) => {
             })
     };
     const getlateSeasons = () => {
-        dispatch(SettingService.getRifleSeasons()).then((res) => {
+        dispatch(SettingService.getlateseason()).then((res) => {
             const newArr = [];
             for (let i = 0; i < res.data.length; i++) {
                 newArr.push({
-                    label: res.data[i].date,
+                    label: res.data[i].name,
                     value: res.data[i]._id,
                 });
             }
@@ -142,8 +142,9 @@ const State = (props) => {
         setSerach(e.target.value)
     }
     const handleSubmit = (values) => {
+        console.log(values);
         values.id = Id;
-        dispatch(SettingService.adminUserStore(values))
+        dispatch(SettingService.updateStateDetails(values))
             .then((res) => {
                 getStates();
                 ToastMe(res?.data?.message, 'success')
