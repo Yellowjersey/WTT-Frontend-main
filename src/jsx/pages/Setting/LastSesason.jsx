@@ -180,7 +180,7 @@ const LastSesason = (props) => {
             </div>
             <Modal
                 open={visible}
-                title={Id ? "Edit lastseason" : "Add lastseason"}
+                title={Id ? "Edit lateseason" : "Add lateseason"}
                 okText="Submit"
                 cancelText="Cancel"
                 onCancel={() => {
