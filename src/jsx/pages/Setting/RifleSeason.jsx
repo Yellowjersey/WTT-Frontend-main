@@ -139,8 +139,8 @@ const RifleSeason = (props) => {
         setSerach(e.target.value)
     }
     const handleSubmit = (values) => {
-        values.from_date = moment(startDate)
-        values.to_date = endDate
+        // values.from_date = moment(startDate)
+        // values.to_date = endDate
         values.id = Id;
 
         const apicall =
@@ -160,14 +160,21 @@ const RifleSeason = (props) => {
     };
 
     const editModal = (e) => {
+        console.log(e);
         setId("")
         form.resetFields();
         setStartDate(null);
         setEndDate(null);
         if (e) {
             setId(e.id);
-            setStartDate(e?.from_date ? moment(e.from_date, "YYYY-MM-DD") : null);
-            setEndDate(e?.to_date ? moment(e.to_date, "YYYY-MM-DD") : null);
+            form.setFieldsValue({
+                from_date: [
+                    e.from_date ? dayjs(e.from_date) : null,
+                    e.to_date ? dayjs(e.to_date) : null,
+                ],
+            });
+            //     setStartDate(e?.from_date ? moment(e.from_date, "YYYY-MM-DD") : null);
+            //     setEndDate(e?.to_date ? moment(e.to_date, "YYYY-MM-DD") : null);
         } else {
             setId("")
             form.resetFields();
@@ -230,10 +237,10 @@ const RifleSeason = (props) => {
                             name="from_date"
                         >
                             <DatePicker.RangePicker
-                                defaultValue={[
-                                    startDate ? dayjs(startDate) : null,
-                                    endDate ? dayjs(endDate) : null
-                                ]}
+                                // defaultValue={[
+                                //     startDate ? dayjs(startDate) : null,
+                                //     endDate ? dayjs(endDate) : null
+                                // ]}
                                 format="YYYY-MM-DD"
                                 onChange={handleDateChange}
                             />

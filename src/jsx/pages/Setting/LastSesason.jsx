@@ -32,6 +32,8 @@ const LastSesason = (props) => {
                             key: i,
                             id: res.data[i]._id,
                             name: res.data[i].name,
+                            from_date: res.data[i].from_date,
+                            to_date: res.data[i].to_date,
                         }
                     )
                 }
@@ -87,10 +89,7 @@ const LastSesason = (props) => {
     ];
 
     const handleSubmit = (values) => {
-        values.from_date = startDate
-        values.to_date = endDate
         values.id = Id;
-
         const apicall =
             Id === ""
                 ? supportService.createlateseason(values) : supportService.updatelateseason(Id, values);
@@ -111,10 +110,15 @@ const LastSesason = (props) => {
         form.resetFields();
         setStartDate(null);
         setEndDate(null);
+        console.log(e);
         if (e) {
             setId(e.id);
-            setStartDate(e?.from_date ? moment(e.from_date, "YYYY-MM-DD") : null);
-            setEndDate(e?.to_date ? moment(e.to_date, "YYYY-MM-DD") : null);
+            form.setFieldsValue({
+                name: [
+                    e.from_date ? dayjs(e.from_date) : null,
+                    e.to_date ? dayjs(e.to_date) : null,
+                ],
+            });
         } else {
             setId("")
             form.resetFields();
@@ -199,10 +203,6 @@ const LastSesason = (props) => {
                             name="name"
                         >
                             <DatePicker.RangePicker
-                                defaultValue={[
-                                    startDate ? dayjs(startDate) : null,
-                                    endDate ? dayjs(endDate) : null
-                                ]}
                                 format="YYYY-MM-DD"
                                 onChange={handleDateChange}
                             />
