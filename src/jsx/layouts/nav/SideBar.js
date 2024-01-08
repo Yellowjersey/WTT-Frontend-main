@@ -171,29 +171,40 @@ const SideBar = (props) => {
               <span className="nav-text">Hunter Tip</span>
             </Link>
           </li>
-          <li className={`${path === "states" || path.pathname === "/states" ? "mm-active" : ""}`}>
+          {/* <li className={`${path === "states" || path.pathname === "/states" ? "mm-active" : ""}`}>
             <Link to="/states" >
               <i className="fa fa-star"></i>
               <span className="nav-text">States</span>
             </Link>
-          </li>
-          <li className={`${path === "rifle-seasons" || path.pathname === "/rifle-seasons" ? "mm-active" : ""}`}>
+          </li> */}
+          {/* <li className={`${path === "rifle-seasons" || path.pathname === "/rifle-seasons" ? "mm-active" : ""}`}>
             <Link to="/rifle-seasons" >
               <i className="fa fa-star"></i>
               <span className="nav-text">Rifle Seasons</span>
             </Link>
-          </li>
+          </li> */}
           <li className={`${path.pathname === "/support-list" || path.pathname === "/support-tickets" ? "mm-active" : ""}`}>
             <Link to="/support-list" >
               <i className="fa fa-envelope"></i>
               <span className="nav-text">Support Tickets</span>
             </Link>
           </li>
-          <li className={`${path === "late-season" || path.pathname === "/late-season" ? "mm-active" : ""}`}>
+          {/* <li className={`${path === "late-season" || path.pathname === "/late-season" ? "mm-active" : ""}`}>
             <Link to="/late-season" >
               <i className="fa fa-lightbulb"></i>
               <span className="nav-text">Late season</span>
             </Link>
+          </li> */}
+          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
+            <Link className="has-arrow ai-icon" to="#" >
+              <i className="fa fa-star" aria-hidden="true"></i>
+              <span className="nav-text">Manage state</span>
+            </Link>
+            <ul >
+              <li><Link className={`${path === "user-subscriptions" ? "mm-active" : ""}`} to="/states">States</Link></li>
+              <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/rifle-seasons">Rifle Seasons</Link></li>
+              <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/late-season">Late season</Link></li>
+            </ul>
           </li>
           <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" >
