@@ -142,7 +142,6 @@ const State = (props) => {
         setSerach(e.target.value)
     }
     const handleSubmit = (values) => {
-        console.log(values);
         values.id = Id;
         dispatch(SettingService.updateStateDetails(values))
             .then((res) => {

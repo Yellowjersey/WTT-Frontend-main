@@ -55,10 +55,10 @@ export function getCms() {
         })
     )
 }
-export function getStates() {
+export function getStates(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('get', BaseUrl + '/admin/getStates')
+            Http.callApi('get', BaseUrl + '/admin/getStates?search=' + data)
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -73,10 +73,10 @@ export function getStates() {
     )
 }
 export function updateStateDetails(data) {
-    data.env="test"
+    data.env = "test"
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('post', BaseUrl + '/admin/updateStateDetail',data)
+            Http.callApi('post', BaseUrl + '/admin/updateStateDetail', data)
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -178,10 +178,10 @@ export function getlateseason() {
     )
 }
 export function addRifle(data) {
-    data.env="test"
+    data.env = "test"
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('post', BaseUrl + '/admin/addRifleSeasons',data)
+            Http.callApi('post', BaseUrl + '/admin/addRifleSeasons', data)
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -196,10 +196,10 @@ export function addRifle(data) {
     )
 }
 export function updateRifle(data) {
-    data.env="test"
+    data.env = "test"
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('post', BaseUrl + '/admin/updateRifleSeasons',data)
+            Http.callApi('post', BaseUrl + '/admin/updateRifleSeasons', data)
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -213,11 +213,11 @@ export function updateRifle(data) {
         })
     )
 }
-export function     deleterifleseason(data) {
-    data.env="test"
+export function deleterifleseason(data) {
+    data.env = "test"
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('post', BaseUrl + '/admin/deleteRifleSeasons',data)
+            Http.callApi('post', BaseUrl + '/admin/deleteRifleSeasons', data)
                 .then(function (res) {
                     return resolve(res);
                 })
