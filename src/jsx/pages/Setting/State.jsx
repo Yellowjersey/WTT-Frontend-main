@@ -40,6 +40,7 @@ const State = (props) => {
     }, [data, selectedFilter]);
 
     const getStates = () => {
+        
         dispatch(SettingService.getStates(serach)).then((res) => {
             var newArr = [];
             for (var i = 0; i < res?.data.length; i++) {
