@@ -50,7 +50,6 @@ const Techniques = (props) => {
 
 
   const changestatus = (e) => {
-    console.log(e);
     Swal.fire({
       title: 'Are you sure?',
       text: "To change this Techniques Guide status!",
@@ -111,6 +110,11 @@ const Techniques = (props) => {
               onClick={() => editModal(data)}>
               <i className="fa fa-edit" aria-hidden="true"></i>
             </span>
+            <span
+              style={{ margin: "0 10px", fontSize: "16px", color: "red", cursor: "pointer" }}
+              onClick={() => deleteTechnique(data)}>
+              <i className="fa fa-trash" aria-hidden="true"></i>
+            </span>
           </div>
         </>
       ),
@@ -128,7 +132,31 @@ const Techniques = (props) => {
       form.resetFields();
     }
   };
-
+  const deleteTechnique = async (text) => {
+    let data = {
+        id:text._id
+    }
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "To delete this techniques guide!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            dispatch(UserService.deleteTechniqueGuide(data))
+                .then((res) => {
+                    ToastMe('Techniques guide delete successfully','success')
+                    getTechniques()
+                })
+                .catch((errors) => {
+                    console.log({ errors })
+                })
+        }
+    })
+}
 
   const handleSubmit = async (values) => {
     setLoadingbutton(true);
@@ -151,6 +179,9 @@ const Techniques = (props) => {
         console.log({ errors });
       });
   };
+
+
+  
   return (
     <>
       <PageLoader loading={loading} />
