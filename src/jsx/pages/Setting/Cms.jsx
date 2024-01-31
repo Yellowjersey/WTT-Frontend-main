@@ -15,14 +15,18 @@ const Cms = () => {
     const [loading, setLoading] = useState(true);
     const [privacy, setPrivacy] = useState('')
     const [terms, setTerms] = useState('')
+    const [eula, setEula] = useState('')
+    const [refund, setRefund] = useState('')
 
     const getCms = () => {
         dispatch(SettingService.getCms())
             .then((res) => {
                 setLoading(false);
                 if (res.data != null) {
-                    setTerms(res?.data?.terms_condition ?? "test")
-                    setPrivacy(res?.data?.privacy_policy ?? "testy")
+                    setTerms(res?.data?.terms_condition)
+                    setPrivacy(res?.data?.privacy_policy)
+                    setRefund(res?.data?.refund_policy)
+                    setEula(res?.data?.eula)
                 }
             })
             .catch((errors) => {
@@ -35,6 +39,8 @@ const Cms = () => {
         let data = {};
         data.terms_condition = terms;
         data.privacy_policy = privacy;
+        data.eula = eula;
+        data.refund_policy = refund;
         dispatch(SettingService.addCms(data))
             .then((res) => {
                 getCms();
@@ -55,6 +61,12 @@ const Cms = () => {
     }
     const handlePrivacy = (data) => {
         setPrivacy(data)
+    }
+    const handleRefund = (data) => {
+        setRefund(data)
+    }
+    const handleEula = (data) => {
+        setEula(data)
     }
     return (
         <>
@@ -92,6 +104,14 @@ const Cms = () => {
                             <div>
                                 <label className="label-name fs-20 font-bold mb-3" style={{ fontWeight: 600 }}>Privacy Policy</label>
                                 <ReactQuill theme="snow" value={privacy} onChange={handlePrivacy} />
+                            </div>
+                            <div>
+                                <label className="label-name fs-20 font-bold mb-3" style={{ fontWeight: 600 }}>Refund Policy</label>
+                                <ReactQuill theme="snow" value={refund} onChange={handleRefund} />
+                            </div>
+                            <div className="mb-4">
+                                <label className="label-name fs-20 font-bold mb-3" style={{ fontWeight: 600 }}>EULA</label>
+                                <ReactQuill theme="snow" value={eula} onChange={handleEula} />
                             </div>
                             <div>
                                 <Button type="submit" className="float-end me-2 btn-xl" variant="primary" style={{ minWidth: "150px" }}>
