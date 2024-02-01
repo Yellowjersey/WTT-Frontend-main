@@ -23,8 +23,6 @@ const RifleSeason = (props) => {
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
 
-    console.log(startDate);
-    console.log(endDate);
 
     const filteredData = useMemo(() => {
         if (selectedFilter === null) return data;
@@ -46,12 +44,13 @@ const RifleSeason = (props) => {
 
     const getRifleSeasons = () => {
         dispatch(SettingService.getRifleSeasons(serach)).then((res) => {
+            console.log(res);
             var newArr = [];
             for (var i = 0; i < res?.data.length; i++) {
                 newArr.push({
                     key: i,
                     id: res?.data[i]._id,
-                    date: res?.data[i].date,
+                    name: res?.data[i].name,
                     to_date: res?.data[i].to_date,
                     from_date: res?.data[i].from_date,
                     status: res?.data[i].status,
@@ -109,9 +108,9 @@ const RifleSeason = (props) => {
             render: (text) => <div>{text + 1}</div>,
         },
         {
-            title: "Date",
-            dataIndex: "date",
-            key: "date",
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
         },
         {
             title: 'Actions',
@@ -168,10 +167,7 @@ const RifleSeason = (props) => {
         if (e) {
             setId(e.id);
             form.setFieldsValue({
-                from_date: [
-                    e.from_date ? dayjs(e.from_date) : null,
-                    e.to_date ? dayjs(e.to_date) : null,
-                ],
+                name: e?.name
             });
             //     setStartDate(e?.from_date ? moment(e.from_date, "YYYY-MM-DD") : null);
             //     setEndDate(e?.to_date ? moment(e.to_date, "YYYY-MM-DD") : null);
@@ -188,7 +184,7 @@ const RifleSeason = (props) => {
             <PageLoader loading={loading} />
             <div className="card">
                 <div className="card-header">
-                    <h4 className="card-title">Rifle Season List</h4>
+                    <h4 className="card-title">Season List</h4>
                     <div className="d-flex gap-2">
                         <div className="search_feild">
                             <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
@@ -214,7 +210,7 @@ const RifleSeason = (props) => {
             </div>
             <Modal
                 open={visible}
-                title={Id ? "Edit Rifle Season" : "Add Rifle Season"}
+                title={Id ? "Edit Season" : "Add Season"}
                 okText="Submit"
                 cancelText="Cancel"
                 onCancel={() => {
@@ -232,18 +228,22 @@ const RifleSeason = (props) => {
                     onFinish={handleSubmit}
                 >
                     <div>
-                        <label className="label-name">Date</label>
+                        <label className="label-name">Season Name</label>
                         <Form.Item
-                            name="from_date"
+                            name="name"
+                            rules={[
+                                { required: true, message: "Please Enter season Name" },
+                            ]}
                         >
-                            <DatePicker.RangePicker
+                            <Input placeholder="Enter Season Name" />
+                            {/* <DatePicker.RangePicker
                                 // defaultValue={[
                                 //     startDate ? dayjs(startDate) : null,
                                 //     endDate ? dayjs(endDate) : null
                                 // ]}
                                 format="YYYY-MM-DD"
                                 onChange={handleDateChange}
-                            />
+                            /> */}
                         </Form.Item>
                     </div>
                     <div style={{ textAlign: "right" }}>

@@ -269,6 +269,24 @@ export function getSeason(id, data) {
     )
 }
 
+export function getSeasons(id, data) {
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/getseason')
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data,
+                        statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
+
 export function createlateseason(data) {
     data.env = 'test';
     return dispatch => (

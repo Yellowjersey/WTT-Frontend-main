@@ -6,8 +6,121 @@ import PageLoader from "../Common/PageLoader";
 import ToastMe from "../Common/ToastMe";
 import { SearchOutlined } from "@ant-design/icons";
 import SettingService from "../../../services/setting";
+import { Add, CloseCircle } from "iconsax-react";
 
-const State = (props) => {
+
+const SeasonComponent = ({ setAlldata, setLoading, form, i, row, alldata, rifledata }) => {
+    const [lateseasons, setlateSeasonData] = useState([]);
+    const dispatch = useDispatch();
+
+    const handleChangeName = (field, index, value) => {
+        // console.log(field, index, value);
+        let newData = [...alldata];
+        newData[index][field] = value;
+        setAlldata(newData)
+        getlateSeasons(value);
+        // form.setFieldValue('season', value)
+    }
+
+    const handlelateChangeName = (field, index, value) => {
+
+        let newData = [...alldata];
+        newData[index][field] = value;
+        setAlldata(newData)
+        // form.setFieldValue('late_season', value)
+    }
+
+    const getlateSeasons = (e) => {
+        dispatch(SettingService.getlateseason(e)).then((res) => {
+            const newArr = [];
+            for (let i = 0; i < res.data.length; i++) {
+                newArr.push({
+                    label: res.data[i].name,
+                    value: res.data[i]._id,
+                });
+            }
+            setlateSeasonData(newArr);
+        })
+            .catch((errors) => {
+                console.log({ errors })
+                setLoading(false)
+            })
+    };
+
+    useEffect(() => {
+        if (row?.season) {
+            getlateSeasons(row?.season);
+        }
+    }, [row])
+
+    return (
+        <div className="d-flex gap-3">
+            <div className="w-100">
+                <label className="label-name">Season</label>
+                <Form.Item
+                    name={`season_${i}`}
+                // rules={[{ required: true, message: "Please Select Season" }]}
+                >
+                    <Space
+                        style={{
+                            width: '100%',
+                        }}
+                        direction="vertical"
+                    >
+                        <Select
+                            placeholder="Please select Season"
+                            style={{
+                                width: '100%',
+                            }}
+                            value={row?.season || undefined}
+                            onChange={(e) => handleChangeName(`season`, i, e)}
+                            options={rifledata}
+                            filterOption={(inputValue, option) =>
+                                option.label ? option.label.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1 : false
+                            }
+                        />
+                    </Space>
+
+                </Form.Item>
+            </div>
+            <div className="w-100">
+                <label className="label-name">Late Season</label>
+                <Form.Item
+                    name={`late_season_${i}`}
+                // rules={[{ required: true, message: "Please Select Late Season" }]}
+                >
+                    <Space
+                        style={{
+                            width: '100%',
+                        }}
+                        direction="vertical"
+                    >
+                        <Select
+                            mode="multiple"
+                            placeholder="Please select Late Season"
+                            style={{
+                                width: '100%',
+                            }}
+                            value={row?.late_season || undefined}
+                            onChange={(e) => handlelateChangeName(`late_season`, i, e)}
+                            options={lateseasons}
+                            filterOption={(inputValue, option) =>
+                                option.label ? option.label.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1 : false
+                            }
+                        />
+                    </Space>
+
+                </Form.Item>
+            </div>
+        </div >
+    )
+
+}
+
+const State = () => {
+    const arraysmpatons = [{
+        season: ""
+    }]
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,6 +133,10 @@ const State = (props) => {
     const [rifleId, setRifleID] = useState("");
     const [seasonId, setlateSeasonID] = useState("");
     const [form] = Form.useForm();
+    const [alldata, setAlldata] = useState(arraysmpatons);
+
+
+
 
     const filteredData = useMemo(() => {
         if (selectedFilter === null) return data;
@@ -41,6 +158,7 @@ const State = (props) => {
 
     const getStates = () => {
         dispatch(SettingService.getStates(serach)).then((res) => {
+            // console.log(res.data);
             var newArr = [];
             for (var i = 0; i < res?.data.length; i++) {
                 newArr.push({
@@ -48,6 +166,7 @@ const State = (props) => {
                     id: res?.data[i]._id,
                     name: res?.data[i].name,
                     archry_oct: res?.data[i].archry_oct,
+                    season: res?.data[i].season,
                     muzzele_loader: res?.data[i].muzzele_loader,
                     rifle: res?.data[i].rifle,
                     late_season: res?.data[i].late_season,
@@ -72,7 +191,7 @@ const State = (props) => {
             const newArr = [];
             for (let i = 0; i < res.data.length; i++) {
                 newArr.push({
-                    label: res.data[i].date,
+                    label: res.data[i].name,
                     value: res.data[i]._id,
                 });
             }
@@ -83,8 +202,8 @@ const State = (props) => {
                 setLoading(false)
             })
     };
-    const getlateSeasons = () => {
-        dispatch(SettingService.getlateseason()).then((res) => {
+    const getlateSeasons = (e) => {
+        dispatch(SettingService.getlateseason(e)).then((res) => {
             const newArr = [];
             for (let i = 0; i < res.data.length; i++) {
                 newArr.push({
@@ -103,9 +222,9 @@ const State = (props) => {
     useEffect(() => {
         getStates();
     }, [serach]);
-    
+
     useEffect(() => {
-        getlateSeasons();
+        // getlateSeasons();
         getRifleSeasons();
     }, []);
 
@@ -142,8 +261,8 @@ const State = (props) => {
         setSerach(e.target.value)
     }
     const handleSubmit = (values) => {
-        console.log(values);
         values.id = Id;
+        values.season = alldata;
         dispatch(SettingService.updateStateDetails(values))
             .then((res) => {
                 getStates();
@@ -157,39 +276,85 @@ const State = (props) => {
     };
 
     const editModal = (e) => {
+        // console.log(e);
         setId("")
         setVisible(true);
         setRifleID('')
         setlateSeasonID('')
         if (e) {
             setId(e?.id)
-            setRifleID(e?.rifle)
-            setlateSeasonID(e?.late_season)
+            if (e?.season?.length) {
+                setAlldata(e?.season)
+                e?.season?.forEach((datas, i) => {
+                    console.log(datas);
+                    form.setFieldsValue({ [`season_${i}`]: datas.season });
+                })
+            } else {
+                setAlldata([{
+                    season: ""
+                }])
+                console.log(4234332);
+            }
+            // setRifleID(e?.rifle)
+            // setlateSeasonID(e?.late_season)
             form.setFieldsValue({
                 name: e.name,
-                archry_oct: e.archry_oct,
-                muzzele_loader: e.muzzele_loader,
-                rifle: e.rifle,
-                late_season: e.late_season,
-                bear: e.bear,
-                turkey: e.turkey,
-                state_website: e.state_website,
-                check_in_game_link: e.check_in_game_link,
+                // archry_oct: e.archry_oct,
+                // muzzele_loader: e.muzzele_loader,
+                // rifle: e.rifle,
+                // late_season: e.late_season,
+                // "season_0": e.season,
+                // bear: e.bear,
+                // turkey: e.turkey,
+                // state_website: e.state_website,
+                // check_in_game_link: e.check_in_game_link,
             });
         } else {
             form.resetFields();
         }
     }
 
-    const handleChangeName = (e) => {
-        setRifleID(e);
-        form.setFieldValue('rifle', e)
-    }
-    const handlelateChangeName = (e) => {
-        setlateSeasonID(e);
-        form.setFieldValue('late_season', e)
+    const handleChangeName = (field, index, value) => {
+        console.log(field, index, value);
+        let newData = [...alldata];
+        newData[index][field] = value;
+        setAlldata(newData)
+        setRifleID(value);
+        getlateSeasons(value);
+        form.setFieldValue('season', value)
     }
 
+    const handlelateChangeName = (field, index, value) => {
+
+        let newData = [...alldata];
+        newData[index][field] = value;
+        setAlldata(newData)
+        setlateSeasonID(value);
+        form.setFieldValue('late_season', value)
+    }
+
+    const handleClick = () => {
+        setAlldata([...alldata, {
+            "data": {}
+        }]);
+        // }
+    };
+
+    const handleDeleteClick = (index) => {
+        setAlldata((prevArray) => {
+            const newArray = [...prevArray];
+            // if (newArray[index]) {
+            if (index >= 0 && index < newArray.length) {
+                newArray.splice(index, 1);
+            }
+            // }
+            return newArray;
+        })
+        alldata.map((t) => {
+            form.setFieldsValue({ [`symptoms_${index}`]: t?.symptoms });
+        })
+
+    }
     return (
         <>
             <PageLoader loading={loading} />
@@ -250,9 +415,8 @@ const State = (props) => {
                                 disabled={true}
                             />
                         </Form.Item>
-
-                        <label className="label-name">Archary Oct</label>
-                        <Form.Item
+                        {/* <label className="label-name">Archary Oct</label> */}
+                        {/* <Form.Item
                             name="archry_oct"
                             rules={[
                                 { required: true, message: "Please Enter Archary Oct" },
@@ -276,63 +440,21 @@ const State = (props) => {
                                 type="text"
                                 placeholder="Muzzle Loader.."
                             />
-                        </Form.Item>
-                        <label className="label-name">Rifle Season</label>
-                        <Form.Item
-                            name="rifle"
-                            rules={[{ required: true, message: "Please Select Rifle Season" }]}
-                        >
-                            <Space
-                                style={{
-                                    width: '100%',
-                                }}
-                                direction="vertical"
-                            >
-                                <Select
-                                    mode="multiple"
-                                    placeholder="Please select Rifle Season"
-                                    style={{
-                                        width: '100%',
-                                    }}
-                                    value={rifleId || undefined}
-                                    onChange={handleChangeName}
-                                    options={rifledata}
-                                    filterOption={(inputValue, option) =>
-                                        option.label ? option.label.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1 : false
+                        </Form.Item> */}
+                        {alldata?.map((row, i) => (
+                            <>
+                                <div className="text-end">
+                                    {
+                                        i < 1 ?
+                                            <a role='button' className='btn-link flex_item_ce gap1 text-success' onClick={handleClick} title='Add'><Add size="24" color="#0D0B0B" /> </a>
+                                            : <a role='button' className='btn-link flex_item_ce gap1 text-warning' onClick={() => handleDeleteClick(i)} title='cancel'><CloseCircle size="24" color="#ff0100" /> </a>
                                     }
-                                />
-                            </Space>
+                                </div>
 
-                        </Form.Item>
-                        <label className="label-name">Late Season</label>
-                        <Form.Item
-                            name="late_season"
-                            rules={[{ required: true, message: "Please Select Late Season" }]}
-                        >
-                            <Space
-                                style={{
-                                    width: '100%',
-                                }}
-                                direction="vertical"
-                            >
-                                <Select
-                                    mode="multiple"
-                                    placeholder="Please select Late Season"
-                                    style={{
-                                        width: '100%',
-                                    }}
-                                    value={seasonId || undefined}
-                                    onChange={handlelateChangeName}
-                                    options={lateseasons}
-                                    filterOption={(inputValue, option) =>
-                                        option.label ? option.label.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1 : false
-                                    }
-                                />
-                            </Space>
-
-                        </Form.Item>
-                       
-                        <label className="label-name">Bear</label>
+                                <SeasonComponent setAlldata={setAlldata} setLoading={setLoading} form={form} i={i} row={row} alldata={alldata} rifledata={rifledata} />
+                            </>
+                        ))}
+                        {/* <label className="label-name">Bear</label>
                         <Form.Item
                             name="bear"
                             rules={[
@@ -383,7 +505,7 @@ const State = (props) => {
                                 type="text"
                                 placeholder="Check in game link.."
                             />
-                        </Form.Item>
+                        </Form.Item> */}
                     </div>
                     <div style={{ textAlign: "right" }}>
                         <Button key="cancel" onClick={() => setVisible(false)}>
@@ -400,7 +522,7 @@ const State = (props) => {
                         </Button>
                     </div>
                 </Form>
-            </Modal>
+            </Modal >
         </>
     );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, DatePicker, Form, Input, Modal, Table } from 'antd';
+import { Button, DatePicker, Form, Input, Modal, Select, Space, Table } from 'antd';
 import moment from 'moment';
 import 'react-phone-input-2/lib/style.css';
 import PageLoader from '../Common/PageLoader';
@@ -15,6 +15,7 @@ import dayjs from 'dayjs';
 const LastSesason = (props) => {
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
+    const [seasondata, setSeasondata] = useState([]);
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(true);
     const [visible, setVisible] = useState(false);
@@ -25,6 +26,7 @@ const LastSesason = (props) => {
     const getSeason = () => {
         dispatch(supportService.getSeason())
             .then((res) => {
+                console.log(res);
                 var newArr = [];
                 for (var i = 0; i < res.data.length; i++) {
                     newArr.push(
@@ -32,6 +34,7 @@ const LastSesason = (props) => {
                             key: i,
                             id: res.data[i]._id,
                             name: res.data[i].name,
+                            season_name: res.data[i].season_name,
                             from_date: res.data[i].from_date,
                             to_date: res.data[i].to_date,
                         }
@@ -49,6 +52,34 @@ const LastSesason = (props) => {
         getSeason();
     }, [])
 
+
+    const getSeasons = () => {
+        dispatch(supportService.getSeasons())
+            .then((res) => {
+                console.log(res);
+                var newArr = [];
+                for (var i = 0; i < res.data.length; i++) {
+                    newArr.push(
+                        {
+                            key: i,
+                            id: res.data[i]._id,
+                            name: res.data[i].name,
+                        }
+                    )
+                }
+                setSeasondata(newArr);
+                setLoading(false)
+            })
+            .catch((errors) => {
+                console.log({ errors })
+                setLoading(false)
+            })
+    }
+    useEffect(() => {
+        getSeasons();
+        getSeason();
+    }, [])
+
     const columnss = [
         {
             title: 'ID',
@@ -59,6 +90,11 @@ const LastSesason = (props) => {
                     {text + 1}
                 </div>
             ),
+        },
+        {
+            title: 'Season Name',
+            dataIndex: 'season_name',
+            key: 'season_name',
         },
         {
             title: 'Name',
@@ -118,6 +154,7 @@ const LastSesason = (props) => {
                     e.from_date ? dayjs(e.from_date) : null,
                     e.to_date ? dayjs(e.to_date) : null,
                 ],
+                season_id: e.season_name
             });
         } else {
             setId("")
@@ -162,6 +199,7 @@ const LastSesason = (props) => {
             setEndDate(moment(dateStrings[1], "YYYY-MM-DD"));
         }
     };
+    const { Option } = Select;
 
     return (
         <>
@@ -198,6 +236,26 @@ const LastSesason = (props) => {
                     onFinish={handleSubmit}
                 >
                     <div>
+                        <label className="label-name">Season</label>
+                        <Form.Item
+                            name="season_id"
+                            rules={[{ required: true, message: "Please Select Late Season" }]}
+                        >
+                            <Select
+                                placeholder="Please select Late Season"
+                                style={{
+                                    width: '100%',
+                                }}
+                                value={"season"}
+                            >
+                                {seasondata?.map((season) => (
+                                    <Option key={season.id} value={season.id}>
+                                        {season.name}
+                                    </Option>
+                                ))}
+                            </Select>
+
+                        </Form.Item>
                         <label className="label-name">Title</label>
                         <Form.Item
                             name="name"
