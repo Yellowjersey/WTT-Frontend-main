@@ -337,6 +337,24 @@ export function gettechniques(value) {
         })
     )
 }
+export function deleteTechniqueGuide(data) {
+    data.env="test"
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('delete', BaseUrl + '/admin/deleteTechniqueGuide',data)
+                .then(function (res) {
+                    // dispatch(action.setNotificationData(res));
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.response.data,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
 
 
 

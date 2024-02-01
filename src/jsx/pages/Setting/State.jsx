@@ -157,6 +157,7 @@ const State = () => {
     }, [data, selectedFilter]);
 
     const getStates = () => {
+        
         dispatch(SettingService.getStates(serach)).then((res) => {
             // console.log(res.data);
             var newArr = [];
@@ -485,7 +486,10 @@ const State = () => {
                             name="state_website"
                             rules={[
                                 { required: true, message: "Please Enter State Website" },
-
+                                {
+                                    pattern: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
+                                    message: 'Enter a valid URL'
+                                },
                             ]}
                         >
                             <Input
@@ -498,6 +502,10 @@ const State = () => {
                             name="check_in_game_link"
                             rules={[
                                 { required: true, message: "Please Enter Check in game link" },
+                                {
+                                    pattern: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
+                                    message: 'Enter a valid URL'
+                                },
 
                             ]}
                         >

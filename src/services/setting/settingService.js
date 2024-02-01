@@ -55,10 +55,10 @@ export function getCms() {
         })
     )
 }
-export function getStates() {
+export function getStates(data) {
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('get', BaseUrl + '/admin/getStates')
+            Http.callApi('get', BaseUrl + '/admin/getStates?search=' + data)
                 .then(function (res) {
                     return resolve(res);
                 })
@@ -73,7 +73,6 @@ export function getStates() {
     )
 }
 export function updateStateDetails(data) {
-    console.log(data, "123456978");
     data.env = "test"
     return dispatch => (
         new Promise((resolve, reject) => {
