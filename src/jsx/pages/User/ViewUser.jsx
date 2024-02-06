@@ -24,6 +24,10 @@ const ViewUser = () => {
       });
   }
 
+  useEffect(() => {
+    document.title = 'Admin | User Detail'
+  }, [])
+
   const getSavedPost = () => {
     dispatch(UserService.getSavedPostList(userDetail?.id))
       .then((res) => {
@@ -49,7 +53,7 @@ const ViewUser = () => {
             <div class="row gy-4">
               <div class="col-md-12 col-lg-4">
                 <div class="img_wrapper_h100">
-                  <img src={userDetail?.img ? process.env.REACT_APP_PROFILE_URL + 'users/' + userDetail?.img : dummy} class="imaga_fluid" alt="" loading="lazy"/>
+                  <img src={userDetail?.img ? process.env.REACT_APP_PROFILE_URL + 'users/' + userDetail?.img : dummy} class="imaga_fluid" alt="" loading="lazy" />
                 </div>
               </div>
               <div class="col-md-12 col-lg-8">
@@ -72,17 +76,17 @@ const ViewUser = () => {
             </Card.Header>
             <Card.Body>
               <div className="d-flex gap-2 flex-wrap">
-              {
-                sharedPost.length !== 0 ? sharedPost.map((post, key) => {
-                  return (
-                    <div key={key} className="image_wrapper">
-                      <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" loading="lazy" />
-                    </div>
-                  )
-                }) : 'No Post'
-              }
+                {
+                  sharedPost.length !== 0 ? sharedPost.map((post, key) => {
+                    return (
+                      <div key={key} className="image_wrapper">
+                        <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" loading="lazy" />
+                      </div>
+                    )
+                  }) : 'No Post'
+                }
               </div>
-              
+
             </Card.Body>
           </Card>
         </Col>
@@ -94,17 +98,17 @@ const ViewUser = () => {
               <Card.Title>Saved Post</Card.Title>
             </Card.Header>
             <Card.Body>
-            <div className="d-flex gap-2 flex-wrap">
-              {
-                savedPost.length !== 0 ? savedPost.map((post, key) => {
-                  return (
-                    <div key={key} className="image_wrapper">
-                      <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" loading="lazy"/>
-                    </div>
-                  )
-                }) : 'No Post'
-              }
-               </div>
+              <div className="d-flex gap-2 flex-wrap">
+                {
+                  savedPost.length !== 0 ? savedPost.map((post, key) => {
+                    return (
+                      <div key={key} className="image_wrapper">
+                        <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" loading="lazy" />
+                      </div>
+                    )
+                  }) : 'No Post'
+                }
+              </div>
             </Card.Body>
           </Card>
         </Col>

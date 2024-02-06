@@ -41,10 +41,12 @@ const RifleSeason = (props) => {
             return true;
         });
     }, [data, selectedFilter]);
+    useEffect(() => {
+        document.title = 'Admin | Seasons'
+    }, [])
 
     const getRifleSeasons = () => {
         dispatch(SettingService.getRifleSeasons(serach)).then((res) => {
-            console.log(res);
             var newArr = [];
             for (var i = 0; i < res?.data.length; i++) {
                 newArr.push({
@@ -63,6 +65,7 @@ const RifleSeason = (props) => {
             .catch((errors) => {
                 console.log({ errors })
                 setLoading(false)
+
             })
     };
 
@@ -155,6 +158,7 @@ const RifleSeason = (props) => {
             })
             .catch((errors) => {
                 console.log(errors)
+                ToastMe(errors?.errorData?.errors?.name, 'error')
             })
     };
 

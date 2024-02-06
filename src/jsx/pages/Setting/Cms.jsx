@@ -18,6 +18,10 @@ const Cms = () => {
     const [eula, setEula] = useState('')
     const [refund, setRefund] = useState('')
 
+    useEffect(() => {
+        document.title = 'Admin | Cms '
+    }, [])
+
     const getCms = () => {
         dispatch(SettingService.getCms())
             .then((res) => {

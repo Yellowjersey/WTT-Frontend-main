@@ -18,6 +18,10 @@ const Notification = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        document.title = 'Admin | General Notifications '
+    }, [])
+
     const editModal = (text) => {
         setVisible(true)
         if (text) {

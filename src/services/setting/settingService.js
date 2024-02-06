@@ -143,10 +143,10 @@ export function addCms(data) {
         })
     )
 }
-export function getRifleSeasons() {
+export function getRifleSeasons(serach) {
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('get', BaseUrl + '/admin/getseason')
+            Http.callApi('get', BaseUrl + `/admin/getseason?serach=${serach}`)
                 .then(function (res) {
                     return resolve(res);
                 })

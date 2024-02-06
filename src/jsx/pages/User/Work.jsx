@@ -19,6 +19,10 @@ const Work = () => {
   const [Name, setName] = useState("");
   var [images, setimages] = useState();
 
+  useEffect(() => {
+    document.title = 'Admin | Works '
+  }, [])
+
   const gerWork = (value) => {
     dispatch(UserService.getwork(value))
       .then((res) => {
@@ -90,7 +94,7 @@ const Work = () => {
     dispatch(UserService.updateimage(formData))
       .then((res) => {
         setimages(res?.data?.file_name);
-        console.log(res,123456789);
+        console.log(res, 123456789);
         ToastMe(res.data.message, "success");
       })
       .catch((errors) => {

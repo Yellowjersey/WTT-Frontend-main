@@ -16,12 +16,16 @@ const PromoCode = () => {
     const [loading, setLoading] = useState(true);
     const [promo, setPromo] = useState()
 
-    const getPromocode =async () => {
+    useEffect(() => {
+        document.title = 'Admin | Promocode '
+    }, [])
+
+    const getPromocode = async () => {
         dispatch(SettingService.getPromoCode())
             .then((res) => {
                 setLoading(false);
-                 if (res.data != null) {
-                  setPromo(res?.data)
+                if (res.data != null) {
+                    setPromo(res?.data)
                 }
             })
             .catch((errors) => {

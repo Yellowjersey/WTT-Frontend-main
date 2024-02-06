@@ -14,7 +14,6 @@ const SeasonComponent = ({ setAlldata, setLoading, form, i, row, alldata, rifled
     const dispatch = useDispatch();
 
     const handleChangeName = (field, index, value) => {
-        // console.log(field, index, value);
         let newData = [...alldata];
         newData[index][field] = value;
         setAlldata(newData)
@@ -157,7 +156,7 @@ const State = () => {
     }, [data, selectedFilter]);
 
     const getStates = () => {
-        
+
         dispatch(SettingService.getStates(serach)).then((res) => {
             // console.log(res.data);
             var newArr = [];
@@ -186,9 +185,9 @@ const State = () => {
                 setLoading(false)
             })
     };
-
+    const search = ""
     const getRifleSeasons = () => {
-        dispatch(SettingService.getRifleSeasons()).then((res) => {
+        dispatch(SettingService.getRifleSeasons(search)).then((res) => {
             const newArr = [];
             for (let i = 0; i < res.data.length; i++) {
                 newArr.push({
@@ -276,6 +275,10 @@ const State = () => {
             })
     };
 
+    useEffect(() => {
+        document.title = 'Admin | States '
+    }, [])
+
     const editModal = (e) => {
         // console.log(e);
         setId("")
@@ -287,14 +290,13 @@ const State = () => {
             if (e?.season?.length) {
                 setAlldata(e?.season)
                 e?.season?.forEach((datas, i) => {
-                    console.log(datas);
+                    // console.log(datas);
                     form.setFieldsValue({ [`season_${i}`]: datas.season });
                 })
             } else {
                 setAlldata([{
                     season: ""
                 }])
-                console.log(4234332);
             }
             // setRifleID(e?.rifle)
             // setlateSeasonID(e?.late_season)
@@ -316,7 +318,6 @@ const State = () => {
     }
 
     const handleChangeName = (field, index, value) => {
-        console.log(field, index, value);
         let newData = [...alldata];
         newData[index][field] = value;
         setAlldata(newData)

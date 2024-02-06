@@ -77,6 +77,10 @@ const ViewTicket = () => {
       })
   }
 
+  useEffect(() => {
+    document.title = 'Admin | Ticket Information'
+  }, [])
+
   //Get Message List continue
   const getMessageList = () => {
     dispatch(supportService.getMessageList(state.state))
@@ -299,7 +303,7 @@ const ViewTicket = () => {
           {/* </div> */}
 
           {data?.status == 1 ? <Card.Body className="mb-0 chat_footer">
-            {userImg != '' ? <img src={userImg} style={{ width: "20%" }} alt="gallery" loading="lazy"/> : ''}
+            {userImg != '' ? <img src={userImg} style={{ width: "20%" }} alt="gallery" loading="lazy" /> : ''}
             <Form form={form} layout="vertical" name="form_in_modal"
               initialValues={{
                 modifier: "public"

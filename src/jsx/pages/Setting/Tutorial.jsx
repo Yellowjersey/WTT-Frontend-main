@@ -52,6 +52,10 @@ const Tutorial = (props) => {
         getTutorial();
     }, [])
 
+    useEffect(() => {
+        document.title = 'Admin | Tutorials'
+    }, [])
+
     const columnss = [
         {
             title: 'ID',

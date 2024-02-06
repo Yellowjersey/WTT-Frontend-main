@@ -3411,6 +3411,9 @@ textarea.form-control-lg {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 1.25rem; }
+.card.overflow-hidden{
+  min-height: 220px;
+} 
   .card > hr {
     margin-right: 0;
     margin-left: 0; }

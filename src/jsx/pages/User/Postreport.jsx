@@ -16,6 +16,10 @@ const Postreport = () => {
   const [loading, setLoading] = useState(true);
   const [selectedFilter, setSelectedFilter] = useState(null);
 
+  useEffect(() => {
+    document.title = 'Admin | Post Reports '
+  }, [])
+
 
   const transaction = (value) => {
     dispatch(UserService.getpostreport(value))
@@ -58,24 +62,24 @@ const Postreport = () => {
       confirmButtonText: 'Accept',
       cancelButtonText: 'Reject'
     }).then((result) => {
-      console.log(result);
       if (result.isConfirmed == true) {
         data.type = 1
       }
       else {
         data.type = 2
       }
-      console.log(data);
-      dispatch(UserService.changereportPostStatus(data))
-        .then((res) => {
-          transaction();
-          setSelectedFilter(null);
-          ToastMe("User status change successfully", 'success')
-        })
-        .catch((errors) => {
-          console.log({ errors })
-          setLoading(false);
-        })
+      if (result.isConfirmed) {
+        dispatch(UserService.changereportPostStatus(data))
+          .then((res) => {
+            transaction();
+            setSelectedFilter(null);
+            ToastMe("User status change successfully", 'success')
+          })
+          .catch((errors) => {
+            console.log({ errors })
+            setLoading(false);
+          })
+      }
     })
   }
 

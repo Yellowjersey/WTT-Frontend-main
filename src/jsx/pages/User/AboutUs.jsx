@@ -24,6 +24,10 @@ const AboutUs = (props) => {
     const [visiblemail, setVisiblemail] = useState(false);
     const [Id, setId] = useState("");
 
+    useEffect(() => {
+        document.title = 'Admin | About Us '
+    }, [])
+
     const getaboutus = () => {
         dispatch(supportService.getAboutUs())
             .then((res) => {
@@ -117,10 +121,10 @@ const AboutUs = (props) => {
             .catch((errors) => {
                 form.setFields([
                     {
-                      name: 'question',
-                      errors: [errors.errorData.errors.question],
+                        name: 'question',
+                        errors: [errors.errorData.errors.question],
                     },
-                 ]);
+                ]);
                 console.log({ errors });
             });
     };

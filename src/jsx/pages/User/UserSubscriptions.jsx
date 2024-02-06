@@ -13,6 +13,9 @@ const UserSubscriptions = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    document.title = 'Admin | User Subscriptions '
+  }, [])
 
   const transaction = (value) => {
     dispatch(UserService.gettransaction(value))
@@ -52,7 +55,7 @@ const UserSubscriptions = () => {
       key: "key",
       render: (text) => <div>{text + 1}</div>,
     },
-   
+
     {
       title: "First Name",
       dataIndex: "firstName",
@@ -67,7 +70,7 @@ const UserSubscriptions = () => {
       dataIndex: "lastName",
       key: "lastName",
       render: (text) => {
-       lastInitial = text ? text[0].toUpperCase() : '';;
+        lastInitial = text ? text[0].toUpperCase() : '';;
         return text
       }
     },
@@ -77,8 +80,8 @@ const UserSubscriptions = () => {
       key: "img",
       render: (text) => {
         return (
-          text 
-            ? <img src={process.env.REACT_APP_PROFILE_URL + 'users/' + text} width="50px"   height="50px" style={{ borderRadius: "50%" }} loading="lazy"/>
+          text
+            ? <img src={process.env.REACT_APP_PROFILE_URL + 'users/' + text} width="50px" height="50px" style={{ borderRadius: "50%" }} loading="lazy" />
             : (<div id="profileImage" style={{ background: '#a6a7ac', borderRadius: "50%", color: '#fff', textAlign: 'center', width: '50px', height: '50px', lineHeight: '50px', margin: '20px 0' }}>
               {firstInitial + lastInitial}
             </div>)
@@ -108,14 +111,14 @@ const UserSubscriptions = () => {
         </div>
         <div className="card-body">
           {data && data.length > 0 ? (
-              <Table
-                dataSource={data}
-                columns={columnss}
-                className="table_custom"
-              />
-            ) : (
-              <Empty />
-            )}
+            <Table
+              dataSource={data}
+              columns={columnss}
+              className="table_custom"
+            />
+          ) : (
+            <Empty />
+          )}
         </div>
       </div>
 

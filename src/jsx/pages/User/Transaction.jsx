@@ -16,6 +16,10 @@ const Transaction = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [statusFilterName, setStatusFilterName] = useState('Filter By Status');
 
+  useEffect(() => {
+    document.title = 'Admin | Transactions '
+  }, [])
+
   const UserSubscription = () => {
     dispatch(UserService.getusersubscription(serach))
       .then((res) => {
@@ -94,7 +98,7 @@ const Transaction = () => {
       dataIndex: "coupon_id",
       key: "coupon_id",
       render: (text) => {
-        return <span>{text == null ?  '-' : "10%"}</span>;
+        return <span>{text == null ? '-' : "10%"}</span>;
       },
     },
     {

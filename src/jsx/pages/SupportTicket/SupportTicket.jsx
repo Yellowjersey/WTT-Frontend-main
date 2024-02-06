@@ -17,6 +17,10 @@ const SupportTicket = (props) => {
     const [statusFilterName, setStatusFilterName] = useState('Filter By Status');
     const locationdata = locations.state
 
+    useEffect(() => {
+        document.title = 'Admin | Support Tickets'
+    }, [])
+
     const handleFilterChange = (filterOption) => {
         if (filterOption === 2) {
             setStatusFilterName('Close')
@@ -27,11 +31,11 @@ const SupportTicket = (props) => {
         }
         setSelectedFilter(filterOption);
     };
-    useEffect(()=>{ 
-        if(locationdata === 1 ){
+    useEffect(() => {
+        if (locationdata === 1) {
             handleFilterChange(1)
         }
-    },[locations])
+    }, [locations])
     const viewTicket = (text) => {
         props.history.push("/view-ticket", { state: text.id })
     }
@@ -136,7 +140,7 @@ const SupportTicket = (props) => {
         },
     ];
 
-   
+
 
     const filteredData = useMemo(() => {
         if (selectedFilter === null) return data;

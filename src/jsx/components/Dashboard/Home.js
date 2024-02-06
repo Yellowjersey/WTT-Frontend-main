@@ -1,5 +1,5 @@
-import React, {  useEffect, useState } from 'react';
-import { useHistory  } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import loadable from "@loadable/component";
 import pMinDelay from "p-min-delay";
 import CommonService from '../../../services/common';
@@ -42,7 +42,10 @@ const Home = () => {
 				setLoading(false)
 			})
 	}
-	
+
+	useEffect(() => {
+		document.title = 'Admin | DashBoard'
+	}, [])
 
 	useEffect(() => {
 		dashboardCountData();
@@ -55,12 +58,12 @@ const Home = () => {
 		history.push('/user-subscriptions');
 	}
 
-	 const UserRedirectTicket = () => {
-		history.push('/support-list' , 1)
-	 }
-	 const Redirecttrascation = () =>{
+	const UserRedirectTicket = () => {
+		history.push('/support-list', 1)
+	}
+	const Redirecttrascation = () => {
 		history.push('/transaction')
-	 }
+	}
 
 	return (
 		<>
@@ -69,12 +72,12 @@ const Home = () => {
 				<h4><b>Users</b></h4>
 				<div className="col-xl-12">
 					<div className="row">
-					<div className="col-xl-3 col-sm-6">
-							<div className="card overflow-hidden">
+						<div className="col-xl-3 col-sm-6">
+							<div className="card overflow-hidden pt-4">
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-1">
-										<svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<path fillRule="evenodd" clipRule="evenodd" d="M17.812 48.64L11.2 53.6C10.594 54.054 9.78401 54.128 9.10602 53.788C8.42802 53.45 8.00002 52.758 8.00002 52V16C8.00002 14.896 8.89602 14 10 14H38C39.104 14 40 14.896 40 16V52C40 52.758 39.572 53.45 38.894 53.788C38.216 54.128 37.406 54.054 36.8 53.6L30.188 48.64L25.414 53.414C24.634 54.196 23.366 54.196 22.586 53.414L17.812 48.64ZM36 48V18H12V48L16.8 44.4C17.596 43.802 18.71 43.882 19.414 44.586L24 49.172L28.586 44.586C29.29 43.882 30.404 43.802 31.2 44.4L36 48ZM22 34H26C27.104 34 28 33.104 28 32C28 30.896 27.104 30 26 30H22C20.896 30 20 30.896 20 32C20 33.104 20.896 34 22 34ZM18 26H30C31.104 26 32 25.104 32 24C32 22.896 31.104 22 30 22H18C16.896 22 16 22.896 16 24C16 25.104 16.896 26 18 26Z" fill="#44814E" />
 												<circle cx="43.5" cy="14.5" r="12.5" fill="#FD5353" stroke="white" strokeWidth="4" />
 											</svg>
@@ -85,15 +88,20 @@ const Home = () => {
 										</div>
 									</div>
 								</div>
-								<div className="card-body p-0">
+								<div className="card-body p-0 position-absolute bottom-0">
 									<div id="totalinvoicessent">
 										<Unpaidinvoices />
 									</div>
 								</div>
 							</div>
 						</div>
-						<div className="col-xl-3 col-sm-6" onClick={subscriberRedirect} style={{cursor:"pointer"}}>
+						<div className="col-xl-3 col-sm-6" >
 							<div className="card overflow-hidden">
+								<div className='d-flex justify-content-end p-1'>
+									<span onClick={subscriberRedirect} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0'>
+										More Info  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg>
+									</span>
+								</div>
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-1">
@@ -108,7 +116,7 @@ const Home = () => {
 										</div>
 									</div>
 								</div>
-								<div className="card-body p-0">
+								<div className="card-body p-0 position-absolute bottom-0">
 									<div id="totalinvoicessent">
 										<Totalinvoicessent />
 									</div>
@@ -116,7 +124,7 @@ const Home = () => {
 							</div>
 						</div>
 						<div className="col-xl-3 col-sm-6">
-							<div className="card overflow-hidden">
+							<div className="card overflow-hidden pt-4">
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-1">
@@ -131,7 +139,7 @@ const Home = () => {
 										</div>
 									</div>
 								</div>
-								<div className="card-body p-0">
+								<div className="card-body p-0 position-absolute bottom-0">
 									<div id="paidinvoices">
 										<Paidinvoices />
 									</div>
@@ -139,8 +147,9 @@ const Home = () => {
 
 							</div>
 						</div>
-						<div className="col-xl-3 col-sm-6" onClick={UserRedirect} style={{cursor:"pointer"}}>
+						<div className="col-xl-3 col-sm-6" >
 							<div className="card overflow-hidden">
+								<div className='d-flex justify-content-end p-1'><span onClick={UserRedirect} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0'>More Info <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg> </span></div>
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-2">
@@ -155,21 +164,21 @@ const Home = () => {
 										</div>
 									</div>
 								</div>
-								<div className="card-body p-0">
+								<div className="card-body p-0 position-absolute bottom-0">
 									<div id="totalInvoices">
 										<TotalInvoices />
 									</div>
 								</div>
 							</div>
 						</div>
-					
+
 					</div>
 				</div>
 				<h4><b>Received Payment</b></h4>
 				<div className="col-xl-12">
 					<div className="row">
 						<div className="col-xl-3 col-sm-6">
-							<div className="card overflow-hidden">
+							<div className="card overflow-hidden pt-4">
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-1">
@@ -179,12 +188,12 @@ const Home = () => {
 											</svg>
 										</span>
 										<div className="invoices">
-										<h4>{countData?.user?.totalpaymenttoday.toFixed(2) ?? 0}$</h4>
+											<h4>{countData?.user?.totalpaymenttoday.toFixed(2) ?? 0}$</h4>
 											<span>Today Received Payment</span>
 										</div>
 									</div>
 								</div>
-								<div className="card-body p-0">
+								<div className="card-body p-0 position-absolute bottom-0">
 									<div id="paidinvoices">
 										<Paidinvoices />
 									</div>
@@ -193,7 +202,7 @@ const Home = () => {
 							</div>
 						</div>
 						<div className="col-xl-3 col-sm-6">
-							<div className="card overflow-hidden">
+							<div className="card overflow-hidden pt-4">
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-1">
@@ -204,12 +213,12 @@ const Home = () => {
 
 										</span>
 										<div className="invoices">
-										<h4>{countData?.user?.totalpayment.toFixed(2) ?? 0}$</h4>
+											<h4>{countData?.user?.totalpayment.toFixed(2) ?? 0}$</h4>
 											<span>Total Received Payment</span>
 										</div>
 									</div>
 								</div>
-								<div className="card-body p-0">
+								<div className="card-body p-0 position-absolute bottom-0">
 									<div id="unpaidinvoices">
 										<Unpaidinvoices />
 									</div>
@@ -218,32 +227,33 @@ const Home = () => {
 							</div>
 						</div>
 						<div className="col-xl-3 col-sm-6">
-							<div className="card overflow-hidden">
+							<div className="card overflow-hidden pt-4">
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-1">
-										<svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<path fillRule="evenodd" clipRule="evenodd" d="M17.812 48.64L11.2 53.6C10.594 54.054 9.784 54.128 9.106 53.788C8.428 53.45 8 52.758 8 52V16C8 14.896 8.896 14 10 14H38C39.104 14 40 14.896 40 16V52C40 52.758 39.572 53.45 38.894 53.788C38.216 54.128 37.406 54.054 36.8 53.6L30.188 48.64L25.414 53.414C24.634 54.196 23.366 54.196 22.586 53.414L17.812 48.64ZM36 48V18H12V48L16.8 44.4C17.596 43.802 18.71 43.882 19.414 44.586L24 49.172L28.586 44.586C29.29 43.882 30.404 43.802 31.2 44.4L36 48ZM22 34H26C27.104 34 28 33.104 28 32C28 30.896 27.104 30 26 30H22C20.896 30 20 30.896 20 32C20 33.104 20.896 34 22 34ZM18 26H30C31.104 26 32 25.104 32 24C32 22.896 31.104 22 30 22H18C16.896 22 16 22.896 16 24C16 25.104 16.896 26 18 26Z" fill="#44814E" />
 												<circle cx="43.5" cy="14.5" r="12.5" fill="#FFAA2B" stroke="white" strokeWidth="4" />
 											</svg>
 
 										</span>
 										<div className="invoices">
-										<h4>{countData?.user?.TodayPaidUser ?? 0}</h4>
+											<h4>{countData?.user?.TodayPaidUser ?? 0}</h4>
 											<span>Today Paid User</span>
 										</div>
 									</div>
 								</div>
-								<div className="card-body p-0">
+								<div className="card-body p-0 position-absolute bottom-0">
 									<div id="unpaidinvoices">
-									<Totalinvoicessent />
+										<Totalinvoicessent />
 									</div>
 								</div>
 
 							</div>
 						</div>
-						<div className="col-xl-3 col-sm-6" onClick={Redirecttrascation} style={{cursor:"pointer"}}>
+						<div className="col-xl-3 col-sm-6" >
 							<div className="card overflow-hidden">
+								<div className='d-flex justify-content-end p-1'><span onClick={Redirecttrascation} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0'> More Info <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg></span></div>
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-2">
@@ -258,7 +268,7 @@ const Home = () => {
 										</div>
 									</div>
 								</div>
-								<div className="card-body p-0">
+								<div className="card-body p-0 position-absolute bottom-0">
 									<div id="totalInvoices">
 										<TotalInvoices />
 									</div>
@@ -270,8 +280,9 @@ const Home = () => {
 				<h4><b>Tickets</b></h4>
 				<div className="col-xl-12">
 					<div className="row">
-						<div className="col-xl-3 col-sm-6" onClick={UserRedirectTicket} style={{cursor:"pointer"}}>
+						<div className="col-xl-3 col-sm-6" >
 							<div className="card overflow-hidden">
+								<div className='d-flex justify-content-end p-1'><span onClick={UserRedirectTicket} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0'> More Info <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg></span></div>
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-1">
@@ -281,12 +292,12 @@ const Home = () => {
 											</svg>
 										</span>
 										<div className="invoices">
-										<h4>{countData?.user?.supportticket ?? 0}</h4>
+											<h4>{countData?.user?.supportticket ?? 0}</h4>
 											<span>New Tickets</span>
 										</div>
 									</div>
 								</div>
-								<div className="card-body p-0">
+								<div className="card-body p-0 position-absolute bottom-0">
 									<div id="paidinvoices">
 										<Paidinvoices />
 									</div>

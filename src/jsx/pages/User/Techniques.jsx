@@ -22,6 +22,10 @@ const Techniques = (props) => {
 
   const [visible, setVisible] = useState(false);
 
+  useEffect(() => {
+    document.title = 'Admin | Techniques Guides '
+  }, [])
+
   const getTechniques = (value) => {
     dispatch(UserService.gettechniques(value))
       .then((res) => {
@@ -134,29 +138,29 @@ const Techniques = (props) => {
   };
   const deleteTechnique = async (text) => {
     let data = {
-        id:text._id
+      id: text._id
     }
     Swal.fire({
-        title: 'Are you sure?',
-        text: "To delete this techniques guide!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes!'
+      title: 'Are you sure?',
+      text: "To delete this techniques guide!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
     }).then(async (result) => {
-        if (result.isConfirmed) {
-            dispatch(UserService.deleteTechniqueGuide(data))
-                .then((res) => {
-                    ToastMe('Techniques guide delete successfully','success')
-                    getTechniques()
-                })
-                .catch((errors) => {
-                    console.log({ errors })
-                })
-        }
+      if (result.isConfirmed) {
+        dispatch(UserService.deleteTechniqueGuide(data))
+          .then((res) => {
+            ToastMe('Techniques guide delete successfully', 'success')
+            getTechniques()
+          })
+          .catch((errors) => {
+            console.log({ errors })
+          })
+      }
     })
-}
+  }
 
   const handleSubmit = async (values) => {
     setLoadingbutton(true);
@@ -181,7 +185,7 @@ const Techniques = (props) => {
   };
 
 
-  
+
   return (
     <>
       <PageLoader loading={loading} />

@@ -86,7 +86,7 @@ const HunterTip = (props) => {
       render: (data) => (
         <img src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data}
           style={{ borderRadius: "50%", height: "80px", width: "80px" }}
-          alt="" loading="lazy"/>
+          alt="" loading="lazy" />
       )
     },
     {
@@ -149,6 +149,10 @@ const HunterTip = (props) => {
       form.resetFields();
     }
   };
+
+  useEffect(() => {
+    document.title = 'Admin | Hunter Tips'
+  }, [])
 
   const previewUserImageOnChange = (ev) => {
     let userImgSrc = URL.createObjectURL(ev.target.files[0]);

@@ -92,6 +92,10 @@ const SideBar = (props) => {
     notification = [
       "general-notification",
     ];
+  const [isMenuActiv, setIsMenuActiv] = useState();
+  const sidebarbtn = (e) => {
+    setIsMenuActiv(e);
+  }
 
   let profileImage = `${process.env.REACT_APP_PROFILE_URL + 'admin/'}${adminData?.profileImage}`
   return (
@@ -145,13 +149,13 @@ const SideBar = (props) => {
           </Dropdown.Menu>
         </Dropdown>
         <MM className="metismenu" id="menu">
-          <li className={`${deshBoard.includes(path) || path.pathname === '/' ? "mm-active" : ""}`}>
+          <li className={`${deshBoard.includes(path) || path.pathname === '/' || isMenuActiv === 1 ? "mm-active" : ""}`} onClick={() => sidebarbtn(1)}>
             <Link to="/" >
               <i className="fas fa-home"></i>
               <span className="nav-text">Dashboard</span>
             </Link>
           </li>
-          <li className={`${user.includes(path) || path.pathname === '/user-list' ? "mm-active" : ""}`}>
+          <li className={`${user.includes(path) || path.pathname === '/user-list' || isMenuActiv === 2 ? "mm-active" : ""}`} onClick={() => sidebarbtn(2)}>
             <Link to="/user-list">
               {/* <Link className="has-arrow ai-icon" to="#" > */}
               <i className="fa fa-user"></i>
@@ -159,13 +163,13 @@ const SideBar = (props) => {
             </Link>
 
           </li>
-          <li className={`${path.pathname === "/tutorials" || path.pathname === "/tutorials" ? "mm-active" : ""}`}>
+          <li className={`${path.pathname === "/tutorials" || path.pathname === "/tutorials" || isMenuActiv === 3 ? "mm-active" : ""}`} onClick={() => sidebarbtn(3)}>
             <Link to="/tutorials" >
               <i className="fa fa-list"></i>
               <span className="nav-text">Tutorials</span>
             </Link>
           </li>
-          <li className={`${path === "hunter-tip" || path.pathname === "/hunter-tip" ? "mm-active" : ""}`}>
+          <li className={`${path === "hunter-tip" || path.pathname === "/hunter-tip" || isMenuActiv === 4 ? "mm-active" : ""}`} onClick={() => sidebarbtn(4)}>
             <Link to="/hunter-tip" >
               <i className="fa fa-lightbulb"></i>
               <span className="nav-text">Hunter Tip</span>
@@ -183,7 +187,7 @@ const SideBar = (props) => {
               <span className="nav-text">Rifle Seasons</span>
             </Link>
           </li> */}
-          <li className={`${path.pathname === "/support-list" || path.pathname === "/support-tickets" ? "mm-active" : ""}`}>
+          <li className={`${path.pathname === "/support-list" || path.pathname === "/support-tickets" || isMenuActiv === 5 ? "mm-active" : ""}`} onClick={() => sidebarbtn(5)}>
             <Link to="/support-list" >
               <i className="fa fa-envelope"></i>
               <span className="nav-text">Support Tickets</span>
@@ -195,54 +199,54 @@ const SideBar = (props) => {
               <span className="nav-text">Late season</span>
             </Link>
           </li> */}
-          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
-            <Link className="has-arrow ai-icon" to="#" >
+          <li className={`${deshBoard.includes(path) || isMenuActiv === 6 ? "mm-active" : ""}`} onClick={() => sidebarbtn(6)}>
+            <Link className="has-arrow ai-icon" to="#" aria-expanded={isMenuActiv === 6 ? "true" : "false"} >
               <i className="fa fa-star" aria-hidden="true"></i>
               <span className="nav-text">Manage state</span>
             </Link>
-            <ul >
+            <ul className={`${isMenuActiv === 6 ? 'mm-show' : ""} mm-collapse`}>
               <li><Link className={`${path === "user-subscriptions" ? "mm-active" : ""}`} to="/states">States</Link></li>
-              <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/rifle-seasons">Rifle Seasons</Link></li>
+              <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/seasons">Seasons</Link></li>
               <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/late-season">Late season</Link></li>
             </ul>
           </li>
-          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
+          <li className={`${deshBoard.includes(path) || isMenuActiv === 7 ? "mm-active" : ""}`} onClick={() => sidebarbtn(7)}>
             <Link className="has-arrow ai-icon" to="#" >
-              <i className="fa fa-user-plus" aria-hidden="true"></i>
+              <i className="fa fa-user-plus" aria-expanded={isMenuActiv === 7 ? "true" : "false"}></i>
               <span className="nav-text">Subscriptions</span>
             </Link>
-            <ul >
+            <ul className={`${isMenuActiv === 7 ? 'mm-show' : ""} mm-collapse`}>
               <li><Link className={`${path === "user-subscriptions" ? "mm-active" : ""}`} to="/user-subscriptions">Subscribed Users</Link></li>
               <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/transaction">Transaction</Link></li>
 
             </ul>
           </li>
-          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
+          <li className={`${deshBoard.includes(path) || isMenuActiv === 8 ? "mm-active" : ""}`} onClick={() => sidebarbtn(8)}>
             <Link className="has-arrow ai-icon" to="#" >
-              <i className="fa fa-flag" aria-hidden="true"></i>
+              <i className="fa fa-flag" aria-expanded={isMenuActiv === 8 ? "true" : "false"}></i>
               <span className="nav-text">Report</span>
             </Link>
-            <ul >
+            <ul className={`${isMenuActiv === 8 ? 'mm-show' : ""} mm-collapse`}>
               <li><Link className={`${path === "post-report" ? "mm-active" : ""}`} to="/post-report">post report</Link></li>
               <li><Link className={`${path === "user-report" ? "mm-active" : ""}`} to="/user-report">user report</Link></li>
 
             </ul>
           </li>
-          <li>
-            <Link className="has-arrow ai-icon" to="#" >
-              <i className="fa fa-bell" aria-hidden="true"></i>
+          <li onClick={() => sidebarbtn(9)} className={`${deshBoard.includes(path) || isMenuActiv === 9 ? "mm-active" : ""}`}>
+            <Link className="has-arrow ai-icon" to="#" aria-expanded={isMenuActiv === 9 ? "true" : "false"}>
+              <i className="fa fa-bell" aria-expanded="true"></i>
               <span className="nav-text">Notifications</span>
             </Link>
-            <ul >
-              <li><Link className={`${path === "general-notification" ? "mm-active" : ""}`} to="/general-notification">General Notifications</Link></li>
+            <ul className={`${isMenuActiv === 9 ? 'mm-show' : ""} mm-collapse`}>
+              <li><Link className={`${path === "general-notification" || isMenuActiv === 9 ? "mm-active" : ""}`} to="/general-notification">General Notifications</Link></li>
             </ul>
           </li>
-          <li className={`${deshBoard.includes(path) ? "mm-active" : ""}`}>
+          <li className={`${deshBoard.includes(path) || isMenuActiv === 10 ? "mm-active" : ""}`} onClick={() => sidebarbtn(10)}>
             <Link className="has-arrow ai-icon" to="#" >
-              <i className="fa fa-cog" aria-hidden="true"></i>
+              <i className="fa fa-cog" aria-expanded={isMenuActiv === 10 ? "true" : "false"}></i>
               <span className="nav-text">Settings</span>
             </Link>
-            <ul >
+            <ul className={`${isMenuActiv === 10 ? 'mm-show' : ""} mm-collapse`}>
               <li><Link className={`${path === "how-it-work" ? "mm-active" : ""}`} to="/how-it-work">How it Work</Link></li>
               <li><Link className={`${path === "techniques-guide" ? "mm-active" : ""}`} to="/techniques-guide">Techniques Guide</Link></li>
               <li><Link className={`${path === "contact-us" ? "mm-active" : ""}`} to="/contact-us">Contact us</Link></li>

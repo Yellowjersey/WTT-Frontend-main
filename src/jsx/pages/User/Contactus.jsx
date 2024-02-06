@@ -25,6 +25,11 @@ const Contactus = (props) => {
     const [mailAddress, setMailAddress] = useState("");
     const subUserdata = location.state;
 
+
+    useEffect(() => {
+        document.title = 'Admin | Contact Us '
+    }, [])
+
     const getcontactus = () => {
         dispatch(UserService.getContactus(subUserdata))
             .then((res) => {

@@ -16,6 +16,9 @@ const Userreport = () => {
   const [loading, setLoading] = useState(true);
   const [selectedFilter, setSelectedFilter] = useState(null);
 
+  useEffect(() => {
+    document.title = 'Admin | User Reports '
+  }, [])
 
   const transaction = (value) => {
     dispatch(UserService.getuserreport(value))
@@ -59,24 +62,24 @@ const Userreport = () => {
       confirmButtonText: 'Accept',
       cancelButtonText: 'Reject'
     }).then((result) => {
-      console.log(result);
       if (result.isConfirmed == true) {
         data.type = 1
       }
       else {
         data.type = 2
       }
-      console.log(data);
-      dispatch(UserService.changereportUserStatus(data))
-        .then((res) => {
-          transaction();
-          setSelectedFilter(null);
-          ToastMe("User status change successfully", 'success')
-        })
-        .catch((errors) => {
-          console.log({ errors })
-          setLoading(false);
-        })
+      if (result.isConfirmed) {
+        dispatch(UserService.changereportUserStatus(data))
+          .then((res) => {
+            transaction();
+            setSelectedFilter(null);
+            ToastMe("User status change successfully", 'success')
+          })
+          .catch((errors) => {
+            console.log({ errors })
+            setLoading(false);
+          })
+      }
     })
   }
 

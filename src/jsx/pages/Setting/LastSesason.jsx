@@ -124,6 +124,10 @@ const LastSesason = (props) => {
         },
     ];
 
+    useEffect(() => {
+        document.title = 'Admin | Late Seasons '
+    }, [])
+
     const handleSubmit = (values) => {
         values.id = Id;
         const apicall =
