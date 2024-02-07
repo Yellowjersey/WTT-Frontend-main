@@ -97,8 +97,8 @@ const Home = () => {
 						</div>
 						<div className="col-xl-3 col-sm-6" >
 							<div className="card overflow-hidden">
-								<div className='d-flex justify-content-end p-1'>
-									<span onClick={subscriberRedirect} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0'>
+								<div className='d-flex justify-content-end p-1 me-1'>
+									<span onClick={subscriberRedirect} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0 rounded-3'>
 										More Info  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg>
 									</span>
 								</div>
@@ -149,7 +149,7 @@ const Home = () => {
 						</div>
 						<div className="col-xl-3 col-sm-6" >
 							<div className="card overflow-hidden">
-								<div className='d-flex justify-content-end p-1'><span onClick={UserRedirect} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0'>More Info <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg> </span></div>
+								<div className='d-flex justify-content-end p-1 me-1'><span onClick={UserRedirect} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0 rounded-3'>More Info <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg> </span></div>
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-2">
@@ -253,7 +253,7 @@ const Home = () => {
 						</div>
 						<div className="col-xl-3 col-sm-6" >
 							<div className="card overflow-hidden">
-								<div className='d-flex justify-content-end p-1'><span onClick={Redirecttrascation} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0'> More Info <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg></span></div>
+								<div className='d-flex justify-content-end p-1 me-1'><span onClick={Redirecttrascation} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0 rounded-3'> More Info <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg></span></div>
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-2">
@@ -282,7 +282,7 @@ const Home = () => {
 					<div className="row">
 						<div className="col-xl-3 col-sm-6" >
 							<div className="card overflow-hidden">
-								<div className='d-flex justify-content-end p-1'><span onClick={UserRedirectTicket} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0'> More Info <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg></span></div>
+								<div className='d-flex justify-content-end p-1 me-1'><span onClick={UserRedirectTicket} style={{ cursor: "pointer" }} className='btn border border-primary px-1 p-0 m-0 rounded-3'> More Info <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xlink="http://www.w3.org/1999/xlink" className='mx-1' width="18" height="18" x="0" y="0" viewBox="0 0 512.009 512.009" space="preserve" class=""><g><path d="M508.625 247.801 392.262 131.437c-4.18-4.881-11.526-5.45-16.407-1.269-4.881 4.18-5.45 11.526-1.269 16.407.39.455.814.88 1.269 1.269l96.465 96.582H11.636C5.21 244.426 0 249.636 0 256.063s5.21 11.636 11.636 11.636H472.32l-96.465 96.465c-4.881 4.18-5.45 11.526-1.269 16.407s11.526 5.45 16.407 1.269c.455-.39.88-.814 1.269-1.269l116.364-116.364c4.511-4.537 4.511-11.867-.001-16.406z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg></span></div>
 								<div className="card-header border-0">
 									<div className="d-flex">
 										<span className="mt-1">
