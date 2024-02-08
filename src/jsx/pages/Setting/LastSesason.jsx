@@ -112,11 +112,11 @@ const LastSesason = (props) => {
                             onClick={() => editModal(data)}>
                             <i className="fa fa-edit" aria-hidden="true"></i>
                         </span>
-                        <span
+                        {/* <span
                             style={{ margin: "0 10px", fontSize: "16px", color: "#f92b2b", cursor: "pointer" }}
                             onClick={() => activeInactive(data)}>
                             <i className="fa fa-trash" aria-hidden="true"></i>
-                        </span>
+                        </span> */}
                     </div>
                 </>
             ),
