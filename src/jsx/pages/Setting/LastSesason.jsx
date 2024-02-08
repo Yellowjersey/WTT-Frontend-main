@@ -26,7 +26,6 @@ const LastSesason = (props) => {
     const getSeason = () => {
         dispatch(supportService.getSeason())
             .then((res) => {
-                console.log(res);
                 var newArr = [];
                 for (var i = 0; i < res.data.length; i++) {
                     newArr.push(
@@ -35,6 +34,7 @@ const LastSesason = (props) => {
                             id: res.data[i]._id,
                             name: res.data[i].name,
                             season_name: res.data[i].season_name,
+                            season_id: res.data[i].season_id,
                             from_date: res.data[i].from_date,
                             to_date: res.data[i].to_date,
                         }
@@ -56,7 +56,6 @@ const LastSesason = (props) => {
     const getSeasons = () => {
         dispatch(supportService.getSeasons())
             .then((res) => {
-                console.log(res);
                 var newArr = [];
                 for (var i = 0; i < res.data.length; i++) {
                     newArr.push(
@@ -150,7 +149,6 @@ const LastSesason = (props) => {
         form.resetFields();
         setStartDate(null);
         setEndDate(null);
-        console.log(e);
         if (e) {
             setId(e.id);
             form.setFieldsValue({
@@ -158,7 +156,7 @@ const LastSesason = (props) => {
                     e.from_date ? dayjs(e.from_date) : null,
                     e.to_date ? dayjs(e.to_date) : null,
                 ],
-                season_id: e.season_name
+                season_id: e.season_id
             });
         } else {
             setId("")
@@ -253,7 +251,7 @@ const LastSesason = (props) => {
                                 value={"season"}
                             >
                                 {seasondata?.map((season) => (
-                                    <Option key={season.id} value={season.id}>
+                                    < Option key={season.id} value={season.id} >
                                         {season.name}
                                     </Option>
                                 ))}
@@ -285,7 +283,7 @@ const LastSesason = (props) => {
                         </Button>
                     </div>
                 </Form>
-            </Modal>
+            </Modal >
         </>
     )
 }

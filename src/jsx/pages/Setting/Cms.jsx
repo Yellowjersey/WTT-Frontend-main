@@ -10,7 +10,7 @@ import 'react-quill/dist/quill.snow.css';
 
 const Cms = () => {
 
-    const [form] = Form.useForm();
+    const [form] = Form.useForm(); 
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [privacy, setPrivacy] = useState('')
@@ -101,20 +101,20 @@ const Cms = () => {
                         </Card.Body> */}
 
                         <>
-                            <div className="mb-4">
-                                <label className="label-name fs-20 font-bold mb-3" style={{ fontWeight: 600 }}>Terms & Conditions</label>
+                            <div>
+                                <label className="label-name fs-20 font-bold m-3" style={{ fontWeight: 600 }}>Terms & Conditions</label>
                                 <ReactQuill theme="snow" value={terms} onChange={handleTerms} />
                             </div>
                             <div>
-                                <label className="label-name fs-20 font-bold mb-3" style={{ fontWeight: 600 }}>Privacy Policy</label>
+                                <label className="label-name fs-20 font-bold m-3" style={{ fontWeight: 600 }}>Privacy Policy</label>
                                 <ReactQuill theme="snow" value={privacy} onChange={handlePrivacy} />
                             </div>
                             <div>
-                                <label className="label-name fs-20 font-bold mb-3" style={{ fontWeight: 600 }}>Refund Policy</label>
+                                <label className="label-name fs-20 font-bold m-3" style={{ fontWeight: 600 }}>Refund Policy</label>
                                 <ReactQuill theme="snow" value={refund} onChange={handleRefund} />
                             </div>
                             <div className="mb-4">
-                                <label className="label-name fs-20 font-bold mb-3" style={{ fontWeight: 600 }}>EULA</label>
+                                <label className="label-name fs-20 font-bold m-3" style={{ fontWeight: 600 }}>EULA</label>
                                 <ReactQuill theme="snow" value={eula} onChange={handleEula} />
                             </div>
                             <div>
