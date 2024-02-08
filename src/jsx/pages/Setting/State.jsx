@@ -309,8 +309,8 @@ const State = () => {
                 // "season_0": e.season,
                 // bear: e.bear,
                 // turkey: e.turkey,
-                // state_website: e.state_website,
-                // check_in_game_link: e.check_in_game_link,
+                state_website: e.state_website,
+                check_in_game_link: e.check_in_game_link,
             });
         } else {
             form.resetFields();
@@ -481,17 +481,17 @@ const State = () => {
                                 type="text"
                                 placeholder="Turkey.."
                             />
-                        </Form.Item>
+                        </Form.Item>*/}
                         <label className="label-name">State Website</label>
                         <Form.Item
                             name="state_website"
-                            rules={[
-                                { required: true, message: "Please Enter State Website" },
-                                {
-                                    pattern: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
-                                    message: 'Enter a valid URL'
-                                },
-                            ]}
+                        // rules={[
+                        //     { required: true, message: "Please Enter State Website" },
+                        //     {
+                        //         pattern: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
+                        //         message: 'Enter a valid URL'
+                        //     },
+                        // ]}
                         >
                             <Input
                                 type="text"
@@ -501,20 +501,20 @@ const State = () => {
                         <label className="label-name">Check in game link</label>
                         <Form.Item
                             name="check_in_game_link"
-                            rules={[
-                                { required: true, message: "Please Enter Check in game link" },
-                                {
-                                    pattern: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
-                                    message: 'Enter a valid URL'
-                                },
+                        // rules={[
+                        //     { required: true, message: "Please Enter Check in game link" },
+                        //     {
+                        //         pattern: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
+                        //         message: 'Enter a valid URL'
+                        //     },
 
-                            ]}
+                        // ]}
                         >
                             <Input
                                 type="text"
                                 placeholder="Check in game link.."
                             />
-                        </Form.Item> */}
+                        </Form.Item>
                     </div>
                     <div style={{ textAlign: "right" }}>
                         <Button key="cancel" onClick={() => setVisible(false)}>
