@@ -207,7 +207,7 @@ const SideBar = (props) => {
             <ul className={`${isMenuActiv === 6 ? 'mm-show' : ""} mm-collapse`}>
               <li><Link className={`${path === "user-subscriptions" ? "mm-active" : ""}`} to="/states">States</Link></li>
               <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/seasons">Seasons</Link></li>
-              <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/late-season">Late season</Link></li>
+              <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/dates">Dates</Link></li>
             </ul>
           </li>
           <li className={`${deshBoard.includes(path) || isMenuActiv === 7 ? "mm-active" : ""}`} onClick={() => sidebarbtn(7)}>

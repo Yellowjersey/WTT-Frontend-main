@@ -124,7 +124,7 @@ const LastSesason = (props) => {
     ];
 
     useEffect(() => {
-        document.title = 'Admin | Late Seasons '
+        document.title = 'Admin | Dates '
     }, [])
 
     const handleSubmit = (values) => {
@@ -208,7 +208,7 @@ const LastSesason = (props) => {
             <PageLoader loading={loading} />
             <div className="card">
                 <div className="card-header">
-                    <h4 className="card-title">Late season</h4>
+                    <h4 className="card-title">Dates</h4>
                     <Button type="primary" onClick={() => editModal()}>
                         Add
                     </Button>
@@ -220,7 +220,7 @@ const LastSesason = (props) => {
             </div>
             <Modal
                 open={visible}
-                title={Id ? "Edit lateseason" : "Add lateseason"}
+                title={Id ? "Edit" : "Add"}
                 okText="Submit"
                 cancelText="Cancel"
                 onCancel={() => {
@@ -258,7 +258,7 @@ const LastSesason = (props) => {
                             </Select>
 
                         </Form.Item>
-                        <label className="label-name">Title</label>
+                        <label className="label-name">Dates</label>
                         <Form.Item
                             name="name"
                         >

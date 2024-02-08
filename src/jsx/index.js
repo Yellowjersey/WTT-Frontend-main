@@ -60,7 +60,7 @@ const Markup = () => {
     { url: "how-it-work", component: Work },
     { url: "contact-us", component: Contactus },
     { url: "hunter-tip", component: HunterTip },
-    { url: "late-season", component: LastSesason },
+    { url: "dates", component: LastSesason },
     { url: "techniques-guide", component: Techniques },
     { url: "user-subscriptions", component: UserSubscriptions },
     { url: "post-report", component: Postreport },
