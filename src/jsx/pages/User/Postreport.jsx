@@ -68,7 +68,7 @@ const Postreport = () => {
       else {
         data.type = 2
       }
-      if (result.isConfirmed) {
+      if (result) {
         dispatch(UserService.changereportPostStatus(data))
           .then((res) => {
             transaction();
@@ -142,9 +142,9 @@ const Postreport = () => {
           {data.status === 0 ? (
             <Badge bg="badge-lg" className="badge-warning light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Pending</Badge>
           ) : data.status === 1 ? (
-            <Badge bg="badge-lg" className="badge-primary light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Accept</Badge>
+            <Badge bg="badge-lg" className="badge-primary light badge-lg">Accept</Badge>
           ) : (
-            <Badge bg="badge-lg" className="badge-danger light badge-lg" style={{ cursor: 'pointer' }} onClick={() => approvePendingUser(data)}>Reject</Badge>
+            <Badge bg="badge-lg" className="badge-danger light badge-lg">Reject</Badge>
           )}
         </div>
       ),
