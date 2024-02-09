@@ -51,6 +51,43 @@ const SeasonComponent = ({ setAlldata, setLoading, form, i, row, alldata, rifled
             getlateSeasons(row?.season);
         }
     }, [row])
+    const validateSeasonData = () => {
+        if (!rifledata || rifledata.length === 0) {
+            return {
+                validateStatus: "error",
+                help: "No data available for season",
+            };
+        }
+
+        if (!row?.late_season || row?.late_season.length === 0) {
+            return {
+                validateStatus: "error",
+                help: "Please select late season",
+            };
+        }
+
+        return {};
+    };
+
+    const validateSeason = () => {
+        if (!rifledata || rifledata.length === 0) {
+            return {
+                validateStatus: "error",
+                help: "No data available for season",
+            };
+        }
+
+        if (!row?.season) {
+            return {
+                validateStatus: "error",
+                help: "Please select season",
+            };
+        }
+
+        return {};
+    };
+
+
 
     return (
         <div className="d-flex gap-3">
@@ -58,6 +95,7 @@ const SeasonComponent = ({ setAlldata, setLoading, form, i, row, alldata, rifled
                 <label className="label-name">Season</label>
                 <Form.Item
                     name={`season_${i}`}
+                    {...validateSeason()}
                 // rules={[{ required: true, message: "Please Select Season" }]}
                 >
                     <Space
@@ -86,6 +124,7 @@ const SeasonComponent = ({ setAlldata, setLoading, form, i, row, alldata, rifled
                 <label className="label-name">Late Season</label>
                 <Form.Item
                     name={`late_season_${i}`}
+                    {...validateSeasonData()}
                 // rules={[{ required: true, message: "Please Select Late Season" }]}
                 >
                     <Space
@@ -260,20 +299,38 @@ const State = () => {
     const handleSearch = (e) => {
         setSerach(e.target.value)
     }
-    const handleSubmit = (values) => {
-        values.id = Id;
-        values.season = alldata;
-        dispatch(SettingService.updateStateDetails(values))
-            .then((res) => {
-                getStates();
-                ToastMe(res?.data?.message, 'success')
-                setVisible(false)
-                setId('')
+    const handleSubmit = () => {
+        form
+            .validateFields()
+            .then((values) => {
+                // Check if there are any validation errors
+                const errors = form.getFieldsError();
+                const hasErrors = Object.keys(errors).some(field => errors[field]);
+                console.log(errors, hasErrors);
+                const missingData = alldata.some(row => !row?.season || !row?.late_season || row?.late_season.length === 0);
+                if (missingData) {
+                    return;
+                }
+
+                // Proceed with form submission
+                values.id = Id;
+                values.season = alldata;
+                dispatch(SettingService.updateStateDetails(values))
+                    .then((res) => {
+                        getStates();
+                        ToastMe(res?.data?.message, 'success');
+                        setVisible(false);
+                        setId('');
+                    })
+                    .catch((errors) => {
+                        console.log(errors);
+                    });
             })
             .catch((errors) => {
-                console.log(errors)
-            })
+                console.log(errors);
+            });
     };
+
 
     useEffect(() => {
         document.title = 'Admin | States '
