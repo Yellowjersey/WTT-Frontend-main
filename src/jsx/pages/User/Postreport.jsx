@@ -17,7 +17,7 @@ const Postreport = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
 
   useEffect(() => {
-    document.title = 'Admin | Post Reports '
+    document.title = 'Admin | Post Report'
   }, [])
 
 
@@ -134,7 +134,7 @@ const Postreport = () => {
       key: "report_name",
     },
     {
-      title: "status",
+      title: "Status",
       dataIndex: "status",
       key: "status",
       render: (text, data) => (

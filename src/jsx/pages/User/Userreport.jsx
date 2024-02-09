@@ -17,7 +17,7 @@ const Userreport = () => {
   const [selectedFilter, setSelectedFilter] = useState(null);
 
   useEffect(() => {
-    document.title = 'Admin | User Reports '
+    document.title = 'Admin | User Report'
   }, [])
 
   const transaction = (value) => {
