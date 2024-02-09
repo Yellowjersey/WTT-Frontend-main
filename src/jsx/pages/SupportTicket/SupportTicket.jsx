@@ -18,7 +18,7 @@ const SupportTicket = (props) => {
     const locationdata = locations.state
 
     useEffect(() => {
-        document.title = 'Admin | Support Tickets'
+        document.title = 'Admin | Support List'
     }, [])
 
     const handleFilterChange = (filterOption) => {
@@ -109,11 +109,11 @@ const SupportTicket = (props) => {
             className: 'custom_width'
         },
         {
-            title: 'status',
+            title: 'Status',
             dataIndex: 'status',
             key: 'status',
             render: (text, data) => (
-                <div style={{ cursor: 'pointer' }}>
+                <div>
                     {data.status === 1 ? <Badge bg=" badge-lg " className='badge-warning badge-lg' >Open</Badge>
                         : <Badge bg=" badge-lg " className='badge-secondary badge-lg'>Close</Badge>}
                 </div>
@@ -124,17 +124,13 @@ const SupportTicket = (props) => {
             key: 'actions',
             render: (text) => (
                 <>
-                    <Dropdown>
-                        <Dropdown.Toggle
-                            variant="danger"
-                            className="light sharp i-false badge_label"
-                        >
-                            {svg1}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick={() => viewTicket(text)}>View</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <div>
+                        <span
+                            style={{ margin: "0 10px", fontSize: "16px", color: "#1677ff", cursor: "pointer" }}
+                            onClick={() => viewTicket(text)}>
+                            <i className="fa fa-eye" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </>
             )
         },

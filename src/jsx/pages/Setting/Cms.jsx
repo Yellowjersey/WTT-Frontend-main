@@ -19,7 +19,7 @@ const Cms = () => {
     const [refund, setRefund] = useState('')
 
     useEffect(() => {
-        document.title = 'Admin | Cms '
+        document.title = 'Admin | CMS '
     }, [])
 
     const getCms = () => {

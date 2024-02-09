@@ -21,23 +21,31 @@ const ViewTicket = () => {
   const [imageData, setimageData] = useState();
   const [messageList, setMessageList] = useState([]);
   const [data, setData] = useState();
+  const [btn, setBtn] = useState(false);
+  const [input, setInput] = useState(false);
   const history = useHistory();
-
   // Add Ticket 
+
+  useEffect(() => {
+    if (imageData) {
+      setInput(true)
+    } else {
+      setInput(false)
+    }
+  },[imageData])
 
   const onSubmit = async (values) => {
 
     values.support_ticket_id = state.state
     values.user_id = data.user_id
-    // console.log(values)
-    if (values.message == undefined) {
+
+    if (values.message == undefined && imageData !== undefined) {
+      setBtn(true)
       const image = new FormData();
       image.append('image', imageData);
       values.type = 2; //msg type 1=text 2=media
-
       dispatch(supportService.uploadCommonImage(image))
         .then((res) => {
-
           values.type = 2;
           values.message = res.data.file_name;
 
@@ -46,39 +54,43 @@ const ViewTicket = () => {
               form.resetFields();
               getMessageList();
               getTicket();
+              setInput(false)
               scrollToBottom();
               setUserImg('')
+              setimageData(undefined);
+              setBtn(false)
             })
-
             .catch((errors) => {
               console.log({ errors })
             })
         })
-
         .catch((errors, statusCode) => {
           setUserImg('')
           ToastMe(errors.errorData, "error");
         });
-
     }
-
     else {
       values.type = 1; //msg type 1=text 2=media
+      if (values?.message !== undefined && values?.message !== ' ') {
+        setBtn(true)
+        dispatch(supportService.ticketReply(values))
+          .then((res) => {
+            form.resetFields();
+            getMessageList();
+            getTicket();
+            scrollToBottom();
+            setBtn(false)
+          })
+          .catch((errors) => {
+            console.log({ errors })
+          })
+      }
     }
-    dispatch(supportService.ticketReply(values))
-      .then((res) => {
-        form.resetFields();
-        getMessageList();
-        getTicket();
-        scrollToBottom();
-      })
-      .catch((errors) => {
-        console.log({ errors })
-      })
+
   }
 
   useEffect(() => {
-    document.title = 'Admin | Ticket Information'
+    document.title = 'Admin | View Ticket'
   }, [])
 
   //Get Message List continue
@@ -170,7 +182,7 @@ const ViewTicket = () => {
       <Col xl="12">
         <Card className='table_custom'>
           <Card.Header>
-            <Card.Title className="text-dark">Ticket Information</Card.Title>
+            <Card.Title className="text-dark">View Ticket</Card.Title>
             <div className="d-flex align-items-center gap-3">
               <Button type="primary" onClick={() => Back()}>Back</Button>
               {data?.status == 1 ? <Button onClick={() => statuschange()}>Complete Ticket</Button> : ''}
@@ -312,7 +324,7 @@ const ViewTicket = () => {
               <div className="form_warpper">
                 <Form.Item name="message"
                 >
-                  <Input type="text" placeholder='Type a message....' />
+                  <Input type="text" placeholder='Type a message....' disabled={input} />
                 </Form.Item>
                 <div className="image_selection">
                   <Form.Item name="image">
@@ -343,6 +355,7 @@ const ViewTicket = () => {
                 <Button
                   key="submit"
                   type="primary" htmlType="submit"
+                  disabled={btn}
                   onClick={() => {
                     form.validateFields()
                       .then((values) => {
