@@ -197,8 +197,8 @@ const LastSesason = (props) => {
 
     const handleDateChange = (dates, dateStrings) => {
         if (!moment(dateStrings[0]).isSame(startDate) || !moment(dateStrings[1]).isSame(endDate)) {
-            setStartDate(moment(dateStrings[0], "YYYY-MM-DD"));
-            setEndDate(moment(dateStrings[1], "YYYY-MM-DD"));
+            setStartDate(moment(dateStrings[0], "MM/DD/YYYY"));
+            setEndDate(moment(dateStrings[1], "MM/DD/YYYY"));
         }
     };
     const { Option } = Select;
@@ -263,7 +263,7 @@ const LastSesason = (props) => {
                             name="name"
                         >
                             <DatePicker.RangePicker
-                                format="YYYY-MM-DD"
+                                format="MM/DD/YYYY"
                                 onChange={handleDateChange}
                             />
                         </Form.Item>
