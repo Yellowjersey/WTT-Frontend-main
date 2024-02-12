@@ -237,7 +237,7 @@ const SideBar = (props) => {
               <span className="nav-text">Notifications</span>
             </Link>
             <ul className={`${isMenuActiv === 9 ? 'mm-show' : ""} mm-collapse`}>
-              <li><Link className={`${path === "general-notification" || isMenuActiv === 9 ? "mm-active" : ""}`} to="/general-notification">General Notifications</Link></li>
+              <li><Link className={`${path === "general-notification" || isMenuActiv === 9 ? "mm-active" : ""}`} to="/general-notification">General Notification</Link></li>
             </ul>
           </li>
           <li className={`${deshBoard.includes(path) || isMenuActiv === 10 ? "mm-active" : ""}`} onClick={() => sidebarbtn(10)}>

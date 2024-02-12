@@ -46,7 +46,7 @@ const User = (props) => {
   };
 
   useEffect(() => {
-    document.title = 'Admin | Users List'
+    document.title = 'Admin | User List'
   }, [])
 
   const approvePendingUser = (text) => {
