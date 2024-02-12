@@ -59,7 +59,7 @@ const Home = () => {
 	}
 
 	const UserRedirectTicket = () => {
-		history.push('/support-list', 1)
+		history.push('/support-tickets', 1)
 	}
 	const Redirecttrascation = () => {
 		history.push('/transaction')

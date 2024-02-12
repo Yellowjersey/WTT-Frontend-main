@@ -19,7 +19,7 @@ const Notification = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        document.title = 'Admin | General Notifications '
+        document.title = 'Admin | General Notification '
     }, [])
 
     const editModal = (text) => {

@@ -147,7 +147,7 @@ const ViewTicket = () => {
   }
 
   const Back = async () => {
-    history.push('/support-list');
+    history.push('/support-tickets');
   }
 
   const statuschange = async () => {
@@ -164,7 +164,7 @@ const ViewTicket = () => {
         dispatch(supportService.changeStatus(state.state))
           .then((res) => {
             ToastMe("Ticket Complete Successfully", 'success')
-            history.push('/support-list');
+            history.push('/support-tickets');
           })
           .catch((errors) => {
             console.log({ errors })

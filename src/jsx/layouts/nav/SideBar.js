@@ -158,7 +158,7 @@ const SideBar = (props) => {
             <Link to="/user-list">
               {/* <Link className="has-arrow ai-icon" to="#" > */}
               <i className="fa fa-user icon_class"></i>
-              <span className="nav-text">Users List</span>
+              <span className="nav-text">User List</span>
             </Link>
 
           </li>
@@ -186,8 +186,8 @@ const SideBar = (props) => {
               <span className="nav-text">Rifle Seasons</span>
             </Link>
           </li> */}
-          <li className={`${path.pathname === "/support-list" || path.pathname === "/support-tickets" || isMenuActiv === 5 ? "mm-active" : ""}`} onClick={() => sidebarbtn(5)}>
-            <Link to="/support-list" >
+          <li className={`${path.pathname === "/support-tickets" || path.pathname === "/support-tickets" || isMenuActiv === 5 ? "mm-active" : ""}`} onClick={() => sidebarbtn(5)}>
+            <Link to="/support-tickets" >
               <i className="fa fa-envelope icon_class"></i>
               <span className="nav-text">Support Tickets</span>
             </Link>

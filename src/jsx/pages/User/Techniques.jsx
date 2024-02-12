@@ -23,7 +23,7 @@ const Techniques = (props) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    document.title = 'Admin | Techniques Guides '
+    document.title = 'Admin | Techniques Guide '
   }, [])
 
   const getTechniques = (value) => {

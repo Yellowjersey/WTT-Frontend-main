@@ -177,7 +177,7 @@ const Tutorial = (props) => {
             <PageLoader loading={loading} />
             <div className="card">
                 <div className="card-header">
-                    <h4 className="card-title">Tutorial</h4>
+                    <h4 className="card-title">Tutorials</h4>
                     <Button type="primary" onClick={() => editModal()}>
                         Add
                     </Button>

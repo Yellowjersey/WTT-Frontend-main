@@ -20,7 +20,7 @@ const Work = () => {
   var [images, setimages] = useState();
 
   useEffect(() => {
-    document.title = 'Admin | Works '
+    document.title = 'Admin | How it Work '
   }, [])
 
   const gerWork = (value) => {

@@ -17,7 +17,7 @@ const Transaction = () => {
   const [statusFilterName, setStatusFilterName] = useState('Filter By Status');
 
   useEffect(() => {
-    document.title = 'Admin | Transactions '
+    document.title = 'Admin | Transaction '
   }, [])
 
   const UserSubscription = () => {

@@ -18,7 +18,7 @@ const SupportTicket = (props) => {
     const locationdata = locations.state
 
     useEffect(() => {
-        document.title = 'Admin | Support List'
+        document.title = 'Admin | Support Tickets'
     }, [])
 
     const handleFilterChange = (filterOption) => {
@@ -156,7 +156,7 @@ const SupportTicket = (props) => {
             <PageLoader loading={loading} />
             <div className="card">
                 <div className="card-header">
-                    <h4 className="card-title">Support List</h4>
+                    <h4 className="card-title">Support Tickets</h4>
                     <DropdownButton title={statusFilterName === "All" ? "Filter By Status" : statusFilterName} className="custom_dd" >
                         <Dropdown.Item onClick={() => handleFilterChange()} active>All</Dropdown.Item>
                         <Dropdown.Item onClick={() => handleFilterChange(1)} >Open</Dropdown.Item>

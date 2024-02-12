@@ -84,7 +84,7 @@ const Markup = () => {
     { url: "change-password", component: ChangePassword },
 
     //support-ticket
-    { url: "support-list", component: SupportTicket },
+    { url: "support-tickets", component: SupportTicket },
     { url: "view-ticket", component: ViewTicket },
 
     //About us

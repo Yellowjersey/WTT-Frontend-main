@@ -154,7 +154,7 @@ const HunterTip = (props) => {
   };
 
   useEffect(() => {
-    document.title = 'Admin | Hunter Tips'
+    document.title = 'Admin | Hunter Tip'
   }, [])
 
   const previewUserImageOnChange = (ev) => {
