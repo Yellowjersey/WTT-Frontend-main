@@ -113,8 +113,7 @@ const SideBar = (props) => {
         <Dropdown className="dropdown header-profile2">
           <Dropdown.Toggle variant="" as="a" className="nav-link i-false c-pointer">
             <div className="header-info2 d-flex align-items-center border">
-              <img src={adminData?.profileImage != null ? profileImage : dummy} width={20} alt="" loading="lazy" />
-              {/* <img src={profile} width={20} alt="" /> */}
+              <img src={adminData?.profileImage != null ? profileImage : dummy} width={20} alt="" loading="lazy" className="object-fit-cover" />
               <div className="d-flex align-items-center sidebar-info">
                 <div>
                   <span className="font-w700 d-block mb-2">{adminData?.displayName}</span>
@@ -151,27 +150,27 @@ const SideBar = (props) => {
         <MM className="metismenu" id="menu">
           <li className={`${deshBoard.includes(path) || path.pathname === '/' || isMenuActiv === 1 ? "mm-active" : ""}`} onClick={() => sidebarbtn(1)}>
             <Link to="/" >
-              <i className="fas fa-home"></i>
+              <i className="fas fa-home icon_class"></i>
               <span className="nav-text">Dashboard</span>
             </Link>
           </li>
           <li className={`${user.includes(path) || path.pathname === '/user-list' || isMenuActiv === 2 ? "mm-active" : ""}`} onClick={() => sidebarbtn(2)}>
             <Link to="/user-list">
               {/* <Link className="has-arrow ai-icon" to="#" > */}
-              <i className="fa fa-user"></i>
+              <i className="fa fa-user icon_class"></i>
               <span className="nav-text">Users List</span>
             </Link>
 
           </li>
           <li className={`${path.pathname === "/tutorials" || path.pathname === "/tutorials" || isMenuActiv === 3 ? "mm-active" : ""}`} onClick={() => sidebarbtn(3)}>
             <Link to="/tutorials" >
-              <i className="fa fa-list"></i>
+              <i className="fa fa-list icon_class"></i>
               <span className="nav-text">Tutorials</span>
             </Link>
           </li>
           <li className={`${path === "hunter-tip" || path.pathname === "/hunter-tip" || isMenuActiv === 4 ? "mm-active" : ""}`} onClick={() => sidebarbtn(4)}>
             <Link to="/hunter-tip" >
-              <i className="fa fa-lightbulb"></i>
+              <i className="fa fa-lightbulb icon_class"></i>
               <span className="nav-text">Hunter Tip</span>
             </Link>
           </li>
@@ -189,41 +188,41 @@ const SideBar = (props) => {
           </li> */}
           <li className={`${path.pathname === "/support-list" || path.pathname === "/support-tickets" || isMenuActiv === 5 ? "mm-active" : ""}`} onClick={() => sidebarbtn(5)}>
             <Link to="/support-list" >
-              <i className="fa fa-envelope"></i>
+              <i className="fa fa-envelope icon_class"></i>
               <span className="nav-text">Support Tickets</span>
             </Link>
           </li>
           {/* <li className={`${path === "late-season" || path.pathname === "/late-season" ? "mm-active" : ""}`}>
             <Link to="/late-season" >
-              <i className="fa fa-lightbulb"></i>
+            <i className="fa fa-lightbulb"></i>
               <span className="nav-text">Late season</span>
             </Link>
           </li> */}
           <li className={`${deshBoard.includes(path) || isMenuActiv === 6 ? "mm-active" : ""}`} onClick={() => sidebarbtn(6)}>
             <Link className="has-arrow ai-icon" to="#" aria-expanded={isMenuActiv === 6 ? "true" : "false"} >
-              <i className="fa fa-star" aria-hidden="true"></i>
-              <span className="nav-text">Manage state</span>
+              <i className="fa fa-star icon_class" aria-hidden="true"></i>
+              <span className="nav-text">Manage State Info</span>
             </Link>
             <ul className={`${isMenuActiv === 6 ? 'mm-show' : ""} mm-collapse`}>
-              <li><Link className={`${path === "user-subscriptions" ? "mm-active" : ""}`} to="/states">States</Link></li>
+              <li><Link className={`${path === "states" ? "mm-active" : ""}`} to="/states">States</Link></li>
               <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/seasons">Seasons</Link></li>
               <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/dates">Dates</Link></li>
             </ul>
           </li>
           <li className={`${deshBoard.includes(path) || isMenuActiv === 7 ? "mm-active" : ""}`} onClick={() => sidebarbtn(7)}>
             <Link className="has-arrow ai-icon" to="#" aria-expanded={isMenuActiv === 7 ? "true" : "false"}>
-              <i className="fa fa-user-plus" aria-expanded="true"></i>
+              <i className="fa fa-user-plus icon_class" aria-expanded="true"></i>
               <span className="nav-text">Subscriptions</span>
             </Link>
             <ul className={`${isMenuActiv === 7 ? 'mm-show' : ""} mm-collapse`}>
-              <li><Link className={`${path === "user-subscriptions" ? "mm-active" : ""}`} to="/user-subscriptions">Subscribed Users</Link></li>
+              <li><Link className={`${path === "subscribed-users" ? "mm-active" : ""}`} to="/subscribed-users">Subscribed Users</Link></li>
               <li><Link className={`${path === "transaction" ? "mm-active" : ""}`} to="/transaction">Transaction</Link></li>
 
             </ul>
           </li>
           <li className={`${deshBoard.includes(path) || isMenuActiv === 8 ? "mm-active" : ""}`} onClick={() => sidebarbtn(8)}>
             <Link className="has-arrow ai-icon" to="#" aria-expanded={isMenuActiv === 8 ? "true" : "false"}>
-              <i className="fa fa-flag" aria-expanded="true" ></i>
+              <i className="fa fa-flag icon_class" aria-expanded="true" ></i>
               <span className="nav-text">Report</span>
             </Link>
             <ul className={`${isMenuActiv === 8 ? 'mm-show' : ""} mm-collapse`}>
@@ -234,7 +233,7 @@ const SideBar = (props) => {
           </li>
           <li onClick={() => sidebarbtn(9)} className={`${deshBoard.includes(path) || isMenuActiv === 9 ? "mm-active" : ""}`}>
             <Link className="has-arrow ai-icon" to="#" aria-expanded={isMenuActiv === 9 ? "true" : "false"}>
-              <i className="fa fa-bell" aria-expanded="true"></i>
+              <i className="fa fa-bell icon_class" aria-expanded="true"></i>
               <span className="nav-text">Notifications</span>
             </Link>
             <ul className={`${isMenuActiv === 9 ? 'mm-show' : ""} mm-collapse`}>
@@ -243,7 +242,7 @@ const SideBar = (props) => {
           </li>
           <li className={`${deshBoard.includes(path) || isMenuActiv === 10 ? "mm-active" : ""}`} onClick={() => sidebarbtn(10)}>
             <Link className="has-arrow ai-icon" to="#" aria-expanded={isMenuActiv === 10 ? "true" : "false"}>
-              <i className="fa fa-cog" aria-expanded="true"></i>
+              <i className="fa fa-cog icon_class" aria-expanded="true"></i>
               <span className="nav-text">Settings</span>
             </Link>
             <ul className={`${isMenuActiv === 10 ? 'mm-show' : ""} mm-collapse`}>

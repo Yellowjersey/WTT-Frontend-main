@@ -84,9 +84,10 @@ const HunterTip = (props) => {
       dataIndex: 'image',
       key: 'image',
       render: (data) => (
-        <img src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data}
-          style={{ borderRadius: "50%", height: "80px", width: "80px" }}
-          alt="" loading="lazy" />
+        <div style={{ borderRadius: "50%", height: "80px", width: "80px" }}>
+          <img src={process.env.REACT_APP_PROFILE_URL + 'admin/' + data}
+            alt="" loading="lazy" className='w-100 h-100 rounded-circle object-fit-cover' />
+        </div>
       )
     },
     {
@@ -134,6 +135,7 @@ const HunterTip = (props) => {
     },
   ];
   const editModal = (text) => {
+    setLoadingbutton(false);
     setVisible(true);
     setId("")
     setUserImg("")
@@ -146,6 +148,7 @@ const HunterTip = (props) => {
         // imagePath: text.image
       });
     } else {
+      setLoadingbutton(false);
       form.resetFields();
     }
   };
@@ -200,6 +203,7 @@ const HunterTip = (props) => {
       })
       .catch((errors) => {
         console.log({ errors });
+        setLoadingbutton(false);
       });
   };
   return (
@@ -209,7 +213,7 @@ const HunterTip = (props) => {
         <div className="card-header">
           <h4 className="card-title">Hunter Tip List</h4>
           <Button type="primary" onClick={() => editModal()}>
-            Add HunterTip
+            Add
           </Button>
         </div>
         <div className="card-body">
@@ -229,6 +233,7 @@ const HunterTip = (props) => {
         cancelText="Cancel"
         onCancel={() => {
           setVisible(false);
+          setLoading(false);
         }}
         footer={
           [
@@ -268,6 +273,7 @@ const HunterTip = (props) => {
             name="title"
             rules={[
               { required: true, message: "Please Enter Title" },
+              { pattern: new RegExp(".*\\S.*[a-zA-z0-9 ]"), message: 'Only space is not allowed' }
             ]}
           >
             <Input
@@ -281,6 +287,7 @@ const HunterTip = (props) => {
             name="description"
             rules={[
               { required: true, message: "Please Enter Description" },
+              { pattern: new RegExp(".*\\S.*[a-zA-z0-9 ]"), message: 'Only space is not allowed' }
             ]}
           >
             <TextArea

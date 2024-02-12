@@ -150,8 +150,8 @@ const RifleSeason = (props) => {
                 ? SettingService.addRifle(values) : SettingService.updateRifle(values);
         dispatch(apicall)
             .then((res) => {
+                ToastMe(res?.data, 'success')
                 getRifleSeasons();
-                ToastMe(res?.data?.message, 'success')
                 setVisible(false)
                 setId('')
                 form.resetFields()
@@ -237,6 +237,7 @@ const RifleSeason = (props) => {
                             name="name"
                             rules={[
                                 { required: true, message: "Please Enter season Name" },
+                                { max: 100, message: "Season Name should be maximum of 100 characters." },
                             ]}
                         >
                             <Input placeholder="Enter Season Name" />

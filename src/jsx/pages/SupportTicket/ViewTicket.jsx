@@ -32,7 +32,7 @@ const ViewTicket = () => {
     } else {
       setInput(false)
     }
-  },[imageData])
+  }, [imageData])
 
   const onSubmit = async (values) => {
 
@@ -175,7 +175,6 @@ const ViewTicket = () => {
   }
   const imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
   const documentExtensions = ['pdf', 'doc', 'docx'];
-
   return (
 
     <Row>
@@ -323,8 +322,12 @@ const ViewTicket = () => {
             >
               <div className="form_warpper">
                 <Form.Item name="message"
+                  rules={[
+                    { required: !imageData, message: "Please Enter Message" },
+                    { pattern: new RegExp(".*\\S.*[a-zA-z0-9 ]"), message: 'Only space is not allowed' }
+                  ]}
                 >
-                  <Input type="text" placeholder='Type a message....' disabled={input} />
+                  <Input type="text" placeholder='Type a message....' value={imageData ? imageData.name : ""} disabled={input} />
                 </Form.Item>
                 <div className="image_selection">
                   <Form.Item name="image">

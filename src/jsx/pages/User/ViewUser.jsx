@@ -80,7 +80,9 @@ const ViewUser = () => {
                   sharedPost.length !== 0 ? sharedPost.map((post, key) => {
                     return (
                       <div key={key} className="image_wrapper">
-                        <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" loading="lazy" />
+                        <a href={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} target="_blank" rel="noopener noreferrer">
+                          <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" loading="lazy" />
+                        </a>
                       </div>
                     )
                   }) : 'No Post'
@@ -91,7 +93,7 @@ const ViewUser = () => {
           </Card>
         </Col>
       </Row>
-      <Row>
+      {/* <Row>
         <Col xl="12">
           <Card>
             <Card.Header className=" border-0 pb-0">
@@ -103,7 +105,9 @@ const ViewUser = () => {
                   savedPost.length !== 0 ? savedPost.map((post, key) => {
                     return (
                       <div key={key} className="image_wrapper">
-                        <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" loading="lazy" />
+                        <a href={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} target="_blank" rel="noopener noreferrer">
+                          <img src={process.env.REACT_APP_PROFILE_URL + 'posts/' + post.image} width={150} height={150} class="imaga_fluid" alt="" loading="lazy" />
+                        </a>
                       </div>
                     )
                   }) : 'No Post'
@@ -112,7 +116,7 @@ const ViewUser = () => {
             </Card.Body>
           </Card>
         </Col>
-      </Row>
+      </Row> */}
     </>
   );
 };

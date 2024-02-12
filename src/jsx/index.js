@@ -62,7 +62,7 @@ const Markup = () => {
     { url: "hunter-tip", component: HunterTip },
     { url: "dates", component: LastSesason },
     { url: "techniques-guide", component: Techniques },
-    { url: "user-subscriptions", component: UserSubscriptions },
+    { url: "subscribed-users", component: UserSubscriptions },
     { url: "post-report", component: Postreport },
     { url: "user-report", component: Userreport },
     { url: "transaction", component: Transaction },

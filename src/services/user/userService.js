@@ -98,10 +98,10 @@ export function getusersubscription(value) {
     )
 }
 
-export function gettransaction(value) {
+export function gettransaction(search) {
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('get', BaseUrl + '/admin/usersubscriptionlist')
+            Http.callApi('get', BaseUrl + `/admin/usersubscriptionlist?search=${search}`)
                 .then(function (res) {
                     return resolve(res?.data);
                 })
@@ -338,10 +338,10 @@ export function gettechniques(value) {
     )
 }
 export function deleteTechniqueGuide(data) {
-    data.env="test"
+    data.env = "test"
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('delete', BaseUrl + '/admin/deleteTechniqueGuide',data)
+            Http.callApi('delete', BaseUrl + '/admin/deleteTechniqueGuide', data)
                 .then(function (res) {
                     // dispatch(action.setNotificationData(res));
                     return resolve(res);
@@ -835,7 +835,7 @@ export function createhntertip(data) {
                 .catch(function (error) {
                     const data = {
                         errorData: error.data.message,
-                        // statusCode: error.response.status,
+                        statusCode: error.response.status,
                     };
                     return reject(data);
                 })
@@ -874,7 +874,7 @@ export function Edithntertip(data) {
                 .catch(function (error) {
                     const data = {
                         errorData: error.response.data.message,
-                        // statusCode: error.response.status,
+                        statusCode: error.response.status,
                     };
                     return reject(data);
                 })
@@ -894,7 +894,7 @@ export function Edittechniques(data) {
                 .catch(function (error) {
                     const data = {
                         errorData: error.response.data.message,
-                        // statusCode: error.response.status,
+                        statusCode: error.response.status,
                     };
                     return reject(data);
                 })
@@ -1363,7 +1363,7 @@ export function sendNotification(data) {
     data.env = 'test'
     return dispatch => (
         new Promise((resolve, reject) => {
-            Http.callApi('post', BaseUrl + '/admin/sendAlluserNotification/' , data)
+            Http.callApi('post', BaseUrl + '/admin/sendAlluserNotification/', data)
                 .then(function (res) {
                     return resolve(res);
                 })

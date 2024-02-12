@@ -223,3 +223,8 @@ body[data-theme-version="dark"] .table-responsive .table_custom .ant-table .ant-
     right: 15px;
     cursor: pointer;
   } 
+  .icon_class{
+    height: 20px !important;
+    width: 20px !important;
+    margin-right: 20px !important;
+  }

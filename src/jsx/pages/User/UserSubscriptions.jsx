@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import UserService from "../../../services/user";
 import { useDispatch } from "react-redux";
-import { Empty, Table } from "antd";
+import { Empty, Input, Table } from "antd";
 import "react-phone-input-2/lib/style.css";
 import PageLoader from "../Common/PageLoader";
 import moment from "moment";
+import { SearchOutlined } from "@ant-design/icons";
 
 
 
@@ -12,13 +13,14 @@ const UserSubscriptions = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSerach] = useState('');
 
   useEffect(() => {
-    document.title = 'Admin | User Subscriptions '
+    document.title = 'Admin | Subscribed Users '
   }, [])
 
-  const transaction = (value) => {
-    dispatch(UserService.gettransaction(value))
+  const transaction = (serach) => {
+    dispatch(UserService.gettransaction(search))
       .then((res) => {
         var newArr = [];
         for (var i = 0; i < res.length; i++) {
@@ -42,7 +44,7 @@ const UserSubscriptions = () => {
 
   useEffect(() => {
     transaction();
-  }, []);
+  }, [search]);
 
 
   let firstInitial;
@@ -66,7 +68,7 @@ const UserSubscriptions = () => {
       }
     },
     {
-      title: "Last name",
+      title: "Last Name",
       dataIndex: "lastName",
       key: "lastName",
       render: (text) => {
@@ -101,13 +103,19 @@ const UserSubscriptions = () => {
     }
   ];
 
+  const handleSearch = (e) => {
+    setSerach(e.target.value)
+  }
+
   return (
     <>
       <PageLoader loading={loading} />
       <div className="card">
         <div className="card-header">
-          <h4 className="card-title">User Subscriptions</h4>
-
+          <h4 className="card-title">Subscribed Users</h4>
+          <div className="search_feild">
+            <Input placeholder='Search....' onChange={(e) => handleSearch(e)} prefix={<SearchOutlined className="site-form-item-icon" />} />
+          </div>
         </div>
         <div className="card-body">
           {data && data.length > 0 ? (
