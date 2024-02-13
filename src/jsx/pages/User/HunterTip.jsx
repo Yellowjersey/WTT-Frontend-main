@@ -107,7 +107,7 @@ const HunterTip = (props) => {
       )
     },
     {
-      title: 'status',
+      title: 'Status',
       dataIndex: 'status',
       key: 'status',
       render: (element, data) => (
