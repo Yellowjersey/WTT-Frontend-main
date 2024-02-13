@@ -30610,3 +30610,6 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   height: 100%;
   object-position: center;
 }
+/* .custom-calender-modal.ant-modal{
+  padding-block: 100px !important;
+} */

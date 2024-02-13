@@ -219,9 +219,11 @@ const LastSesason = (props) => {
                 </div>
             </div>
             <Modal
+                style={{ padding: '60px 0px' }}
                 open={visible}
                 title={Id ? "Edit" : "Add"}
                 okText="Submit"
+                centered
                 cancelText="Cancel"
                 onCancel={() => {
                     setVisible(false);
