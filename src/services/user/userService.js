@@ -1359,6 +1359,24 @@ export function getSavedPostList(id) {
         })
     )
 }
+export function getUsercontactus() {
+    // data.env = 'test'
+    return dispatch => (
+        new Promise((resolve, reject) => {
+            Http.callApi('get', BaseUrl + '/admin/getUserContactUs')
+                .then(function (res) {
+                    return resolve(res);
+                })
+                .catch(function (error) {
+                    const data = {
+                        errorData: error.message,
+                        // statusCode: error.response.status,
+                    };
+                    return reject(data);
+                })
+        })
+    )
+}
 export function sendNotification(data) {
     data.env = 'test'
     return dispatch => (

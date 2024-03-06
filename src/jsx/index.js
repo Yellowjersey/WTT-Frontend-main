@@ -46,6 +46,7 @@ import RifleSeasons from "./pages/Setting/RifleSeason";
 import Postreport from "./pages/User/Postreport";
 import Userreport from "./pages/User/Userreport";
 import LastSesason from "./pages/Setting/LastSesason";
+import UserContactUs from "./pages/Setting/UserContactUs";
 
 const Markup = () => {
   const { menuToggle } = useContext(ThemeContext);
@@ -68,6 +69,7 @@ const Markup = () => {
     { url: "transaction", component: Transaction },
     { url: "states", component: State },
     { url: "seasons", component: RifleSeasons },
+    { url: "user-contact-us", component: UserContactUs },
 
 
 
