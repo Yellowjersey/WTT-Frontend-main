@@ -29,10 +29,12 @@ const Postreport = () => {
           newArr.push({
             key: i,
             post_id: res[i]?.post_id,
+            post_user_name: res[i]?.post_user_name,
             user_data: res[i]?.user_name,
             report_user: res[i]?.reports,
             post_image: res[i]?.post_image,
             report_name: res[i]?.report_name,
+            reported_users: res[i]?.reported_users,
             status: res[i]?.status,
           });
         }
@@ -96,21 +98,17 @@ const Postreport = () => {
     },
 
     {
-      title: "User Name",
-      dataIndex: "user_data",
-      key: "user_data",
-      render: (text) => {
-        firstInitial = text ? text[0].toUpperCase() : '';;
-        return text;
-      }
+      title: "Post's User Name",
+      dataIndex: "post_user_name",
+      key: "post_user_name",
     },
     {
-      title: "Report user name",
-      dataIndex: "report_user",
-      key: "report_user",
+      title: "Who report the post",
+      dataIndex: "reported_users",
+      key: "reported_users",
       render: (text) => (
         <div>
-          {text.map((name) => name?.user_name).join(',')}
+          {text.map((name) => name).join(',')}
         </div>
       )
     },
