@@ -108,7 +108,7 @@ const Postreport = () => {
       key: "reported_users",
       render: (text) => (
         <div>
-          {text.map((name) => name).join(',')}
+          {text?.map((name) => name).join(',')}
         </div>
       )
     },
