@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "./slick.css";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+@import './font.css';
+
+* {
+  @apply p-0 m-0 box-border scroll-smooth
+}
+
+body {
+  @apply overflow-x-hidden !font-Grotesk tracking-[1px]
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .container {
+    @apply max-w-full sm:max-w-[540px] md:max-w-[740px] lg:max-w-[980px] xl:max-w-[1180px] xxl:max-w-[1440px]
+  }
+}
+
+@layer base {
+  h1 {
+    @apply 3xl:text-[64px] lg:text-[48px] sm:text-[38px] text-[28px]
+  } 
+
+  h2 {
+    @apply lg:text-[48px] sm:text-[28px] text-[22px]
+  }
+
+  h3 {
+    @apply text-[32px]
+  }
+
+  h4 {
+    @apply text-[24px]
+  }
+
+  h5 {
+    @apply sm:text-lg text-base
+  }
+
+  h6 {
+    @apply sm:text-base text-sm
+  }
+
+  p {
+    @apply text-sm
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    @apply leading-[1.5] text-white
+  }
+
+  .list {
+    @apply text-sm text-gray-800 font-400 cursor-pointer
+  }
+
+  .title {
+    @apply font-500 leading-[30px] pb-5
+  }
+
+  .desc {
+    @apply text-base font-400 leading-[30px] text-gray-800
+  }
+
+  .hidden-scrollbar::-webkit-scrollbar {
+    @apply hidden
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar {
+    @apply w-0.5 h-3 ms-2
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar-track {
+    @apply w-0.5 bg-gray-600
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-white
+  }
+
+  .tap-top{
+    @apply fixed bottom-5 end-5 h-12 w-12 flex items-center justify-center bg-gray-800 text-danger rounded-full cursor-pointer shadow-theam animate-bounce transition-all duration-300 z-[9]
+  }
+}

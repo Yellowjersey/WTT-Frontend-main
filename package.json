@@ -1,0 +1,34 @@
+{
+  "name": "whitetail",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "aos": "^2.3.4",
+    "axios": "^1.6.7",
+    "clsx": "^2.1.0",
+    "formik": "^2.4.5",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-lottie-player": "^1.5.6",
+    "react-slick": "^0.29.0",
+    "react-toastify": "^10.0.4",
+    "slick-carousel": "^1.8.1",
+    "tailwind-merge": "^2.2.1",
+    "yup": "^1.3.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0"
+  }
+}
