@@ -4,6 +4,7 @@ import IcnApple from '@/components/svg_icons/IcnApple';
 import IcnGooglePlay from '@/components/svg_icons/IcnGooglePlay';
 import RedShap from '@/components/svg_icons/RedShap';
 import Image from 'next/image';
+
 // import IcnPlay from '@/components/svg_icons/IcnPlay';    
 // import { Button } from '@/components/ui_componets/Button';
 // import ShapTop from '@/components/svg_icons/ShapTop';
@@ -17,14 +18,16 @@ const HeroSection = (props) => {
                         <h1 className='font-600 max-w-[600px] lg:text-start text-center'>WHITETAIL TACTICAL APP</h1>
                         <h5 className='text-gray-800 sm:tracking-[8px] tracking-[3px]'>VISUALIZING THE UNSEEN</h5>
                         <div className="flex items-center gap-4 md:pt-12 pt-6">
-                            <div className="bg-danger py-1.5 px-3 rounded-[6px] flex items-center gap-3">
+                            <div className="bg-danger py-1.5 px-3 rounded-[6px] flex items-center gap-3 appButton" onClick={()=>{
+                                window.open("https://apps.apple.com/us/app/whitetail-tactical-deer-optics/id6467631622")
+                            }}>
                                 <IcnApple className='w-6 h-8 text-white' />
                                 <div className="">
                                     <h6 className='text-[12px] font-400 text-white/3 mb-1 leading-none'>Available on</h6>
                                     <h5 className='text-sm font-500 leading-none'>App Store</h5>
                                 </div>
                             </div>
-                            <div className="bg-danger py-1.5 px-3 rounded-[6px] flex items-center gap-3">
+                            <div className="bg-danger py-1.5 px-3 rounded-[6px] flex items-center gap-3 appButton" onClick={()=>{}}>
                                 <IcnGooglePlay className='w-6 h-8 text-white' />
                                 <div className="">
                                     <h6 className='text-[12px] font-400 text-white/3 mb-1 leading-none'>Available on</h6>

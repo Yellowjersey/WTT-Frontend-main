@@ -14,6 +14,10 @@ body {
   @apply overflow-x-hidden !font-Grotesk tracking-[1px]
 }
 
+.appButton{
+  cursor: pointer;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
